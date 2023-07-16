@@ -9,7 +9,8 @@ import atexit
 from .preinput import plugin_preinput, basicop_helpers
 from .GPTModels import GPTModel
 
-openai.api_key = "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"
+# Add your openai api key here
+openai.api_key = ""
 
 
 class OneCommandLine(wx.Frame):
