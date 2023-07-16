@@ -12,7 +12,8 @@ import atexit
 from .GPTModels import MainGPT, SubGPT, GPTModel, GPTModel_QA, Data_increment_GPTModel
 from .preinput import main_gpt_preinput, sub_gpt_preinput, data_increment_gpt_preinput
 
-openai.api_key = "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"
+# Add you openai api key here
+openai.api_key = ""
 
 
 class WebViewWindow(wx.Frame):
