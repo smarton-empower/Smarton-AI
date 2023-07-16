@@ -1,7 +1,8 @@
 import json
 import openai
 
-openai.api_key = "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"
+# Add your openai api key here
+openai.api_key = ""
 
 
 class GPTModel:
