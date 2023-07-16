@@ -2,7 +2,8 @@ import json
 import openai
 from bs4 import BeautifulSoup
 
-openai.api_key = "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"
+# Add you openai api key here
+openai.api_key = ""
 
 
 class MainGPT:
