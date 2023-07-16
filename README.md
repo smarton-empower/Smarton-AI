@@ -4,7 +4,7 @@
 
 ```
 git init
-git remote add origin 
+git remote add origin https://github.com/BoyuHan666/Kicad-Plugins.git
 ```
 
 ### Develop on a feature branch
