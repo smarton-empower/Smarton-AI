@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>高级主题</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+
+<li><a href="#_高级主题">8. 高级主题</a>
+<ul class="sectlevel2">
+<li><a href="#configuration-and-customization">8.1. 配置和自定义</a></li>
+<li><a href="#text-variables">8.2. Text variables</a></li>
+<li><a href="#_自定义设计规则">8.3. 自定义设计规则</a></li>
+<li><a href="#_脚本">8.4. 脚本</a></li>
+<li><a href="#working-with-idf-component-outlines">8.5. 使用 IDF 元件边框的工作</a></li>
+</ul>
+</li>
+
+	
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sect1">
+<h2 id="_高级主题">8. 高级主题</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="configuration-and-customization">8.1. 配置和自定义</h3>
+<div class="paragraph">
+<p>KiCad PCB 编辑器有多种偏好设置，可通过偏好设置对话框进行配置。像 KiCad 的所有部分一样，PCB 编辑器的偏好设置存储在用户配置目录中，并且在 KiCad 的次要版本之间是独立的，以允许多个版本的偏好设置并排运行。</p>
+</div>
+<div class="paragraph">
+<p>偏好设置对话框的第一部分（通用、鼠标和触摸板以及快捷键）是所有 KiCad 程序共享的。这些部分在 KiCad 手册中的 "常规偏好设置" 部分有详细描述。</p>
+</div>
+<div class="sect3">
+<h4 id="_显示选项">8.1.1. 显示选项</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_preferences_display.png" alt="pcbnew preferences display">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>渲染引擎：</strong> 控制是否使用硬件加速图形或软件加速图形。</p>
+</div>
+<div class="paragraph">
+<p><strong>网格样式：</strong> 控制如何绘制路线网格。</p>
+</div>
+<div class="paragraph">
+<p><strong>网格厚度：</strong> 控制网格线或网格点的粗细。</p>
+</div>
+<div class="paragraph">
+<p><strong>最小网格间距：</strong> 控制两条网格线之间的最小距离 (以像素为单位)。无论当前的栅格设置如何，都不会绘制违反此最小间距的栅格线。</p>
+</div>
+<div class="paragraph">
+<p><strong>捕捉到网格：</strong> 控制何时将绘制和编辑操作捕捉到活动网格上的坐标。
+“始终”将启用对齐，即使网格处于隐藏状态；
+“当网格显示时”将仅在网格可见时启用对齐。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+按住 <kbd>Ctrl</kbd> 可以暂时禁用网格捕捉。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>光标形状：</strong> 控制编辑光标是绘制为小十字准线还是全屏十字准线 (覆盖整个绘图画布的一组线)。
+  编辑光标显示下一个绘图或编辑操作将发生的位置，如果启用了捕捉，则会捕捉到栅格位置。</p>
+</div>
+<div class="paragraph">
+<p><strong>始终显示十字准线：</strong> 控制是始终显示编辑光标，
+还是仅在编辑或绘图工具处于活动状态时才显示编辑光标。</p>
+</div>
+<div class="paragraph">
+<p><strong>网络名称：</strong> 控制是否在铜对象上绘制网络名称标签。
+这些标签仅作为编辑指南，不会出现在制造输出中。</p>
+</div>
+<div class="paragraph">
+<p><strong>显示焊盘编号：</strong>控制是否在封装焊盘上绘制焊盘编号标签。</p>
+</div>
+<div class="paragraph">
+<p><strong>显示焊盘 &lt;无网络&gt; 指示器：</strong> 控制是否用特殊标记指示没有
+网络的焊盘。</p>
+</div>
+<div class="paragraph">
+<p><strong>布线间隙：</strong> 控制是否显示布线和过孔周围的间隙边框。
+间隙边框显示为对象周围的细长形状，表示与其他对象之间的最小间隙，
+如约束和设计规则所定义。</p>
+</div>
+<div class="paragraph">
+<p><strong>显示焊盘间隙：</strong> 控制是否显示焊盘周围的间隙边框。</p>
+</div>
+<div class="paragraph">
+<p><strong>交叉探测项目的中心视图：</strong> 当原理图和 PCB 编辑器同时运行时，控制在原理图中点击一个元件或引脚是否会将 PCB 编辑器的视图集中在相应的封装或焊盘上。</p>
+</div>
+<div class="paragraph">
+<p><strong>缩放以适合交叉探测项：</strong> 控制是否缩放视图以显示交叉探测
+封装或焊盘。</p>
+</div>
+<div class="paragraph">
+<p><strong>高亮交叉探测网络：</strong> 控制当高亮工具在两个工具中激活时，原理图中高亮的网络是否会在 PCB 编辑器中高亮。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_编辑选项">8.1.2. 编辑选项</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_preferences_editing.png" alt="pcbnew preferences editing">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>翻转电路板项目 L/R：</strong> 控制在顶层和底层之间移动电路板项目时翻转的方向。
+  选中时，项目从左向右翻转(围绕垂直轴)；
+取消选中时，项目从上向下翻转(围绕水平轴)。</p>
+</div>
+<div class="paragraph">
+<p><strong>旋转命令的步长：</strong> 控制每次使用旋转命令时选定对象将旋转多远。</p>
+</div>
+<div class="paragraph">
+<p><strong>允许自由焊盘：</strong> 控制封装焊盘是否可以解锁并与封装分开编辑或移动。</p>
+</div>
+<div class="paragraph">
+<p><strong>吸附点：</strong> 本节控制对象捕捉，也叫吸附点。 启用对象捕捉后，对象捕捉优先于网格捕捉。 物体捕捉只对活动层上的物体起作用。按住 <kbd>Shift</kbd> 可以暂时关闭对象捕捉功能。</p>
+</div>
+<div class="paragraph">
+<p><strong>捕捉焊盘：</strong> 控制编辑光标何时捕捉焊盘原点。</p>
+</div>
+<div class="paragraph">
+<p><strong>捕捉到布线：</strong> 控制编辑光标何时捕捉到布线端点。</p>
+</div>
+<div class="paragraph">
+<p><strong>对齐图形：</strong> 控制编辑光标何时对齐图形形状点。</p>
+</div>
+<div class="paragraph">
+<p><strong>始终显示选定的飞线：</strong>启用后，即使全局飞线被隐藏，
+选定封装外形的飞线也将始终显示。</p>
+</div>
+<div class="paragraph">
+<p><strong>用曲线显示飞线：</strong>控制飞线是直线绘制还是曲线绘制。</p>
+</div>
+<div class="paragraph">
+<p><strong>鼠标拖动布线行为：</strong> 控制使用鼠标拖动布线段时将发生的操作："移动" 将独立于任何其他布线段移动布线。
+  "拖动(45 度模式)" 将调用推挤式布线器拖动布线，遵守设计规则并保持其他布线段的连接。
+  "拖动(自由角度)" 将移动布线段最近的角点，高亮显示与其他对象的碰撞，但不会将其移开。</p>
+</div>
+<div class="paragraph">
+<p><strong>将图形线条限制为 H、V 和45度：</strong> 控制使用图形绘制工具绘制的布线是否可以采用任何角度。
+请注意，这仅影响绘制新的布线：可以编辑布线以采用任何角度。</p>
+</div>
+<div class="paragraph">
+<p><strong>显示页面限制：</strong> 控制页面边界是否绘制为矩形。</p>
+</div>
+<div class="paragraph">
+<p><strong>覆铜属性后重新填充覆铜对话框：</strong> 控制编辑任何覆铜的属性后是否自动重新填充覆铜。
+可以在复杂的设计或速度较慢的计算机上禁用此功能，以提高响应速度。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_颜色">8.1.3. 颜色</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_preferences_colors.png" alt="pcbnew preferences colors">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad 支持在不同的颜色主题之间切换，以符合你的喜好。Kicad 7.0 内置了两种颜色主题。"KiCad 默认" 是一个新的主题，旨在为大多数情况下提供良好的对比度和平衡，是新安装的默认主题。"KiCad 经典版" 是 KiCad 5.1 和早期版本的默认主题。这两个内置主题都不能被修改，但你可以创建新的主题来定制 KiCad 的外观，也可以安装其他用户制作的主题。</p>
+</div>
+<div class="paragraph">
+<p>颜色主题存储在位于 KiCad 配置目录的 <code>Colors</code> 子目录中的 JSON 文件中。“打开主题文件夹”按钮将在您的系统文件管理器中打开此位置，使您可以轻松地管理已安装的主题。要安装新主题，请将其放在此文件夹中，然后重新启动 KiCad。如果文件是有效的颜色主题文件，则新主题将从颜色主题下拉列表中提供。</p>
+</div>
+<div class="paragraph">
+<p>要创建一个新的颜色主题，从颜色主题的下拉列表中选择新主题&#8230;&#8203;。 为你的主题输入一个名称，然后开始编辑颜色。 新主题中的颜色将从你创建新主题之前选择的任何主题中复制。</p>
+</div>
+<div class="paragraph">
+<p>要更改颜色，请双击或中键单击列表中的色样。“重置为默认值”按钮会将该颜色重置为“KiCad 默认”颜色主题中的相应条目。</p>
+</div>
+<div class="paragraph">
+<p>颜色主题会自动保存；当您关闭偏好设置对话框时，所有更改都会立即反映出来。对话框右侧的窗口显示所选主题外观的预览。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_操作插件">8.1.4. 操作插件</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_preferences_action_plugins.png" alt="pcbnew preferences action plugins">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad PCB 编辑器支持用 Python 编写的插件，可以对正在编辑的电路板进行操作。 这些插件可以使用内置的插件和内容管理器来安装（详见 KiCad 章节），或者将插件文件放在用户的插件目录中。 详见下面的脚本部分。</p>
+</div>
+<div class="paragraph">
+<p>每个被检测到的插件都会在这个偏好设置上显示一排。 插件可以在 PCB 编辑器的顶部工具栏上显示一个按钮。 如果一个插件的 "显示按钮" 控制没有被选中，它仍然可以从 "工具" &gt; "外部插件" 菜单中访问。</p>
+</div>
+<div class="paragraph">
+<p>列表底部的箭头控制允许改变插件在工具栏和菜单中的显示顺序。 文件夹按钮将启动一个文件资源管理器到插件文件夹，以使安装新的插件更容易。 刷新按钮将扫描插件文件夹中的任何新的或删除的插件，并更新列表。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_原点和轴">8.1.5. 原点和轴</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_preferences_origin_axes.png" alt="pcbnew preferences origin axes">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>显示原点：</strong> 决定在编辑画布中坐标显示使用哪个坐标原点。
+页面原点固定在页面的角落。
+用户可以移动钻取/放置文件原点和栅格原点。</p>
+</div>
+<div class="paragraph">
+<p><strong>X 轴：</strong> 控制 X 坐标向右还是向左增加。</p>
+</div>
+<div class="paragraph">
+<p><strong>Y 轴：</strong> 控制 Y 坐标是向上还是向下增加。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="text-variables">8.2. Text variables</h3>
+<div class="paragraph">
+<p>KiCad supports text variables, which allow you to substitute the variable name with a defined text string. This substitution happens anywhere the variable name is used inside the variable replacement syntax of <code>${VARIABLENAME}</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can define your own text variables in the <a href="../eeschema/eeschema.html#schematic-setup-text-variables">schematic</a> or <a href="#board-setup-text-variables">board setup</a> dialogs, but there are also a number of built-in system text variables. System text variables may be available in some contexts and not others.</p>
+</div>
+<div class="paragraph">
+<p>The following variables can be used in PCB text, footprint text, and footprint fields. There are also a number of <a href="../eeschema/eeschema.html#text-variables">variables that can be used in the Schematic Editor</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Variable name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ISSUE_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of drawing sheet&#8217;s <code>Issue Date</code> field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURRENT_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Today&#8217;s date, in ISO format.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>REVISION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of drawing sheet&#8217;s <code>Revision</code> field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TITLE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of drawing sheet&#8217;s <code>Title</code> field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>COMPANY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of drawing sheet&#8217;s <code>Company</code> field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>COMMENT1</code> - <code>COMMENT9</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of drawing sheet&#8217;s <code>Comment&lt;n&gt;</code> field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;variablename&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of <a href="#board-setup-text-variables">project text variable</a>
+  <code>&lt;variablename&gt;</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;fieldname&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of footprint field <code>&lt;fieldname&gt;</code>. Fields can only be
+    accessed from within of their parent object, so footprint fields can be
+    accessed from other text or fields within the footprint.</p>
+<p class="tableblock">    Both built-in footprint fields and user-defined fields from the
+    corresponding symbol are available. Built-in footprint fields use all
+    uppercase letters: for example, to access the value of <code>U1</code>, use
+    <code>${U1:VALUE}</code>.</p>
+<p class="tableblock">    Built-in footprint fields are <code>REFERENCE</code>, <code>VALUE</code>, <code>LAYER</code>,
+    <code>FOOTPRINT_LIBRARY</code>, <code>FOOTPRINT_NAME</code>, <code>NET_NAME(&lt;pad_number&gt;)</code>,
+    <code>NET_CLASS(&lt;pad_number&gt;)</code>, <code>PIN_NAME(&lt;pad_number&gt;)</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;refdes&gt;:&lt;fieldname&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contents of field <code>&lt;fieldname&gt;</code> in footprint <code>&lt;refdes&gt;</code>.</p>
+<p class="tableblock">    Both built-in footprint fields and user-defined fields from the
+    corresponding symbol are available. Built-in footprint fields use all
+    uppercase letters: for example, to access the value of <code>U1</code>, use
+    <code>${U1:VALUE}</code>.</p>
+<p class="tableblock">    Built-in footprint fields are <code>REFERENCE</code>, <code>VALUE</code>, <code>LAYER</code>,
+    <code>FOOTPRINT_LIBRARY</code>, <code>FOOTPRINT_NAME</code>, <code>NET_NAME(&lt;pad_number&gt;)</code>,
+    <code>NET_CLASS(&lt;pad_number&gt;)</code>, <code>PIN_NAME(&lt;pad_number&gt;)</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_自定义设计规则">8.3. 自定义设计规则</h3>
+<div class="paragraph">
+<p>KiCad 的自定义设计规则系统允许创建比电路板设置对话框的约束页面中的通用规则更具体的设计规则。 自定义设计规则有很多应用，但一般来说，它们被用来对电路板的一部分应用某些规则，如特定的网络或网络类、特定的区域或特定的封装。</p>
+</div>
+<div class="paragraph">
+<p>自定义设计规则存储在一个扩展名为 <code>kicad_dra</code> 的单独文件中。当您开始向项目添加自定义规则时，会自动创建此文件。如果您在项目中使用自定义规则，请在备份或提交到版本控制系统时，确保将 <code>kicad_dra</code> 文件与 <code>kicad_pcb</code> 和 <code>kicad_pro</code> 文件一起保存。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>kicad_dra</code> 文件由 KiCad 自动管理，不应使用外部文本编辑器进行编辑。
+始终使用电路板设置对话框的自定义规则页面编辑自定义设计规则。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_自定义规则编辑器">8.3.1. 自定义规则编辑器</h4>
+<div class="paragraph">
+<p>自定义规则编辑器位于电路板设置对话框中，它提供了一个用于输入自定义规则的文本编辑器，一个语法检查器将测试你的自定义规则并指出任何错误，还有一个语法帮助对话框，其中包含了对自定义规则语言的快速参考和一些规则示例。</p>
+</div>
+<div class="paragraph">
+<p>最好在编辑自定义规则后使用 <strong>检查规则语法</strong> 按钮，以确保没有语法错误。自定义规则中的任何错误都将阻止设计规则检查器运行。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_自定义规则语法">8.3.2. 自定义规则语法</h4>
+<div class="paragraph">
+<p>自定义设计规则语言基于 s 表达式，允许您创建使用内置约束无法实现的设计约束。每条设计规则通常包含一个定义匹配哪些对象的 <strong>条件</strong>，以及一个定义要应用于匹配对象的规则的 <strong>约束</strong>。</p>
+</div>
+<div class="paragraph">
+<p>该语言使用圆括号 (<code>(</code> 和 <code>)</code>) 来定义相关标记和值的子句。括号必须始终匹配：对于每个 <code>(</code> 必须有匹配的 <code>)</code>。在子句中，标记和值之间用空格分隔。按照惯例，使用单个空格，但是可以在标记之间使用任意数量的空格字符。在文本字符串有效的地方，没有任何空格的字符串可以用 <code>"</code> 或 <code>'</code> 引起来，也可以不加引号。包含空格的字符串必须始终用引号引起来。在需要嵌套引号的地方，可以使用 <code>"</code> 作为外引号字符，使用 <code>'</code> 作为内引号字符 (反之亦然)，从而实现单层嵌套。换行符不是必需的，但为清楚起见，通常在示例中使用。</p>
+</div>
+<div class="paragraph">
+<p>在下面的语法描述中，<code>&lt; 尖括号 &gt;</code> 中的项表示必须存在的标记，<code>[ 方括号 ]</code> 中的项表示可选或仅有时需要的标记。</p>
+</div>
+<div class="paragraph">
+<p>自定义规则文件必须以定义规则语言的版本头开始。 从 KiCad 6.0 开始，版本是 <code>1</code>。 版本头的语法是 <code>(version&lt;number&gt;)</code>。因此，在 KiCad 6.0 中，标题应该是这样的：</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(version 1)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在版本标题之后，您可以输入任意数量的规则。规则以相反的顺序计算，这意味着首先检查文件中的最后一个规则。一旦找到正在测试的给定集合对象的匹配规则，将不再检查其他规则。实际上，这意味着更具体的规则应该在文件的后面，以便在评估更一般的规则之前对其进行评估。</p>
+</div>
+<div class="paragraph">
+<p>例如，如果您创建一条规则来限制网络 <code>HV</code> 中的布线与任何其他网络中的布线之间的最小间距，以及第二条规则来限制特定规则区域内所有对象的最小间距，请确保第一条规则在自定义规则文件中的出现时间比第二条规则晚，否则，如果 <code>HV</code> 网络中的布线落在规则区域内，可能会有错误的间距。</p>
+</div>
+<div class="paragraph">
+<p>每条规则必须有一个名称和一个或多个 <code>约束 (constraint)</code> 子句。该名称可以是任何字符串，用于在 DRC 报告中引用该规则。<code>约束 (constraint)</code> 定义了规则的行为。规则还可以有一个 <code>条件 (condition)</code> 子句，决定哪些对象应该应用该规则，以及一个可选的 <code>层 (layer)</code> 子句，指定该规则适用于哪些板层。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(rule &lt;name&gt;
+    [(layer &lt;layer_name&gt;)]
+    [(condition &lt;expression&gt;)]
+    (constraint &lt;constraint_type&gt; [constraint_arguments]))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>定制规则文件还可以包括描述规则的注释。注释由任何以 <code>#</code> 字符开头的行表示 (不包括空格)。</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># Clearance for 400V nets to anything else
+(rule HV
+    (condition "A.NetClass == 'HV'")
+    (constraint clearance (min 1.5mm)))</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_图层子句">图层子句</h5>
+<div class="paragraph">
+<p><code>层 (layer)</code> 子句确定规则将对哪些层起作用。虽然对象层可以在下面介绍的 <code>约束 (constraint)</code> 子句中进行测试，但是使用 <code>层 (layer)</code> 子句效率更高。</p>
+</div>
+<div class="paragraph">
+<p><code>层 (layer)</code> 子句的值可以是任何线路板层名，也可以是与顶底铜层 ( <code>F.Cu</code> 和 <code>B.Cu</code> ) 匹配的快捷方式 <code>外 (outer)</code>，以及与任何内部铜层匹配的快捷键 <code>内 (inner)</code>。</p>
+</div>
+<div class="paragraph">
+<p>如果省略 <code>层 (layer)</code> 子句，则该规则将适用于所有层。</p>
+</div>
+<div class="paragraph">
+<p>下面是一些示例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># Do not allow footprints on back layer (no condition clause means this rule always applies)
+(rule "Top side footprints only"
+    (layer B.Cu)
+    (constraint disallow footprint))
+
+# This rule does the same thing, but is less efficient
+(rule "Top side footprints only"
+    (condition "A.Layer == 'B.Cu'")
+    (constraint disallow footprint))
+
+# Larger clearance on outer layers (inner layer clearance set by board minimum clearance)
+(rule "clearance_outer"
+    (layer outer)
+    (constraint clearance (min 0.25mm)))</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_条件子句">条件子句</h5>
+<div class="paragraph">
+<p>规则 <strong>条件</strong> 是一个包含在文本字符串中的表达式（因此通常用引号包围，以便允许留出空白，使之更清晰）。 该表达式是针对设计规则检查器正在测试的每一对对象进行评估的。 例如，当检查铜对象之间的间隙时，每个网络上的每个铜对象（布线段、焊盘、通孔等）都要与其他网络上的其他铜对象进行检查。 如果存在一个自定义规则，其表达式与两个给定的铜对象相匹配，并且约束条件定义了铜的间隙，那么这个自定义规则可以用来确定这两个对象之间所需的间隙。</p>
+</div>
+<div class="paragraph">
+<p>被测对象在表达式语言中称为 <code>A</code> 和 <code>B</code>。这两个对象的顺序并不重要，因为设计规则检查器将测试这两种可能的顺序。例如，您可以编写一条规则，假设 <code>A</code> 为布线，<code>B</code> 为过孔。 有一些表达式函数可以同时测试这两个对象；这些表达式函数使用 <code>AB</code> 作为对象名。</p>
+</div>
+<div class="paragraph">
+<p>条件中的表达式必须解析为布尔值 ( <code>true</code> 或 <code>false</code> )。如果表达式解析为 <code>true</code>，则规则应用于给定的对象。</p>
+</div>
+<div class="paragraph">
+<p>每个被测对象都有可以比较的 <strong>属性</strong>，以及可以执行特定测试的 <strong>函数</strong>。属性和函数的使用语法分别为 <code>&lt;object&gt;.&lt;property&gt;</code> 和 <code>&lt;object&gt;.&lt;function&gt;([arguments])</code>。译者注： <code>&lt;对象&gt;.&lt;属性&gt;</code> 和 <code>&lt;对象&gt;.&lt;函数&gt;([参数])</code>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+当您在文本编辑器 ( <code>A.</code>、<code>B.</code> 或 <code>AB.</code> ) 中键入 <code>&lt;对象 (object)&gt;.</code> 时，会出现一个自动完成列表。将打开包含所有可使用的对象属性的。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>使用 <strong>布尔运算符</strong> 比较对象属性和函数，得到布尔表达式。布尔运算符基于 C/C++ 语法，并支持以下运算符：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>==</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">等于</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>!=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不等于</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;</code>, <code>&gt;=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">大于、大于或等于</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;</code>, <code>&lt;=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">小于、小于或等于</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&amp;&amp;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">和</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>||</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">或</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>例如，<code>A.NetClass == 'HV'</code> 将适用于任何属于 "HV" 网络类的对象，<code>A.NetClass != B.NetClass</code> 将适用于任何属于不同网络类的对象。圆括号可以用来澄清复杂表达式中的操作顺序，但并不是必须的。</p>
+</div>
+<div class="paragraph">
+<p>有些属性表示物理测量，比如尺寸、角度、长度、位置等等。 在这些属性上，<strong>单位后缀</strong> 可以在自定义规则语言中使用，以指定使用什么单位。 如果没有使用单位后缀，属性的内部表示将被使用（距离为纳米，大多数角度为度）。 支持以下后缀：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">毫米</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mil</code>, <code>th</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">千分之一英寸 (mils)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>in</code>, <code>"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">英寸</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">度</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rad</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">弧度</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+自定义设计规则中使用的单位独立于 PCB 编辑器中的显示单位。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_约束_2">约束</h5>
+<div class="paragraph">
+<p>规则的 <strong>约束</strong> 子句定义了规则在条件匹配的对象上的行为。每个约束子句都有一个 <strong>约束类型</strong> 和一个或多个设置约束行为的参数。单个规则可以有多个约束子句，以便为符合相同规则条件的对象设置多个约束 (如 <code>间隙 (clearance)</code>、<code>布线宽度 (trace_width)</code> )。</p>
+</div>
+<div class="paragraph">
+<p>许多约束条件的参数指定了一个物理测量或数量。 这些约束条件支持最小值、最优值和最大值说明（缩写为 "min/opt/max"）。 <strong>最小</strong> 和 <strong>最大</strong> 值用于设计规则检查：如果实际值小于约束条件中的最小值或大于最大值，将产生一个 DRC 错误。 <strong>最优</strong> 值仅用于某些约束，并通知 KiCad 默认使用的 "最优" 值。 例如，最优的 <code>diff_pair_gap</code> 是由布线器在放置新的差分对时使用的。 如果后来修改了差分对，使得差分对之间的间隙与最佳值不同，只要间隙在最小值和最大值之间（如果这些值被指定），就不会产生错误。 在所有接受最小/最大/最优值的情况下，可以指定任何或全部的最小值、最优值和最大值。</p>
+</div>
+<div class="paragraph">
+<p>最小/最优/最大值被指定为 <code>(min&lt;value&gt;)</code>, <code>(opt&lt;value&gt;)</code>, 和 <code>(max&lt;value&gt;)</code>。例如，布线宽度约束可以写成 <code>(constraint track_width (min 0.5mm) (opt 0.5mm) (max 1.0mm))</code>，如果只约束最小宽度，可以简单写成 `(constraint track_width (min 0.5mm))。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">约束类型</th>
+<th class="tableblock halign-left valign-top">参数类型</th>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>圆环宽度</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最优/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查通孔上的环形环的宽度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>间隙</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查不同网路的铜对象之间的间隙。 KiCad 的设计规则系统目前还不允许限制同一网内的对象之间的间隙。要允许铜对象重叠（碰撞），请创建一个 <code>间隙</code> 约束，其 <code>最小</code> 值小于 0（例如 <code>-1</code>）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>外框间隙</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查封装外框之间的间隙，如果任何两个外框比 <code>最小</code> 距离更近，就会产生一个错误。 如果一个封装没有外框的形状，这个约束不会产生错误。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>差分对布线</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最优/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查差分对中耦合布线之间的间隙。 耦合布线是相互平行的线段。 差分对的间隙不对差分对的非耦合部分进行测试（例如，来自元件的扇出部分）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>差分对未耦合</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查差分对布线与差分对中的其他极性布线偏离的距离（例如，差分对从一个元件中扇出，或变成偏离以通过另一个元体，如通孔）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>不允许</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>布线<br>
+     通孔<br>
+     微型通道<br>
+     埋入式通孔<br>
+     焊盘<br>
+     区域<br>
+     文本<br>
+     图形<br>
+     通孔<br>
+     封装</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">指定一个或多个不允许的对象类型，用空格分隔。 例如，<code>(约束不允许布线)`或</code>(约束不允许通过焊盘的布线)`。 如果这种类型的对象符合规则条件，将产生一个 DRC 错误。 这个约束条件本质上与保持规则区相同，但可以用来创建更具体的保持限制。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>边框间隙</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最优/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查对象和 <code>Edge.Cuts</code> 层上的图形项目之间的间隙（外框边框，以及该层上定义的任何外框切口或槽）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>长大</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查符合规则条件的网络的总布线长度，如果每个网络低于限制条件的 <code>最小</code> 值（如果指定）或高于 <code>最大</code> 值（如果指定），则产生错误。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>通孔</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查焊盘或通孔中钻孔的大小（直径）。 对于椭圆孔，较小的（次要）直径将根据 <code>最小</code> 值（如果指定）进行测试，较大的（主要）直径将根据 <code>最大</code> 值（如果指定）进行测试。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>通孔间隙</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查焊盘或通孔上的钻孔与不同网的铜物体之间的间隙。 间隙是从通孔的直径开始测量的，而不是它的中心。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>通孔与通孔之间</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查焊盘和通孔上的机械钻孔之间的间隙。 间隙是在通孔的直径之间测量的，而不是在它们的中心之间。 HDI 通孔（微通孔、盲通孔和埋入式通孔）不受此约束的测试。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>丝印间隙</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最优/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查丝印层上的物体与其他物体之间的间隙。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>倾斜度</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查符合规则条件的网的总倾斜度，即每个网的长度与规则所匹配的每个网的所有长度的平均值之间的差。 如果该平均值与任何一个网的长度之差的绝对值高于约束条件的 <code>最大</code> 值，将产生一个错误。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>布线宽度</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小/最优/最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">检查布线和弧段的宽度。 如果每个线段的宽度低于 <code>最小</code> 值（如果指定）或高于 <code>最大</code> 值（如果指定），就会产生错误。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>通孔数</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最大</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">计算规则条件所匹配的每个网络上的通孔数量。 如果这个数字超过了任何匹配网的约束 <code>最大</code> 值，那么这个网就会产生一个错误。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_对象属性和函数参考">8.3.3. 对象属性和函数参考</h4>
+<div class="paragraph">
+<p>可以在自定义规则表达式中测试以下属性：</p>
+</div>
+<div class="sect4">
+<h5 id="_常见属性">常见属性</h5>
+<div class="paragraph">
+<p>这些属性适用于所有 PCB 对象。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Layer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对象所在的板层。对于存在于多个层上的对象，
+    该属性将返回第一层 (例如，对于大多数通孔焊盘/通孔，返回 <code>F.Cu</code> )。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Locked</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象已锁定，则为 True。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Parent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">返回此对象的父对象的唯一标识符。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Position_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对象原点在 X 轴上的位置。请注意，对象的原点并不总是与对象边界框的中心相同。
+    例如，封装的原点是封装编辑器中该封装的 (0, 0) 坐标的位置，
+    但是封装的设计可能使此位置不在外框形状的中心。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Position_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对象原点在 Y 轴上的位置。请注意，KiCad 始终在内部使用从屏幕顶部到底部递增的 Y 坐标，
+    即使您已将设置配置为显示从底部到顶部递增的 Y 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"封装 (Footprint)", "焊盘 (Pad)", "图形形状 (Graphic Shape)", "电路板文本 (Board Text)",
+    "封装文本 (Footprint Text)", "敷铜 (Zone)", "布线 (Track)",
+    "过孔 (Via)", "敷铜 (Zone)", 或 "组合 (Group)" 之一.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_连接的对象属性">连接的对象属性</h5>
+<div class="paragraph">
+<p>这些属性适用于可以分配网的铜对象（焊盘、过孔、覆铜、布线）。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Net</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">铜对象的网络码。</p>
+<p class="tableblock">    请注意，不能依赖网络码来保持不变：如果您需要在规则中引用特定的网络，请使用`NetName`。
+    <code>Net</code> 可以用来比较两个性能更好的对象的网络，
+    例如 <code>A.Net == B.Net</code> 比 <code>A.NetName == B.NetName</code> 快。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NetClass</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">铜对象的网络类的名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">铜对象的网络名称。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_封装属性">封装属性</h5>
+<div class="paragraph">
+<p>这些属性适用于封装。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Clearance_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为封装设置的铜间隙覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">库封装的 "描述"。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Keywords</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">库封装中的 "关键词"。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Library ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">以 <code>库名:封装名</code> 的格式链接到库的封装。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Orientation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">封装的方向（旋转），度数。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Reference</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">封装的位号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Solderpaste_Margin_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为封装设置的焊膏边缘覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Solderpaste_Margin_Ratio_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为封装设置的焊膏余量比率。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Gap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为封装设置的散热间隙。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为封装设置的散热连接宽度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">封装的 "值" 字段的内容。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_焊盘属性">焊盘属性</h5>
+<div class="paragraph">
+<p>这些属性适用于封装焊盘。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Clearance_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的铜间隙覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Fabrication_Property</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"无"、"BGA 焊盘"、"基准, 全局到电路板"、"基准, 本地到封装"、"测试点焊盘"、 "散热片焊盘"、"蜂窝状焊盘" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Hole_Size_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘在 X 轴上的通孔/槽的大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Hole_Size_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘在 Y 轴上的通孔/槽的大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Orientation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘的方向 (旋转) (单位：度)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pad_Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘的 "编号"，可以是字符串 (例如，BGA 中的 "A1")。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pad_To_Die_Length</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘的 "焊盘到芯片长度" 属性的值，它是在计算网络时添加到焊盘的网络的附加长度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pad_Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"通孔"、"贴片"、"板边连接器" 或 "非导通孔，机械" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pin_Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘的名称 (通常是原理图中相应接点的名称)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pin_Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘的电气类型 (通常取自原理图中相应的引脚)。 "输入"、"输出"、"双向"、"三态"、"无源"、"自由"、"未指定"、 "电源输入"、"电源输出"、"集电极开路"、"发射器开路" 或 "未连接" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Round_Radius_Ratio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对于圆形矩形焊盘，为半径与矩形大小的比率。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shape</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"圆形"、"矩形"、"椭圆形"、"梯形"、"圆角矩形"、"倒角矩形" 或 "自定义" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Size_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘在 X 轴上的大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Size_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">焊盘在 Y 轴上的大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Soldermask_Margin_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的阻焊边距覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Solderpaste_Margin_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的焊膏边距覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Solderpaste_Margin_Ratio_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的焊膏边距比率覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Gap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的散热间隙。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为焊盘设置的散热连接宽度。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_布线和圆弧属性">布线和圆弧属性</h5>
+<div class="paragraph">
+<p>这些属性适用于布线和弧形布线。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Origin_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">起点的 X 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Origin_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">起点的 Y 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>End_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">终点的 X 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>End_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">终点的 Y 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">布线或圆弧的宽度。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_过孔属性">过孔属性</h5>
+<div class="paragraph">
+<p>这些属性适用于过孔。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Diameter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">过孔焊盘的直径。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Drill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">过孔成品通孔的直径。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Layer_Bottom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">过孔压层中的最后一层。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Layer_Top</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">过孔压层中的第一层。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Via_Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"通孔"、"盲孔/埋孔" 或 "微孔" 之一。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_覆铜和规则区域属性">覆铜和规则区域属性</h5>
+<div class="paragraph">
+<p>这些属性适用于铜区和非铜区，以及规则区（以前称为禁止布线区）。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Clearance_Override</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为覆铜设置的铜间隙覆盖。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Min_Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">覆铜中允许的填充区域的最小宽度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用户指定的名称 (默认情况下为空)。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Pad_Connections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"继承"、"无"、"焊盘散热孔"、"实心"、"导通的散热孔" 之一</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Priority</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">覆铜的优先级别。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Gap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为覆铜设置的散热间隙。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thermal_Relief_Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为覆铜设置的散热连接宽度。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_图形形状属性">图形形状属性</h5>
+<div class="paragraph">
+<p>这些属性适用于图形线、圆弧、圆、矩形和多边形。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>End_X</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">终点的 X 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>End_Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">终点的 Y 坐标。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thickness</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">形状画笔的粗细。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_文本属性">文本属性</h5>
+<div class="paragraph">
+<p>这些属性适用于文本对象（封装字段、自由文本标签等）。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 15%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">属性</th>
+<th class="tableblock halign-left valign-top">数据类型</th>
+<th class="tableblock halign-left valign-top">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Bold</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果文本为粗体，则为 <code>true</code>。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Height</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字体中字符的高度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Horizontal_Justification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">水平文本对齐 (对齐)："向左对齐"、"居中对齐" 或 "向右对齐" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Italic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果文本为斜体，则为 <code>true</code>。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Mirrored</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果文本为镜像，则为 <code>true</code>。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Text</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文本对象的内容。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Thickness</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字体笔划的粗细。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Width</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字体中字符的宽度。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Vertical_Justification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">垂直文本对齐方式："向上对齐"、"居中对齐" 或 "向下对齐" 之一。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Visible</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果文本对象可见 (显示)，则为 <code>true</code>。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_表达式函数">表达式函数</h5>
+<div class="paragraph">
+<p>可以对自定义规则表达式中的对象调用以下函数：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">功能</th>
+<th class="tableblock halign-left valign-top">对象</th>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>existsOnLayer('layer_id')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象存在于给定的板层上，则返回 true。 <code>layer_id</code> 是一个字符串，包含板层的名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fromTo('x', 'y')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象存在于给定焊盘之间的铜路径上，则返回 true。 <code>x</code> 和 <code>y</code> 是设计中焊盘的全称，例如 <code>'R1-Pad1'</code>。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inDiffPair('x')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象是差分对的一部分，并且差分对的基本名称与给定参数 <code>x</code> 相匹配，则返回 true。 例如，<code>inDiffPair('/USB_')</code> 或 <code>inDiffPair('/USB')</code> 对于网络 <code>/USB_P</code> 和 <code>/USB_N</code> 中的对象返回`true`。 <code>*</code> 可以作为通配符，所以`inDiffPair('/USB*')` 匹配 <code>/USB1_P</code> 和`/USB1_N`。 请注意，如果给定的网络不是一个差异对，这将总是返回错误，这意味着没有一个相反极性的匹配网络。 因此，在一个有 <code>/USB_P</code> 网络但没有 <code>/USB_N</code> 网络的板子上，这个函数返回 false。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>insideArea('x')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象的任何部分在指定的规则区域或区域内，返回 true。 规则区域和区域的名称可以在它们各自的属性对话框中设置。 如果给定的区域是一个填充铜区，该函数测试给定的对象是否在该区域的任何一个填充铜区内，而不是对象是否在该区域的边框内。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>insideCourtyard('x')</code>。</p>
+<p class="tableblock">  <code>insideFrontCourtyard('x')</code></p>
+<p class="tableblock">  <code>insideBackCourtyard('x')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象的任何部分在给定的封装引用的外框内，则返回 true。 第一个变体同时检查顶层外框或底层外框，如果对象在其中一个外框里，则返回 true；第二个和第三个变体检查一个特定的外框。 在位号中可以使用 <code>*</code>。<code>insideCourtyard('R*')</code> 将检查所有以 <code>R</code> 开头的封装。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isBlindBuriedVia()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果对象是盲孔/埋孔，返回 true。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isCoupledDiffPair()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AB</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果被测试的两个对象是同一差分对的一部分，但极性相反，则返回 true。 例如，如果 <code>A</code> 在 <code>/USB+</code> 网中，<code>B</code> 在 <code>/USB-</code> 网中，则返回 true。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isMicroVia()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果该对象是一个微孔，则返回 true。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isPlated()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果该对象是一个电镀孔（在焊盘或通孔中），则返回 true。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>memberOf('x')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A</code> 或 <code>B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果该对象是指定组 <code>x</code> 的成员，则返回 true。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_自定义设计规则示例">8.3.4. 自定义设计规则示例</h4>
+<div class="listingblock">
+<div class="content">
+<pre>(rule RF_width
+	(layer outer)
+	(condition "A.NetClass == 'RF'")
+	(constraint track_width (min 0.35mm) (max 0.35mm)))
+
+(rule "BGA neckdown"
+	(constraint track_width (min 0.2mm) (opt 0.25mm))
+	(constraint clearance (min 0.05mm) (opt 0.08mm))
+	(condition "A.insideCourtyard('U3')"))
+
+(rule "Distance between Vias of Different Nets"
+	(constraint hole_to_hole (min 0.25mm))
+	(condition "A.Type =='Via' &amp;&amp; B.Type =='Via' &amp;&amp; A.Net != B.Net"))
+
+(rule "Distance between test points"
+	(constraint courtyard_clearance (min 1.5mm))
+	(condition "A.Reference =='TP*' &amp;&amp; B.Reference == 'TP*"))
+
+# This assumes that there is a cutout with 1mm thick lines
+(rule "Clearance to cutout"
+	(constraint clearance (min 0.8mm))
+	(condition "A.Layer=='Edge.Cuts' &amp;&amp; A.Thickness == 1.0mm"))
+
+(rule "Max Drill Hole Size Mechanical"
+	(constraint hole (max 6.3mm))
+	(condition "A.Pad_Type == 'NPTH, mechanical'"))
+
+(rule "Max Drill Hole Size PTH"
+	(constraint hole (max 6.35mm))
+	(condition "A.Pad_Type == 'Through-hole'"))
+
+# Specify an optimal gap for a particular differential pair
+(rule "Clock gap"
+	(condition "A.inDiffPair('/CLK')")
+	(constraint diff_pair_gap (opt 0.8mm)))
+
+# Specify a larger clearance between differential pairs and anything else
+(rule "Differential pair clearance"
+	(condition "A.inDiffPair('*') &amp;&amp; !AB.isCoupledDiffPair()")
+	(constraint clearance (min 1.5mm)))</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_脚本">8.4. 脚本</h3>
+<div class="paragraph">
+<p>脚本允许您使用 <a href="https://www.python.org/">Python</a> 语言自动执行 KiCad 中的任务。可以通过 Python "操作插件" 向 KiCad 添加功能，这些插件可以添加到顶部工具栏。也可以编写与 KiCad 文件交互的独立脚本，例如，从电路板文件自动生成制造输出。</p>
+</div>
+<div class="paragraph">
+<p>本手册涵盖了一般脚本编写概念。希望编写或修改脚本的用户还应使用 <a href="https://docs.kicad.org/doxygen-python/namespaces.html">https://docs.kicad.org/doxygen-python/namespaces.html</a> 上的 Doxygen 文档。</p>
+</div>
+<div class="paragraph">
+<p>KiCad 6 或更新版本需要 Python 3 来支持脚本。Python 2 已不再被支持。</p>
+</div>
+<div class="sect3">
+<h4 id="_python_脚本位置">8.4.1. Python 脚本位置</h4>
+<div class="paragraph">
+<p>PCB 编辑器的插件脚本可以通过插件和内容管理器（PCM）自动安装，也可以通过手动将插件复制到一个文件夹中。 每个插件都应该在 <code>plugins</code> 文件夹内有自己的文件夹。 <code>plugins</code> 文件夹的位置默认为：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">平台</th>
+<th class="tableblock halign-left valign-top">路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/.local/share/kicad/6.0/scripting/plugins</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">macOS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~/Documents/KiCad/6.0/scripting/plugins</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Windows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%HOME%\Documents\KiCad\6.0\scripting\plugins</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_操作插件_2">8.4.2. 操作插件</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：编写本部分 (如何安装新的操作插件)
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_封装向导">8.4.3. 封装向导</h4>
+<div class="paragraph">
+<p>封装向导是可以从封装编辑器访问的 Python 脚本的集合。 如果调用封装对话框，则选择一个给定的向导，该向导允许您查看渲染的封装，并且您可以编辑一些参数。</p>
+</div>
+<div class="paragraph">
+<p>如果插件未正确分发到您的系统软件包，您可以在 KiCad 源代码树中的链接中找到最新版本：<a href="https://gitlab.com/kicad/code/kicad/tree/master/pcbnew/python/plugins">gitlab</a>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用脚本控制台">8.4.4. 使用脚本控制台</h4>
+<div class="paragraph">
+<p>PCB 编辑器带有一个内置的 Python 控制台，可以用来检查和与电路板互动。 要启动控制台，使用顶部工具栏中的 <span class="image"><img src="images/icons/py_script_24.png" alt="脚本控制台图标"></span> 按钮。PCB 编辑器的 Python API 不会自动加载，所以要加载它，在控制台中输入 <code>import pcbnew</code>。然后 <code>pcbnew.GetBoard()</code> 命令将返回当前在 PCB 编辑器中加载的电路板的引用，可以通过控制台进行检查和修改。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：记录其他有用的 PyAlaMode 函数
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_编写外部脚本">8.4.5. 编写外部脚本</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_编写操作插件">8.4.6. 编写操作插件</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="working-with-idf-component-outlines">8.5. 使用 IDF 元件边框的工作</h3>
+<div class="paragraph">
+<p>KiCad 可以 《IDF 导出器，导出电路板的 IDF 表示》，以便在机械 CAD 软件中使用。下面是一些关于将 IDF 元件边框附在封装上、创建新的 IDF 元件边框的指导，以及 KiCad 中包含的 IDF 工具的描述。</p>
+</div>
+<div class="sect3">
+<h4 id="_指定供导出程序使用的元件模型">8.5.1. 指定供导出程序使用的元件模型</h4>
+<div class="paragraph">
+<p>IDF 元件模型使用《封装属性，封装的 3D 模型属性》附加到封装上。IDF 导出器使用的文件类型与 3D 查看器和其他 3D 模型导出器不同，因此为 IDF 导出器添加 3D 模型不会与为其他目的添加到封装的 3D 模型发生冲突。</p>
+</div>
+<div class="paragraph">
+<p>要在封装或 PCB 编辑器中把 IDF 模型添加到封装中，编辑封装的属性并点击 3D 模型标签。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprint_3d_model_options.png" alt="封装属性，3D 设置">
+</div>
+</div>
+<div class="paragraph">
+<p>点击 <span class="image"><img src="images/icons/small_folder_16.png" alt="文件夹图标"></span> 按钮，选择 <strong>IDF(*.idf;*.IDF)</strong> 文件类型筛选器。浏览到所需的边框文件。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/idf_select.png" alt="IDF 元件边框选择">
+</div>
+</div>
+<div class="paragraph">
+<p>一旦选择了所需的元件边框文件，输入任何必要的偏移和旋转值。偏移量必须使用 IDF 板的输出单位（毫米或密耳）并在 IDF 坐标系中指定，这是一个右手坐标系，+Z 指向观察者，+X 指向观察者的右边，+Y 指向屏幕的上边缘。旋转必须以度为单位；正向旋转是逆时针旋转，如 IDF v3 规范中所述。</p>
+</div>
+<div class="paragraph">
+<p>多个边框可以与适当的偏移量结合起来，以表示简单的装配，如插座中的 DIP 封装。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+IDF 导出器只使用偏移值和 Z 旋转值，所有其他数值都被忽略。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_创建元件边框文件">8.5.2. 创建元件边框文件</h4>
+<div class="paragraph">
+<p>元件边框的创建应该与相应的封装 的方向和位置相匹配。这就避免了为IDF 元件边框指定非零旋转的需要。由于 IDF 导出器忽略了（X，Y）偏移值，所以在 IDF 元件边框中使用正确的原点是至关重要的。</p>
+</div>
+<div class="paragraph">
+<p>元件边框部分包含字符串，整数或浮点数字段。 字符串是可包含空格的字符组合; 如果字符串包含空格，则必须引用它。 引号不得出现在字符串中。 浮点数可以使用十进制或指数表示法表示，但十进制表示法是人类可读性的首选。 小数点必须是点而不是逗号。 IDF 文件必须只包含7 位 ASCII 字符; 使用8位字符将导致未定义的行为。</p>
+</div>
+<div class="paragraph">
+<p>IDF 文件由 SECTIONS 组成，SECTIONS 由 RECORDS 组成，RECORDS 由 FIELDS 组成。对于 IDF 边框文件，只有一种类型的部分可以存在，并且必须是 <code>.ELECTRICAL</code> 或 <code>.MECHANICAL</code> 中的一种。一个记录是一行文本，可能包含一个或多个字段。字段是由一个或多个空格分隔的字符序列，不在引号之间出现。一条记录的所有字段必须出现在单行上；记录不能跨行。</p>
+</div>
+<div class="paragraph">
+<p>节的标题（<code>.ELECTRICAL</code> 或 <code>.MECHANICAL</code>）被认为是该节的第一条记录（记录 1）。记录 1后面必须有记录 2，该记录有四个字：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>几何名称：与零件号组合的字符串必须形成元件边框的唯一标识符。 对于标准化包，包名称是几何名称的良好值，例如 <em>SOT-23</em> 。 对于独特的包装，制造商的部件号是几何名称的不错选择。</p>
+</li>
+<li>
+<p>部件号：虽然显然是用于部件号，例如 BS107，但最好使用此字符串来帮助描述包。 例如，如果几何名称是 <em>TO-92</em> ，则部件号条目可用于描述焊盘的布局或该特定 TO-92 边框文件的方向。</p>
+</li>
+<li>
+<p>IDF 单位：这必须是 <code>MM</code> 或 <code>THOU</code> 中的一个，它只适用于描述这个单一成分边框的单位。</p>
+</li>
+<li>
+<p>高度：这是一个浮点数，表示使用字段 3 中指定的单位的元件的标称高度。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>记录2后面必须跟有许多记录 3 条目，这些条目指定了元件的边框。 记录 3 包含四个字段：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>循环索引。<code>0</code>（边框点按逆时针顺序指定）或 <code>1</code>（边框点按顺时针顺序指定）。</p>
+</li>
+<li>
+<p>X 坐标：浮点数</p>
+</li>
+<li>
+<p>Y 坐标：浮点数</p>
+</li>
+<li>
+<p>包括角度：一个浮点数。如果该值为 <code>0</code>，则从上一点到这一点绘制一条直线段。 如果数值是 <code>360</code>，那么前一个点指定一个圆的中心，这个点指定圆上的一个点；千万不要用 <code>360</code> 的数值指定一个圆，因为至少有一个主要的机械 CAD 包在这种情况下表现不好。如果该值为负数，则从上一点到这一点将绘制顺时针方向的圆弧；如果该值为正数，则绘制逆时针方向的圆弧。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>只允许一个闭环，并且无法指定切口。 指定的最后一个点必须与第一个点相同，除非边框是圆形。</p>
+</div>
+<div class="paragraph">
+<p>示例 IDF 文件 1：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># a simple cylinder - this could represent an electrolytic capacitor
+.ELECTRICAL
+    "cylinder" "5mm OD, 5mm height" MM 5
+    0 0 0 0
+    0 2.5 0 360
+.END_ELECTRICAL</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>示例 IDF 文件 2：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># an upside-down T
+# a comment added for the sake of adding comments
+.ELECTRICAL
+    "Capital T" "5x8x10mm, upside down" MM 10
+    0 -0.5 8 0
+    0 -0.5 0.5 0
+    0 -2.5 0.5 0
+    0 -2.5 -0.5 180
+    0 2.5 -0.5 0
+    0 2.5 0.5 180
+    0 0.5 0.5 0
+    0 0.5 8 0
+    0 -0.5 8 180
+.END_ELECTRICAL</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_创建边框的准则">8.5.3. 创建边框的准则</h4>
+<div class="paragraph">
+<p>在创建边框时，特别是在与他人共享工作时，文件的设计和命名的一致性可以帮助人们更快地找到文件并以最小的麻烦放置元件。</p>
+</div>
+<div class="sect4">
+<h5 id="_包命名">包命名</h5>
+<div class="paragraph">
+<p>尝试提供有关文件名中可用边框的一些信息，以便用户大致了解边框是什么。 例如，轴向引线圆柱形封装可能代表某些类型的电容器以及某些类型的电阻，因此将边框识别为水平或垂直轴向引线装置并在相关尺寸上添加一些额外信息是有意义的：直径，长度 和音高是最重要的。 如果设备具有唯一的边框，则制造商的部件号和用于指示设备类别的前缀就足够了。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_注释">注释</h5>
+<div class="paragraph">
+<p>使用 IDF 文件中的注释为用户提供有关边框的更多信息，例如对用于尺寸信息的源的引用。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_几何和部件编号条目">几何和部件编号条目</h5>
+<div class="paragraph">
+<p>仔细考虑要赋予几何和部件编号条目的值。 总之，这些字符串充当 MCAD 系统的唯一标识符。 理想情况下，字符串的值对用户有一定的意义，但这不是必需的：这些值主要用于 MCAD 系统用作唯一 ID。 理想情况下，所选择的值在任何大型边框集中都是唯一的; 选择好的价值将导致更少的冲突，特别是在复杂的板上。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_引脚方向和定位">引脚方向和定位</h5>
+<div class="paragraph">
+<p>元件边框的创建应该与相应的封装的方向和位置相匹配。这就避免了为 IDF 元件边框指定非零旋转的需要。由于 IDF 导出器忽略了 (X，Y) 偏移值，所以在 IDF 元件边框中使用正确的原点是至关重要的。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/idf_blobs.png" alt="示例边框">
+</div>
+</div>
+<div class="paragraph">
+<p>上图显示了由程序 <code>idfcyl</code> 和 <code>idfrect</code> 生成并在一个机械 CAD 程序中渲染的样本边框。从左到右分别是 (a) 垂直径向引线圆柱体，(b) 垂直轴向引线圆柱体，左边有金属丝，(c) 垂直轴向引线圆柱体，右边有金属丝，(d) 水平轴向引线圆柱体，(e) 水平径向引线圆柱体，(f) 方形边框，普通，(g) 方形边框有倒角，(h) 方形边框有轴向引线在右边。上面的边框以毫米为单位，下面的边框以英寸为单位。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_尺寸提示">尺寸提示</h5>
+<div class="paragraph">
+<p>推挤边框的目的是让机械设计者了解每个部件占据的位置和物理空间。在典型情况下，机械设计师将使用更详细的机械模型替换一些原始边框，例如在检查时确保直角安装的 LED 适合面板上的孔。在大多数情况下，边框的准确性无关紧要，但优良作法是创建可传达最佳机械信息的边框。在少数情况下，用户可能希望将元件装配到具有非常小的多余空间的壳体中，例如在便携式音乐播放器中。在这种情况下，如果大多数推挤边框是元件的足够好的表示，那么机械设计师可能只需要在设计壳体时替换很少的模型。如果边框不是现实的可靠反映，那么机械设计师将浪费大量时间来更换模型以确保良好的贴合性。毕竟，如果你把垃圾放进去，你可以期待垃圾出来。如果您提供了良好的信息，您可以对良好的结果充满信心。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_idf_元件边框工具">8.5.4. IDF 元件边框工具</h4>
+<div class="paragraph">
+<p>许多命令行工具可用于帮助生成 IDF 元件边框。 工具是：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>idfcyl:</code> 创建一个垂直或水平方向的圆柱体边框，并具有轴向或径向引线</p>
+</li>
+<li>
+<p><code>idfrect:</code> 创建一个矩形的边框，这个矩形可以有一个轴向引线或左上角的倒角</p>
+</li>
+<li>
+<p><code>dxf2idf:</code> 将 DXF 格式的图纸转换为 IDF 元件边框</p>
+</li>
+</ol>
+</div>
+<div class="sect4">
+<h5 id="_idfcyl">idfcyl</h5>
+<div class="paragraph">
+<p><code>idfcyl</code> 生成圆柱形元件的边框。</p>
+</div>
+<div class="paragraph">
+<p>当 <code>idfcyl</code> 被调用时，没有参数，它会打印出一个使用说明和输入的摘要：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>idfcyl：该程序生成圆柱形元件的边框。
+     圆筒可以是水平的或垂直的。
+     水平圆柱体可以在一端或两端具有线。
+     垂直圆柱体可以具有至多一根可以是的线
+     放在左侧或右侧。
+
+输入：
+    单位：mm, in（毫米或英寸）
+    方向：V（垂直）
+    引线类型：X，R（轴向，径向）
+    体型直径
+    体型长度
+    板偏移
+    *   线径
+    *   节距
+    **  线侧：L，R（左，右）
+    *** 引线长度
+    文件名（必须以 * .idf 结尾）
+
+    注意：
+         *   仅用于水平方向或
+             带轴向引线的垂直方向
+
+        **  只有轴向引线的垂直方向才需要
+
+        ***  仅对于带有径向引线的水平方向需要</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以通过在命令行上输入任意参数来抑制注释。 用户可以在命令行手动输入信息或创建脚本以生成边框。 以下脚本创建一个单个圆柱轴向引线边框，右侧为引线：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">#!/bin/bash
+# Generate a cylindrical IDF outline for test purposes
+# vertical 5mm cylinder,  nominal length 8mm + 3mm board offset,
+# axial wire on right,  0.8mm wire dia., 3.5mm pitch
+idfcyl - 1 &gt; /dev/null &lt;&lt;  _EOF
+mm
+v
+x
+5
+8
+3
+0.8
+3.5
+r
+cylvmm_1R_D5_L8_Z3_WD0.8_P3.5.idf
+_EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_idfrect">idfrect</h5>
+<div class="paragraph">
+<p><code>idfrect</code> 生成矩形元件的边框。</p>
+</div>
+<div class="paragraph">
+<p>当 <code>idfrect</code> 被调用而没有参数时，它会打印出使用说明和输入摘要：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>idfrect：该程序生成矩形元件的边框。
+     该部件可以具有单个引线（轴向）或倒角
+     左上角。
+输入：
+     单位：毫米，英寸（毫米或英寸）
+     宽度：
+     长度：
+     高度：
+     倒角：长度为 45 度。倒棱
+     * 倾斜的角度：Y，N（引线始终向右边）
+     ** 线径
+     ** 球场
+     文件名（必须以 *.idf 结尾）
+
+    NOTES:
+        *   only required if chamfer = 0
+
+        **  仅对倾斜的角度元件有要求</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以通过在命令行上输入任意参数来抑制注释。 用户可以在命令行手动输入信息或创建脚本以生成边框。 以下脚本创建倒角矩形和轴向引线边框：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">#!/bin/bash
+# Generate various rectangular IDF outlines for test purposes
+# 10x10, 1mm chamfer, 2mm height
+idfrect - 1 &gt; /dev/null &lt;&lt;  _EOF
+mm
+10
+10
+2
+1
+rectMM_10x10x2_C0.5.idf
+_EOF
+# 10x10x12,  0.8mm lead on 6mm pitch
+idfrect - 1 &gt; /dev/null &lt;&lt;  _EOF
+mm
+10
+10
+12
+0
+Y
+0.8
+6
+rectLMM_10x10x12_D0.8_P6.0.idf
+_EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dxf2idf">dxf2idf</h5>
+<div class="paragraph">
+<p><code>dxf2idf</code> 从 DXF 边框创建一个 IDF 元件文件。</p>
+</div>
+<div class="paragraph">
+<p>用于指定元件边框的 DXF 文件可以用免费软件 <a href="http://librecad.org/">LibreCAD</a> 来准备，以获得最佳的兼容性。</p>
+</div>
+<div class="paragraph">
+<p>当 <code>dxf2idf</code> 被调用而没有参数时，它会打印出一个使用说明和输入的摘要：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>dxf2idf：此程序采用线段，圆弧和圆弧段 从 DXF 文件中创建 IDF 元件边框文件。
+
+输入：
+     DXF 文件名：输入文件，必须以 _.dxf_ 结尾
+     单位：毫米，英寸（毫米或英寸）
+     几何名称：字符串，根据 IDF 3.0版规范
+     部件名称：根据部件号的 IDF 3.0版规范
+     高度：边框的挤压高度
+     注释：所有非空行都是要添加的注释
+         IDF 文件。 空行表示结束
+         注释块。
+     文件名：输出文件名，必须以 _.idf_ 结尾</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>可以通过在命令行上输入任何任意参数来抑制注释的产生。用户可以在命令行上手动输入信息或创建脚本来生成边框。下面的脚本从 DXF 文件 <code>test.dxf</code> 创建了一个 5 毫米高的边框：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">#!/bin/bash
+# Generate an IDF outlines from a DXF file
+dxf2idf - 1 &gt; /dev/null &lt;&lt; _EOF
+test.dxf
+mm
+DXF TEST GEOMETRY
+DXF TEST PART
+5
+This is an IDF test file produced from the outline 'test.dxf'
+This is a second IDF comment to demonstrate multiple comments
+
+test_dxf2idf.idf
+_EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="idf2vrml">idf2vrml</h5>
+<div class="paragraph">
+<p><code>idf2vrml</code> 工具读取一组 IDF 板（<code>.emn</code>）和一个 IDF 元件文件（<code>.emp</code>）并产生一个 VRML 文件，可以用 VRML 查看器查看。在用户不能使用 MCAD 软件的情况下，这个功能对板件装配的可视化很有用。在没有任何参数的情况下调用 <code>idf2vrml</code> 将导致显示一个使用信息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt;./idf2vrml
+用法： idf2vrml -f input_file.emn -s scale_factor {-k} {-d} {-z} {-d} {-z} {-m}
+标志：
+   -k: 产生 KiCad 友好的 VRML 输出；默认为紧凑的 VRML
+   -d: 抑制对默认边框的替换
+   -z: 抑制零高度边框的渲染
+   -m: 打印对象映射到标准输出用于调试目的。
+例子产生一个供 KiCad 使用的模型： idf2vrml -f input.emn -s 0.3937008 -k</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>idf2vrml</code> 工具不能正确渲染 <code>emn</code> 文件中的 <code>OTHER_OUTLINE</code> 实体，如果该实体被指定在 PCB 的底层；然而你不会注意到使用 KiCad 导出的文件，因为没有机制来指定这样的实体。这只是一个问题，如果你渲染一个第三方的 emn 文件，该文件确实在电路板的底层采用了一个实体。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

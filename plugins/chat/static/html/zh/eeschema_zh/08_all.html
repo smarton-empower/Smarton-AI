@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>符号和符号库</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+
+<li><a href="#symbols-and-symbol-libraries">8. 符号和符号库</a>
+<ul class="sectlevel2">
+<li><a href="#managing-symbol-libraries">8.1. 管理符号库</a></li>
+<li><a href="#creating-and-editing-symbols">8.2. 创建和编辑符号</a></li>
+<li><a href="#_浏览符号库">8.3. 浏览符号库</a></li>
+</ul>
+</li>
+
+	
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sect1">
+<h2 id="symbols-and-symbol-libraries">8. 符号和符号库</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KiCad 将符号组织到符号库中，而符号库中则保存着符号的集合。原理图中的每个符号都由一个全称来唯一标识，该全称由库的名称和符号名称组成。例如，标识符 <code>Audio:AD1853</code> 是指 <code>Audio</code> 库中的 <code>AD1853</code> 符号。</p>
+</div>
+<div class="sect2">
+<h3 id="managing-symbol-libraries">8.1. 管理符号库</h3>
+<div class="paragraph">
+<p>KiCad 使用一个符号库表将符号库名称映射到磁盘上的底层符号库。 KiCad 使用一个全局的符号库表，以及一个针对每个工程的表。要编辑任何一个符号库表，请使用 <strong>偏好设置</strong> &#8594; <strong>管理符号库&#8230;&#8203;</strong>。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/en/options_symbol_lib.png" alt="符号库列表对话框">
+</div>
+</div>
+<div class="paragraph">
+<p>全局符号库表包含了无论当前加载的工程是什么，都可以使用的库列表。该表保存在 KiCad 配置文件夹下的 <code>sym-lib-table</code> 文件中。<a href="./kicad/kicad.html#config-file-location">该文件夹的位置</a> 取决于使用的操作系统。</p>
+</div>
+<div class="paragraph">
+<p>工程专用的符号库表包含了专门为当前加载的工程提供的库的列表。如果有任何工程专用的符号库，该表将保存在工程文件夹下的 `sym-lib-table `文件中。</p>
+</div>
+<div class="sect3">
+<h4 id="_初始配置">8.1.1. 初始配置</h4>
+<div class="paragraph">
+<p>第一次运行 KiCad 原理图编辑器时，如果在 KiCad 配置文件夹中没有找到全局符号表文件 <code>sym-lib-table</code>，KiCad 将引导用户设置一个新的符号库表。这个过程将在《初始配置》中描述。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_管理列表条目">8.1.2. 管理列表条目</h4>
+<div class="paragraph">
+<p>符号库只有在它们被添加到全局或工程专用的符号库表中时才能使用。</p>
+</div>
+<div class="paragraph">
+<p>通过点击 <span class="image"><img src="images/icons/small_folder_16.png" alt="文件夹图标"></span> 按钮并选择一个库或点击 <span class="image"><img src="images/icons/small_plus_16.png" alt="加号图标"></span> 按钮并输入库文件的路径来添加一个库。选定的库将被添加到当前打开的库表中（全局或特定工程）。可以通过选择所需的库条目并点击 <span class="image"><img src="images/icons/small_trash_16.png" alt="删除图标"></span> 按钮来删除库。</p>
+</div>
+<div class="paragraph">
+<p>这个 <span class="image"><img src="images/icons/small_up_16.png" alt="向上图标"></span> 和 <span class="image"><img src="images/icons/small_down_16.png" alt="向下图标"></span> 按钮在库表中上下移动所选库。这并不影响符号库浏览器、符号编辑器或添加符号工具中库的显示顺序。</p>
+</div>
+<div class="paragraph">
+<p>通过取消第一列中的 <strong>活动</strong> 复选框，可以使库不活动。不活动的库仍然在库表中，但不会出现在任何库的浏览器中，也不会从磁盘加载，这可以减少加载时间。</p>
+</div>
+<div class="paragraph">
+<p>通过点击范围内的第一个库，然后 <kbd>Shift</kbd> - 点击范围内的最后一个库，就可以选择一个库的范围。</p>
+</div>
+<div class="paragraph">
+<p>每个库必须有一个独特的昵称：在同一个表中不允许有重复的库昵称。然而，昵称可以在全局和工程库表中重复。工程表中的库比全局表中的同名库更有优先权。</p>
+</div>
+<div class="paragraph">
+<p>库的昵称不一定要与库的文件名或路径有关。冒号字符（<code>:</code>）不能在库的昵称或符号名称中使用，因为它被用作昵称和符号之间的分隔符。</p>
+</div>
+<div class="paragraph">
+<p>每个库条目必须有一个有效的路径。路径可以定义为绝对的、相对的，或者通过《环境变量替换,环境变量替换》来定义。</p>
+</div>
+<div class="paragraph">
+<p>必须选择适当的库格式，以便正确读取库。"KiCad" 格式用于 KiCad 6+ 版库（<code>.kicad_sym</code> 文件），而 "Legacy" 格式用于 KiCad 旧版本的库（<code>.lib</code> 文件）。遗留库是只读的，但可以通过 <strong>迁移库</strong> 按钮迁移到 KiCad 格式的库（见《迁移库，迁移遗留库》一节）。</p>
+</div>
+<div class="paragraph">
+<p>有一个可选的描述字段，用于添加库条目的描述。选项字段目前不使用，所以添加选项在加载库时不会有任何影响。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="environment-variable-substitution">8.1.3. 环境变量的替代</h4>
+<div class="paragraph">
+<p>符号库表支持环境变量的替换，这允许你定义包含自定义路径的环境变量来存储你的库。通过在符号库路径中使用 <code>${ENV_VAR_NAME}</code> 的语法，支持环境变量的替换。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，KiCad 定义了几个环境变量，这些变量在 <a href="../kicad/kicad.html#kicad-environment-variables">工程管理文档</a> 中描述。环境变量可以在 <strong>偏好设置</strong> &#8594; <strong>配置路径&#8230;&#8203;</strong> 对话框中进行配置。</p>
+</div>
+<div class="paragraph">
+<p>在符号库表中使用环境变量，可以在不破坏符号库表的情况下重新定位库，只要在库的位置改变时更新环境变量即可。</p>
+</div>
+<div class="paragraph">
+<p><code>${KIPRJMOD}</code> 是一个特殊的环境变量，总是展开为当前工程目录的绝对路径。<code>${KIPRJMOD}</code> 允许将库存储在工程文件夹中，而不必在工程库表中使用绝对路径。这使得重新定位工程而不破坏其工程库表成为可能。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_使用模式">8.1.4. 使用模式</h4>
+<div class="paragraph">
+<p>符号库可以全局定义，也可以专门为当前加载的项目定义。在用户的全局表中定义的符号库总是可用的，并存储在用户的 KiCad 配置文件夹中的 <code>sym-lib-table</code> 文件中。工程专用的符号库表只对当前打开的工程文件有效。</p>
+</div>
+<div class="paragraph">
+<p>每种方法都有其优点和缺点。在全局表中定义所有的库意味着它们在需要时总是可用的。这样做的缺点是，加载时间会增加。</p>
+</div>
+<div class="paragraph">
+<p>在工程的基础上定义所有的符号库，意味着你只有工程所需的库，这减少了符号库的加载时间。缺点是你总是要记住添加每个工程所需的每个符号库。</p>
+</div>
+<div class="paragraph">
+<p>一种使用模式是在全局范围内定义常用的库，并在工程专用的库表中定义工程所需的库。对于如何定义库没有任何限制。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="migrating-libraries">8.1.5. 迁移遗留库</h4>
+<div class="paragraph">
+<p>遗留库（<code>.lib</code> 文件）是只读的，但它们可以被迁移到 KiCad 6 版库（<code>.kicad_sym</code>）。6.0.0 以上的 KiCad 版本不能查看或编辑 KiCad 6 版本的库。</p>
+</div>
+<div class="paragraph">
+<p>通过在符号库表中选择传统库并点击 <strong>迁移库</strong> 按钮，可以将其转换为 KiCad 6 库。通过 <kbd>Ctrl</kbd> - 点击或 <kbd>shift</kbd> -点击，可以一次选择和迁移多个库。</p>
+</div>
+<div class="paragraph">
+<p>库也可以通过在符号编辑器中打开它们并将其保存为一个新的库来一次转换。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_遗留工程重新映射">8.1.6. 遗留工程重新映射</h4>
+<div class="paragraph">
+<p>当加载一个在符号库表实施之前创建的原理图时，KiCad 会尝试将原理图中的符号库链接重新映射到适当的库表符号。 这个过程的成功与否取决于几个因素：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>原理图中使用的原始库仍然可用，并且与符号被添加到原理图中时相比没有变化。</p>
+</li>
+<li>
+<p>所有恢复操作都是在检测到创建恢复库或保持现有恢复库最新时进行的。</p>
+</li>
+<li>
+<p>工程符号缓存库的完整性没有被破坏。</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>重新映射将在工程文件夹中的 <code>rescue-backup</code> 文件夹中备份所有在重新映射期间被改变的文件。 在重新映射之前，一定要对你的工程做一个备份，以防出错。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>即使恢复操作已被禁用，也会被执行，以确保正确的符号可用于重新映射。 不要取消这个操作，否则重新映射将不能正确地重新映射原理图符号。 任何错误的符号链接将不得不手动修复。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>如果原来的库已经被删除，并且没有进行恢复，作为最后的手段，缓存库可以作为恢复库使用。将缓存库复制到一个新的文件名，并使用符号库表实现之前的 KiCad 版本将新的库文件添加到库列表的顶部。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-and-editing-symbols">8.2. 创建和编辑符号</h3>
+<div class="sect3">
+<h4 id="_符号和符号库的概述">8.2.1. 符号和符号库的概述</h4>
+<div class="paragraph">
+<p>符号是一个元件的原理图。一个符号由以下部分组成：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>图形项目（直线、圆形、圆弧、文字等），决定了符号在原理图中的样子。</p>
+</li>
+<li>
+<p>引脚，具有图形属性（直线、时钟、反相、低电平有效等）和电气属性（输入、输出、双向等），由电气规则检查（ERC）工具使用。</p>
+</li>
+<li>
+<p>字段，如位号、值、PCB 设计的对应封装名称等。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>符号库是由一个或多个符号组成的。一般来说，这些符号按功能、类型和/或制造商进行逻辑分组。</p>
+</div>
+<div class="paragraph">
+<p>符号可以从同一库中的另一个符号衍生出来。派生符号共享基础符号的图形形状和引脚定义，但可以覆盖基础符号的属性字段（值、封装、封装筛选器、数据手册、描述等）。派生符号可用于定义与基本部件相似的符号。例如，74LS00、74HC00 和 7437 符号都可以从 7400 符号衍生出来。在以前的 KiCad 版本中，派生符号被称为别名。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_符号编辑器概述">8.2.2. 符号编辑器概述</h4>
+<div class="paragraph">
+<p>KiCad 提供了一个符号编辑工具，允许你创建库，在库之间添加、删除或转移符号，将符号导出到文件，并从文件中导入符号。</p>
+</div>
+<div class="paragraph">
+<p>一般来说，设计一个符号的流程包括：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>定义符号是否由一个或多个单元组成。</p>
+</li>
+<li>
+<p>定义符号是否有替代的主体风格（也称为德摩根代号）。</p>
+</li>
+<li>
+<p>使用直线、矩形、圆形、多边形和文字设计其符号表示。</p>
+</li>
+<li>
+<p>通过仔细定义每个引脚的图形元素、名称、编号和电气属性（输入、输出、三态、电源输出等）来添加引脚。</p>
+</li>
+<li>
+<p>确定该符号是否应从另一个具有相同图形设计和引脚定义的符号中衍生出来。</p>
+</li>
+<li>
+<p>添加可选的字段，如 PCB 设计软件使用的封装名称和/或定义其可见性。</p>
+</li>
+<li>
+<p>通过添加描述字符串和数据手册链接来记录该符号，等等。</p>
+</li>
+<li>
+<p>将其保存在所需的库中。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>符号编辑器的主窗口如下所示。它包括三个用于快速访问常用功能的工具条和一个符号查看/编辑区。 不是所有的命令都可以在工具栏上使用，但所有的命令都可以在菜单中使用。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/libedit_main_window.png" alt="符号编辑器主窗口">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_主工具栏">主工具栏</h5>
+<div class="paragraph">
+<p>主工具条位于主窗口的顶部。它有撤销/重做命令、缩放命令、符号属性对话框和单位/代表管理控制等按钮。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/new_component_24.png" alt="新建符号图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在选定的库中创建一个新的符号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/save_24.png" alt="保存图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">保存当前选定的库。库中所有修改过的符号都将被保存。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/undo_24.png" alt="撤消图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">撤销上次的编辑。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/redo_24.png" alt="重做图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">重做最后一次撤消。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/refresh_24.png" alt="刷新图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">刷新显示。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_in_24.png" alt="放大图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">放大。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_out_24.png" alt="缩小图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">缩小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_fit_in_page_24.png" alt="放大到适合页面的图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">放大到适合显示的符号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_area_24.png" alt="放大到选择图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">放大到适合选择。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/rotate_ccw_24.png" alt="逆时针旋转图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">逆时针旋转。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/rotate_cw_24.png" alt="顺时针旋转图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">顺时针旋转。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/mirror_h_24.png" alt="水平镜像图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">水平镜像。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/mirror_v_24.png" alt="垂直镜像图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">垂直镜像。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/part_properties_24.png" alt="符号属性图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">编辑当前的符号属性。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_table_24.png" alt="引脚表图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在一个表格界面中编辑符号的引脚。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/datasheet_24.png" alt="数据手册图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">打开符号的数据手册，如果它被定义的话。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/erc_24.png" alt="ERC图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">测试当前符号是否有设计错误。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/morgan1_24.png" alt="普通主体样式图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择正常的主体风格。如果当前符号没有备选的主体样式，该按钮将被禁用。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/morgan2_24.png" alt="备用主体样式图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择备用的主体风格。如果当前的符号没有备用的主体风格，该按钮将被禁用。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/symbol_editor_unit_selector.png" alt="单元下拉" width="80%"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择要显示的多单元符号的单位。如果当前的符号不是来自于多单元的符号，则下拉控件将被禁用。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin2pin_24.png" alt="同步引脚编辑模式图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用同步引脚编辑模式。启用该模式后，任何引脚的修改都会传播到所有其他符号单元。引脚编号的变化不会被传播。这种模式对有多个可互换单元的符号自动启用，对只有一个单元的符号不能启用。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_元素工具栏">元素工具栏</h5>
+<div class="paragraph">
+<p>位于主窗口右侧的垂直工具条允许你放置设计一个符号所需的所有元素。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/cursor_24.png" alt="游标图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择工具。用选择工具右键单击可以打开光标下的对象的上下文菜单。用选择工具左键单击，在主窗口底部的信息面板中显示光标下的对象的属性。用选择工具左键双击将打开光标下对象的属性对话框。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_24.png" alt="引脚图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">引脚工具。左键点击可以添加一个新的引脚。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/text_24.png" alt="文字图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">图形文字工具。左键单击以添加一个新的图形文本项目。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_rectangle_24.png" alt="添加矩形图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">矩形工具。左键单击开始绘制图形矩形的第一个角。再次左键单击以放置矩形的另一个角。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_circle_24.png" alt="添加圆形图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">圆形工具。左键单击，开始从中心绘制一个新的圆形。再次左键单击来定义圆的半径。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_arc_24.png" alt="添加弧形图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">弧形工具。左键单击，从第一个弧形端点开始绘制一个新的图形弧项目。再次左键单击以定义第二个弧形端点。通过拖动弧形中心点来调整半径。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_line_24.png" alt="添加直线图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">连接线工具。左键单击开始在当前符号中绘制一个新的图形线项。每增加一条连接线都要左击。双击左键来完成该线。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/anchor_24.png" alt="锚点图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">锚点工具。左键单击以设置符号的锚定位置。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/delete_cursor_24.png" alt="删除图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">删除工具。左键单击，从当前符号中删除一个对象。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_选项工具栏">选项工具栏</h5>
+<div class="paragraph">
+<p>位于主窗口左侧的垂直工具条允许你设置一些编辑器的绘图选项。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/grid_24.png" alt="网格图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">切换网格的可见性和关闭。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_inch_24.png" alt="英寸单位图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置单位为英寸。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_mil_24.png" alt="毫米单位图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置单位为密尔（0.001英寸）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_mm_24.png" alt="毫米单位图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置单位为毫米。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/cursor_shape_24.png" alt="光标形状图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">切换全屏光标的开启和关闭。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_show_etype_24.png" alt="显示引脚类型图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">切换显示引脚的电气类型。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/search_tree_24.png" alt="符号工作区图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">切换显示库和符号工作区。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_将符号保存到库中">8.2.3. 将符号保存到库中</h4>
+<div class="paragraph">
+<p>这个 <span class="image"><img src="images/icons/search_tree_24.png" alt="符号工作区图标"></span> 按钮显示或隐藏可用库的列表，可以选择一个活动库。当一个符号被保存时，它将被放在这个库中。</p>
+</div>
+<div class="paragraph">
+<p>点击左侧工具栏上的 <span class="image"><img src="images/icons/search_tree_24.png" alt="符号工作区图标"></span> 图标，可以切换库和符号的树状视图。点击一个符号就可以打开该符号。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+有些符号是由其他符号衍生出来的。派生的符号名称在树状图中以 <em>大写字母</em> 显示。如果一个派生符号被打开，它的符号图形将不能被编辑。它的符号字段将可以正常编辑。要编辑一个基本符号及其所有衍生符号的图形，请打开基本符号。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>修改后的符号可以保存在当前库或不同的库中。</p>
+</div>
+<div class="paragraph">
+<p>要在当前库中保存修改后的符号，请点击 <span class="image"><img src="images/icons/save_24.png" alt="保存图标"></span> 图标。修改的内容将被写入现有的符号中。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+保存一个修改过的符号也会保存同一库中所有其他修改过的符号。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>要把符号的变化保存为一个新的符号，请点击 <strong>文件</strong> &#8594; <strong>另存为&#8230;&#8203;</strong>。 符号可以保存在当前库或不同的库中。可以为该符号设置一个新的名称。</p>
+</div>
+<div class="paragraph">
+<p>要创建一个只包含当前符号的新文件，请点击 <strong>文件</strong> &#8594; <strong>导出</strong> &#8594; <strong>符号&#8230;&#8203;</strong>。这个文件将是一个标准库文件，只包含一个符号。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_创建符号">8.2.4. 创建符号</h4>
+<div class="sect4">
+<h5 id="_创建一个新符号">创建一个新符号</h5>
+<div class="paragraph">
+<p>点击 <span class="image"><img src="images/icons/new_component_24.png" alt="新建符号图标"></span> 图标就可以创建一个新的符号。 你会被要求提供一些符号的属性。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>符号名称</p>
+</li>
+<li>
+<p>一个可选的基础符号，用于派生新的符号。新符号将使用基础符号的图形形状和引脚配置，但其他符号信息可以在派生符号中修改。基础符号必须与新派生符号在同一个库中。</p>
+</li>
+<li>
+<p>位号前缀（<code>U</code>, <code>C</code>, <code>R</code>）。</p>
+</li>
+<li>
+<p>每个封装的单元数，以及这些单元是否可以互换（例如，一个 7400 四路 NAND 符号可以有 4 个单元，每个门一个）。</p>
+</li>
+<li>
+<p>如果需要另一种主体样式（有时被称为 "德-摩根等价"）。</p>
+</li>
+<li>
+<p>该符号是否为电源符号。电源符号出现在原理图编辑器的 <strong>添加电源符号</strong> 对话框中，它们的 "值" 字段在原理图中不可编辑，不能为它们分配一个封装，它们不会被添加到 PCB 上，也不包括在物料清单中。</p>
+</li>
+<li>
+<p>该符号是否应从材料清单中排除。</p>
+</li>
+<li>
+<p>该符号是否应从 PCB 中排除。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>还有几种图形选项。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>每个引脚的末端和它的引脚名称之间的偏移。</p>
+</li>
+<li>
+<p>是否应显示引脚编号和引脚名称。</p>
+</li>
+<li>
+<p>引脚名称是否应显示在引脚旁边，或显示在符号主体内的引脚末端。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>这些属性以后也可以在《符号属性，符号属性窗口》中修改。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_new_symbol_properties.png" alt="新建符号属性">
+</div>
+</div>
+<div class="paragraph">
+<p>一个新的符号将使用上述属性被创建，并将出现在编辑器中，如下图所示。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_new.png" alt="新建的符号">
+</div>
+</div>
+<div class="paragraph">
+<p>中间的蓝色十字是符号的锚，它指定了符号的原点，即坐标（0，0）。锚点可以通过选择 <span class="image"><img src="images/icons/anchor_24.png" alt="锚点图标"></span> 图标并点击新的所需锚点位置来重新定位。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_从另一个符号创建一个符号">从另一个符号创建一个符号</h5>
+<div class="paragraph">
+<p>通常，你想制作的符号与符号库中已有的符号相似。在这种情况下，加载和修改一个现有的符号是很容易的。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>加载将被作为起点的符号。</p>
+</li>
+<li>
+<p>使用 <strong>文件</strong> &#8594; <strong>另存为&#8230;&#8203;</strong> 保存一个新的符号副本。"另存为" 对话框将提示新符号的名称和要保存在哪个库中。</p>
+</li>
+<li>
+<p>根据需要编辑新的符号。</p>
+</li>
+<li>
+<p>保存修改后的符号。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="symbol-properties">符号属性</h5>
+<div class="paragraph">
+<p>符号属性是在创建符号时设置的，但它们可以在任何时候被修改。要改变符号属性，请点击 <span class="image"><img src="images/icons/part_properties_24.png" alt="符号属性图标"></span> 图标，显示符号属性对话框。你也可以双击编辑画布中的一个空点。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_properties_for_symbol.png" alt="符号属性">
+</div>
+</div>
+<div class="paragraph">
+<p>设置 <strong>单元编号</strong>，并检查 <strong>所有单元都可互换</strong> 和 <strong>具有交替的主体风格</strong>（如适用）是很重要的，因为这些设置会影响引脚和图形被添加到每个符号单元的方式。</p>
+</div>
+<div class="paragraph">
+<p>如果你在向符号添加引脚后改变了每个包的单元编号，你将需要做额外的工作来为额外的单元添加引脚和图形。如果最初正确设置了这些属性，引脚和图形就会自动添加到每个单元。尽管如此，还是可以在任何时候修改这些属性。</p>
+</div>
+<div class="paragraph">
+<p>图形选项 <strong>显示引脚编号</strong> 和 <strong>显示引脚名称</strong> 定义引脚编号和引脚名称文本的可见性。选项 <strong>将引脚名称置于内部</strong> 定义了引脚名称相对于引脚主体的位置。如果该选项被选中，引脚被显示在符号的轮廓内。在这种情况下，<strong>引脚名称位置偏移</strong> 属性定义了文字远离引脚末端的位置。通常，0.02 到 0.05 英寸的数值是合理的。</p>
+</div>
+<div class="paragraph">
+<p>下面的例子显示了一个没有勾选 <strong>将引脚名称放在里面</strong> 选项的符号。注意名称和引脚编号的位置。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_uncheck_pin_name_inside.png" alt="将引脚名称放在未选中的位置">
+</div>
+</div>
+<div class="sect5">
+<h6 id="_符号名称描述和关键词">符号名称、描述和关键词</h6>
+<div class="paragraph">
+<p><strong>符号名称</strong> 是符号在库中的名称。符号是由库和符号名称的组合来识别的。</p>
+</div>
+<div class="paragraph">
+<p>在以前的 KiCad 版本中，符号名称与 <code>值</code> 字段相连。 在 KiCad 7.0 及以后的版本中，这种联系被删除。</p>
+</div>
+<div class="paragraph">
+<p>符号描述应包含对组件的简要描述，如元件的功能、突出的特点和包装选项。关键字应包含与该元件相关的其他术语。关键词主要是用来帮助搜索符号的。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_add_symbol_search_description.png" alt="在添加符号对话框中搜索一个符号">
+</div>
+</div>
+<div class="paragraph">
+<p>符号的名称、描述和关键词都是在符号编辑器和添加符号对话框中搜索符号时使用的。描述和关键词会显示在符号库浏览器和添加符号对话框中。</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="footprint-filters">封装筛选器</h6>
+<div class="paragraph">
+<p>封装筛选器标签用于定义哪些封装适合与符号一起使用。这些筛选器可以在封装分配工具中应用，以便每个符号只显示合适的封装。</p>
+</div>
+<div class="paragraph">
+<p>可以定义多个封装筛选器。符合任何一个筛选器的封装将被显示；如果没有定义筛选器，那么所有的封装都将被显示。</p>
+</div>
+<div class="paragraph">
+<p>筛选器可以使用通配符。<code>*</code> 匹配任何数量的字符，包括零，而 <code>?</code> 匹配零或一个字符。例如，<code>SOIC-*</code> 将匹配 <code>SOIC-8_3.9x4.9mm_P1.27mm</code> 封装以及任何其他以 <code>SOIC-</code> 开头的封装。筛选器 <code>SOT?23</code> 匹配 <code>SOT23</code> 以及 <code>SOT-23</code>。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_footprint.png" alt="封装筛选器">
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_具有替代性符号表示的符号">具有替代性符号表示的符号</h5>
+<div class="paragraph">
+<p>如果该符号定义了一个备用的主体样式，每次必须选择一个主体样式进行编辑。要编辑正常表示，请点击 <span class="image"><img src="images/icons/morgan1_24.png" alt="正常表示图标"></span> 图标。</p>
+</div>
+<div class="paragraph">
+<p>要编辑备用替换，请点击 <span class="image"><img src="images/icons/morgan2_24.png" alt="备用替换图标"></span> 图标。 使用下面显示的 <span class="image"><img src="images/symbol_editor_unit_selector.png" alt="单元选择下拉框"></span> 下拉菜单，选择你想编辑的单位。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_图形元素">8.2.5. 图形元素</h4>
+<div class="paragraph">
+<p>图形元素创建了一个符号的视觉表现，不包含电气连接信息。图形元素是用以下工具创建的:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>由起点和终点定义的直线和多边形。</p>
+</li>
+<li>
+<p>由两个对角线角定义的矩形。</p>
+</li>
+<li>
+<p>由中心和半径定义的圆形。</p>
+</li>
+<li>
+<p>弧线由弧线的起点和终点以及它的中心定义。一个弧线从 0° 到 180°。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>主窗口右侧的垂直工具条允许你放置设计一个符号的表现形式所需的所有图形元素。</p>
+</div>
+<div class="sect4">
+<h5 id="_图形元素成员">图形元素成员</h5>
+<div class="paragraph">
+<p>每个图形元素（直线、圆弧、圆形等）都可以被定义为所有单元和/或主体样式所共有的，或特定单元和/或主体样式所特有的。元素选项可以通过右键点击元素来快速访问，显示所选元素的上下文菜单。下面是一个线条元素的上下文菜单。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_context_menu.png" alt="图形线上下文菜单">
+</div>
+</div>
+<div class="paragraph">
+<p>你也可以在一个元素上双击左键来修改其属性。 下面是一个多边形元素的属性对话框。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_polyline_properties.png" alt="图形线属性">
+</div>
+</div>
+<div class="paragraph">
+<p>图形元素的属性是：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>边界</strong> 决定是否应该绘制形状的边框。</p>
+</li>
+<li>
+<p><strong>宽度</strong> 和 <strong>颜色</strong> 定义了边框的线宽和颜色。边界宽度为 <code>0</code> 时，使用原理图的默认符号线宽。<strong>风格</strong> 决定了边框的线条样式（实线、虚线、点线等）。</p>
+</li>
+<li>
+<p><strong>填充样式</strong> 决定了图形元素所定义的形状是不填充还是填充。填充颜色可以是颜色主题的主体边框颜色、主体背景颜色或自定义颜色。</p>
+</li>
+<li>
+<p><strong>符号中所有单元的共有</strong> 决定了图形元素是否为符号中的每个单元绘制，每个包有一个以上的单元，或者图形元素只为当前单元绘制。</p>
+</li>
+<li>
+<p><strong>对所有主体风格通用（德摩根）</strong> 决定图形元素是否为具有替代主体风格的符号中的每个符号表示绘制，或者图形元素是否只为当前的主体风格绘制。</p>
+</li>
+<li>
+<p><strong>私有化的符号编辑器</strong> 导致形状仅在符号编辑器中编辑符号时可见。当符号被添加到原理图中时，该形状将被隐藏。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_图形化文本元素">图形化文本元素</h5>
+<div class="paragraph">
+<p>这个 <span class="image"><img src="images/icons/text_24.png" alt="文本图标"></span> 图标允许创建图形文本。图形文本会自动调整方向，以便可读，即使符号被镜像化。请注意，图形文本项目与符号字段不一样。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_每个符号的多个单元和替代的主体样式">8.2.6. 每个符号的多个单元和替代的主体样式</h4>
+<div class="paragraph">
+<p>符号最多可以有两种主体样式（一个标准符号和一个备用符号，通常被称为 "德摩根等同"）和/或每个封装有一个以上的单元（例如逻辑门）。有些符号每个封装可以有一个以上的单元，每个单元有不同的符号和引脚配置。</p>
+</div>
+<div class="paragraph">
+<p>例如，考虑一个有两个开关的继电器，它可以被设计成有三个不同单元的符号：线圈、开关 1 和开关 2。 设计一个每个封装有多个单元的符号和/或备用的主体样式是非常灵活的。一个引脚或一个主体符号项目可以是所有单元所共有的，也可以是特定单元所特有的，或者它们可以是两个符号表示所共有的，所以是特定的符号表示。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，引脚是特定于一个单元和主体样式的。当一个引脚是所有单位或所有主体款式所共有的，它只需要被创建一次。主体样式的图形和文字也是如此，它们可能是每个单元所共有的，但通常是每个主体样式所特有的）。</p>
+</div>
+<div class="paragraph">
+<p>要向一个符号添加额外的单元，在符号属性对话框中将 <strong>单元编号</strong> 属性设置为适当的数字。默认情况下，符号单元被命名为 <code>单元 A</code>、<code>单元 B</code> 等，但你可以使用 <strong>编辑</strong> &#8594; <strong>设置单元显示名称&#8230;&#8203;</strong> 为当前单元设置一个任意的名称。</p>
+</div>
+<div class="paragraph">
+<p>要添加一个备用的主体样式，请在符号属性对话框中设置 <strong>具有备用的主体样式（德摩根）</strong> 属性。</p>
+</div>
+<div class="sect4">
+<h5 id="_具有多个不可互换单元的符号示例">具有多个不可互换单元的符号示例</h5>
+<div class="paragraph">
+<p>对于一个有多个不能互换的单元的符号的例子，考虑一个每包有 3 个单元的继电器：一个线圈、开关 1 和开关 2。</p>
+</div>
+<div class="paragraph">
+<p>这三个单元并不都是一样的，所以在符号属性对话框中应取消选择 <strong>所有单元都可以互换</strong>。另外，这个选项可以在最初创建符号时指定。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_not_interchangeable.png" alt="取消勾选所有单元都可互换">
+</div>
+</div>
+<div class="sect5">
+<h6 id="_单元_a">单元 A</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit1.png" alt="继电器单元 A">
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_单元_b">单元 B</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit2.png" alt="继电器单元 B">
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_单元_c">单元 C</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit3.png" alt="继电器单元 C">
+</div>
+</div>
+<div class="paragraph">
+<p>单元 A 与单元 B 和单元 C 的符号和引脚布局不一样，所以这些单元不能互换。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<strong>同步引脚编辑模式</strong> 可以通过点击 <span class="image"><img src="images/icons/pin2pin_24.png" alt="同步引脚编辑模式图标"></span> 图标启用。在这种模式下，引脚的修改会在符号单元之间同步；一个单元中的修改也会反映在其他单元中。当这种模式被禁用时，一个单元中的引脚修改不会影响其他单元。当 <strong>所有单元可互换</strong> 被选中时，该模式会自动启用，但它可以被禁用。当 <strong>所有单元可互换</strong> 未被选中或符号只有一个单元时，该模式不能被启用。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_引脚创建和编辑">8.2.7. 引脚创建和编辑</h4>
+<div class="paragraph">
+<p>你可以通过点击 <span class="image"><img src="images/icons/pin_24.png" alt="引脚图标"></span> 按钮来创建和插入一个引脚。可以通过双击引脚来编辑引脚的属性。你也可以删除或移动你已经添加的引脚。必须小心地创建引脚，因为任何错误都会对 PCB 设计产生影响。</p>
+</div>
+<div class="sect4">
+<h5 id="_引脚概述">引脚概述</h5>
+<div class="paragraph">
+<p>一个引脚是由它的图形表示、它的名字和它的编号定义的。引脚的名称和编号可以包含字母、数字和符号，但不能包含空格。 为了使电气规则检查（ERC）工具发挥作用，引脚的电气类型（输入、输出、三态&#8230;&#8203;）也必须被正确定义。如果这个类型定义不正确，原理图上的 ERC 检查结果可能是无效的。</p>
+</div>
+<div class="paragraph">
+<p>重要笔记：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>符号的引脚按编号与封装的焊盘相匹配。符号中的引脚编号必须与封装中相应的焊盘编号相匹配。</p>
+</li>
+<li>
+<p>不要在引脚名称和数字中使用空格。空格将被自动替换成下划线（<code>_</code>）。</p>
+</li>
+<li>
+<p>To define a pin name with an inverted signal (overbar) use the <code>~</code> (tilde) character followed by the text to invert in braces. For example <code>~{FO}O</code> would display <span class="overline">FO</span> O.</p>
+</li>
+<li>
+<p>如果引脚名称为空，则认为该引脚未被命名。</p>
+</li>
+<li>
+<p>引脚名称可以在一个符号中重复。</p>
+</li>
+<li>
+<p>引脚编号在一个符号中必须是唯一的。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_引脚属性">引脚属性</h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_properties.png" alt="引脚属性">
+</div>
+</div>
+<div class="paragraph">
+<p>引脚属性对话框允许你编辑引脚的所有特性。当你创建一个引脚或双击一个现有的引脚时，这个对话框会自动弹出。这个对话框允许你修改：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>引脚名称和文字大小。</p>
+</li>
+<li>
+<p>引脚编号和文字大小。</p>
+</li>
+<li>
+<p>引脚的长度。</p>
+</li>
+<li>
+<p>引脚的电气类型和图形风格。</p>
+</li>
+<li>
+<p>单元和备用成员。</p>
+</li>
+<li>
+<p>引脚可见性。</p>
+</li>
+<li>
+<p>《备用引脚定义，备用引脚定义》。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_引脚图形样式">引脚图形样式</h5>
+<div class="paragraph">
+<p>不同的引脚图形风格如下图所示。这些样式是纯粹的图形，不影响引脚的电气类型。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_properties_style.png" alt="引脚图形样式">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="pin-electrical-types">引脚电气类型</h5>
+<div class="paragraph">
+<p>选择正确的电气类型对原理图 ERC 工具很重要。 ERC 将检查引脚的连接是否恰当，例如，确保输入引脚被驱动，电源输入从适当的来源接收电源。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">引脚类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">描述</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">输入</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个专门用于输入的引脚。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">输出</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个专门用于输出的引脚。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">双向</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可以作为输入或输出的引脚，如微控制器的数据总线引脚。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">三态</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">三态输出引脚（高、低或高阻抗）。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无源</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个无源符号引脚：电阻、连接器等。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自由</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个可以自由连接到任何其他引脚的引脚，没有电气方面的问题。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">未指定的</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个引脚，ERC 检查对其不重要。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">电源输入</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个符号的电源引脚。作为一种特殊情况，被标记为不可见的电源输入引脚会自动连接到同名的网络中。更多信息请参见《创建电源符号，电源符号部分》。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">电源输出</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为其他引脚提供电源的引脚，如稳压器的输出。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">集电极开路</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个集电极开路的逻辑输出。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开路发射器</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开路发射器逻辑输出。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">未连接的引脚</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">不应连接任何东西的引脚。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_将引脚属性推送到其他引脚">将引脚属性推送到其他引脚</h5>
+<div class="paragraph">
+<p>你可以通过右击一个针脚，并分别选择 <strong>推送引脚长度</strong>、<strong>推送引脚名称大小</strong> 或 <strong>推送引脚数字大小</strong>，将该针脚的长度、名称大小或数字大小应用于符号中的其他引脚。符号中的所有其他引脚将被更新。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_context_menu.png" alt="引脚上下文菜单">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_为多个单元和替代符号表示法定义引脚">为多个单元和替代符号表示法定义引脚</h5>
+<div class="paragraph">
+<p>具有多个单元和/或图形表示的符号在创建和编辑引脚时，问题特别多。大多数引脚都是针对每个符号单元（因为每个单元都有一组不同的引脚）和每个主体样式（因为正常主体样式和备用形式之间的形式和位置不同）。</p>
+</div>
+<div class="paragraph">
+<p>符号库编辑器允许同时创建引脚。默认情况下，对引脚所做的修改是针对一个多单元符号的所有单元，以及对具有替代符号表示法的符号的两种表示法。 唯一的例外是引脚的图形类型和名称，它们在符号单元和主体样式之间保持无关联。建立这种依赖关系是为了在大多数情况下更容易创建和编辑引脚。这个依赖关系可以通过切换主工具栏上的 <span class="image"><img src="images/icons/pin2pin_24.png" alt="同步引脚编辑模式图标"></span> 图标来禁用。这将允许你完全独立地为每个单元和代表创建引脚。</p>
+</div>
+<div class="paragraph">
+<p>引脚可以是共同的，也可以是不同单位所特有的。引脚也可以是两个符号表示法都有的，也可以是每个符号表示法都有的。当一个引脚对所有单位都通用时，它只需要绘制一次。引脚可以在引脚属性对话框中设置为通用或特定。</p>
+</div>
+<div class="paragraph">
+<p>一个例子是 7400 四路双输入 NAND 门的输出引脚。由于有四个单元和两个符号表示，在符号定义中有八个独立的输出引脚。当创建一个新的 7400 符号时，正常符号表示法的单元 A 将显示在库编辑器中。要编辑备用符号表示法中的引脚样式，必须首先通过点击工具栏上的 <span class="image"><img src="images/icons/morgan2_24.png" alt="备用表示法图标"></span> 按钮来启用它。要编辑每个单元的引脚编号，请使用 <span class="image"><img src="images/symbol_editor_unit_selector.png" alt="单元选择下拉"></span> 下拉控件选择合适的单元。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_引脚表">引脚表</h5>
+<div class="paragraph">
+<p>另一种编辑引脚的方法是使用引脚表，可以通过 <span class="image"><img src="images/icons/pin_table_24.png" alt="引脚表图标"></span> 图标访问。引脚表以表格的形式显示符号中的所有引脚及其属性，所以它对批量修改引脚很有用。</p>
+</div>
+<div class="paragraph">
+<p>任何引脚属性都可以通过点击相应的单元格进行编辑。可以用 <span class="image"><img src="images/icons/small_plus_16.png" alt="加号图标"></span> 和 <span class="image"><img src="images/icons/small_trash_16.png" alt="垃圾桶图标"></span> 图标分别添加和删除引脚。</p>
+</div>
+<div class="paragraph">
+<p>你可以通过分组来同时编辑多个引脚的同一属性。 引脚可以按名称自动分组，或者你通过选择几个引脚并点击 <strong>选择的分组</strong> 来手动分组。点击 <span class="image"><img src="images/icons/small_refresh_16.png" alt="small refresh 16"></span> 按钮来清除手动分组。 你也可以过滤表格，只显示某些单元的引脚。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+通过右键单击标题行并勾选或取消附加列，可以显示或隐藏引脚表的各列。有些列是默认隐藏的。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下面的截图显示了一个四路运算放大器的引脚表。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_table.png" alt="引脚表">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="alternate-pin-definitions">备用引脚定义</h5>
+<div class="paragraph">
+<p>备用引脚定义引脚可以添加备用引脚定义。替代引脚定义允许用户在原理图中放置符号时为引脚选择不同的名称、电气类型和图形风格。这可用于具有多种功能的引脚，如微控制器引脚。</p>
+</div>
+<div class="paragraph">
+<p>替代引脚定义是在引脚属性对话框中添加的，如下图所示。 每个备用定义包含一个引脚名称、电气类型和图形风格。 这个微控制器引脚的所有外围功能都在符号中定义为备用引脚名称。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_alternate_pin_definitions.png" alt="备用引脚定义">
+</div>
+</div>
+<div class="paragraph">
+<p>一旦符号被放置在原理图中，就可以在原理图编辑器中选择备用引脚的定义。备用引脚是在符号属性对话框的备用引脚分配选项卡中分配的。备用定义可在备用分配栏的下拉菜单中选择。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_alternate_pin_assignment_selection.png" alt="选择一个备用引脚定义">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_符号字段">8.2.8. 符号字段</h4>
+<div class="paragraph">
+<p>所有库中的符号都定义有四个默认字段。每当创建或复制一个符号时，就会创建位号、值、封装分配和数据表链接字段。 只有位号是必需的。</p>
+</div>
+<div class="paragraph">
+<p>The <code>Footprint</code> field, if used, contains a reference to a footprint for the symbol. The format is <code>LIBNAME:FOOTPRINTNAME</code>, where <code>LIBNAME</code> is the name of the footprint library in the footprint library table (see the <a href="../pcbnew/pcbnew.html#managing-footprint-libraries">Footprint Library Table</a> section in the PCB Editor manual) and <code>FOOTPRINTNAME</code> is the name of the footprint in the library <code>LIBNAME</code>.</p>
+</div>
+<div class="paragraph">
+<p>在库中定义的符号通常只有这四个默认字段。额外的字段，如供应商、零件编号、单位成本等，可以添加到库中的符号中，但一般是在原理图编辑器中完成，这样额外的字段就可以应用到原理图中的所有符号。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+创建额外的空符号字段的一个方便方法是使用定义字段名模板。字段名模板定义空字段，当每个符号插入原理图时，这些字段会被添加到每个符号中。字段名模板可以在原理图编辑器首选项中全局定义（针对所有原理图），也可以在原理图设置对话框中局部定义（针对每个工程）。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+如果你想在符号字段中管理大量的元件数据，可以考虑使用《数据库，数据库库》。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_编辑符号字段">编辑符号字段</h5>
+<div class="paragraph">
+<p>要编辑一个现有的符号字段，请双击该字段，选择它或悬停并按 <kbd>E</kbd>，或右击字段文本并选择 <strong>属性&#8230;&#8203;</strong>。</p>
+</div>
+<div class="paragraph">
+<p>要添加新字段、删除可选字段或编辑现有字段，请使用主工具栏上的 <span class="image"><img src="images/icons/part_properties_24.png" alt="元件属性图标"></span> 图标，打开《符号属性,符号属性对话框》。</p>
+</div>
+<div class="paragraph">
+<p>字段是与符号相关的文本信息。不要将它们与符号的图形表示中的文字混淆。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-power-symbols">8.2.9. 创建电源符号</h4>
+<div class="paragraph">
+<p>电源符号是用来标记一条线作为电源网的一部分的符号，如 <code>VCC</code> 或 <code>GND</code>。电源符号的行为在《电源符号，电气连接部分》中描述。电源符号的处理和创建方式与普通符号相同，但有几个额外的考虑因素，如下所述。</p>
+</div>
+<div class="paragraph">
+<p>将电源符号放在一个专门的库中可能是有用的。KiCad 的符号库将电源符号放在 <code>power</code> 库中，用户可以创建库来存储自己的电源符号。如果在符号的属性中勾选了 <strong>定义为电源符号</strong> 框，该符号就会出现在原理图编辑器的 <strong>添加电源符号</strong> 对话框中，以便于访问。</p>
+</div>
+<div class="paragraph">
+<p>下面是一个 <code>GND</code> 电源符号的例子。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_power_symbol.png" alt="编辑电源符号">
+</div>
+</div>
+<div class="paragraph">
+<p>电源符号包括一个标记为不可见的 "电源输入" 类型的引脚。 它们还必须检查 <strong>定义为电源符号</strong> 的属性。 《隐藏的电源引脚,隐形的电源输入引脚》有一个特殊的属性，即根据引脚名称进行隐性的全局连接。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+如果电源符号勾选了 <strong>定义为电源符号</strong> 属性，那么电源输入引脚就不需要被标记为不可见。然而，惯例是无论如何都要使这些引脚不可见。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_power_symbol_pin.png" alt="电源符号引脚">
+</div>
+</div>
+<div class="paragraph">
+<p>要创建一个电源符号，请使用以下步骤：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>添加一个 <strong>电源输入</strong> 类型的引脚，<strong>可见</strong> 不被选中，并根据所需的网络命名引脚。使引脚的编号为 <code>1</code> 长度为 <code>0</code>，并将图形样式设置为 <strong>直线</strong>。引脚名称建立了与网络的连接；在这种情况下，引脚将自动连接到网络 <code>GND</code>。引脚编号、长度和线条样式在电气上并不重要。</p>
+</li>
+<li>
+<p>将引脚放在符号锚点上。</p>
+</li>
+<li>
+<p>使用形状工具来绘制符号图形。</p>
+</li>
+<li>
+<p>设置符号值。符号值在电气上并不重要，但它会显示在原理图中。为了避免混淆，它应该与引脚名称相匹配（这决定了连接的网络名称）。</p>
+</li>
+<li>
+<p>勾选符号属性窗口中的 <strong>定义为电源符号</strong> 框。这使得该符号出现在 <strong>添加电源符号</strong> 对话框中，使原理图中的 "值" 字段成为只读，防止该符号被分配一个封装，并将该符号从电路板、BOM 和网表中排除。</p>
+</li>
+<li>
+<p>设置符号参考并取消勾选 <strong>显示</strong> 框。除了第一个字符外，参考文本并不重要，它应该是`#<code>。对于上面所示的电源符号，位号可以是 `\#GND</code>。位号以`#` 开头的符号不会被添加到 PCB 上，不包括在材料清单的输出或网表中，也不能在封装分配工具中分配一个封装。如果一个电源符号的参考文献不是以 <code>\#</code> 开头，当运行批注或封装分配工具时，该字符将被自动插入。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>创建一个新的电源符号的一个更简单的方法是使用另一个符号作为起点，《从另一个符号创建一个符号，如前面所述》。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+连接的网名是由电源符号的 <strong>引脚名称</strong> 决定的，而不是符号的名称或值。在修改现有的电源符号时，请确保重新命名引脚，以便新符号连接到适当的电源网络。这意味着电源符号网络名称只能在符号编辑器中改变，而不能在原理图中改变。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="checking-symbols">8.2.10. 检查符号</h4>
+<div class="paragraph">
+<p>符号编辑器可以检查你的符号中的常见问题。使用顶部工具栏上的 <span class="image"><img src="images/icons/erc_24.png" alt="符号检查器图标"></span> 按钮运行符号检查器。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol_checker.png" alt="符号检查器检测到一个错位引脚">
+</div>
+</div>
+<div class="paragraph">
+<p>符号检查器检查的是：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>错位的引脚</p>
+</li>
+<li>
+<p>符号单元之间重复的引脚</p>
+</li>
+<li>
+<p>设计不正确的《电源符号，电源符号》。电源符号应该有：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>一个单位</p>
+</li>
+<li>
+<p>没有备用的主体样式</p>
+</li>
+<li>
+<p>一个单一的引脚，它要么是电源输出类型（见《电源标记，电源标记》），要么是不可见的电源输入类型（见《电源符号，电源符号》）。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>非法的位号前缀：位号前缀不应该以数字或 <code>?</code> 结尾</p>
+</li>
+<li>
+<p>《隐藏的电源引脚,隐藏的电源输入引脚》在非电源符号中：这些创建了隐含的连接，不推荐使用</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_浏览符号库">8.3. 浏览符号库</h3>
+<div class="paragraph">
+<p>符号库浏览器允许你快速检查符号库的内容。符号库浏览器可以通过点击主工具栏上的 <span class="image"><img src="images/icons/library_browser_24.png" alt="库查看器图标"></span> 图标，<strong>查看</strong> &#8594; <strong>符号库浏览器</strong>，或点击 <strong>选择符号</strong> 窗口中的 <strong>用浏览器</strong> 选择来访问。</p>
+</div>
+<div class="paragraph">
+<p>要检查一个库的内容，从左侧窗格的列表中选择一个库。所选库中的所有符号将出现在第二个窗格中。 选择一个符号名称来查看该符号。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol_library_browser.png" alt="符号库浏览器">
+</div>
+</div>
+<div class="paragraph">
+<p>双击符号名称或使用 <span class="image"><img src="images/icons/add_symbol_to_schematic_24.png" alt="添加符号到原理图图标"></span> 按钮将符号添加到原理图中。</p>
+</div>
+<div class="paragraph">
+<p>顶部的工具条包含以下命令：</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/library_browser_24.png" alt="符号选择图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在 <strong>选择符号</strong> 窗口中打开选定的符号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/lib_previous_24.png" alt="上一个符号图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在库中选择前一个符号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/lib_next_24.png" alt="下一个符号图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择库中的下一个符号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/refresh_24.png" alt="refresh 24"></span> <span class="image"><img src="images/icons/zoom_in_24.png" alt="zoom in 24"></span>
+<span class="image"><img src="images/icons/zoom_out_24.png" alt="zoom out 24"></span> <span class="image"><img src="images/icons/zoom_fit_in_page_24.png" alt="zoom fit in page 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">缩放工具。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/morgan1_24.png" alt="morgan1 24"></span> <span class="image"><img src="images/icons/morgan2_24.png" alt="morgan2 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择标准或备用的德摩根符号表示，如果适用的话。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/toolbar_viewlib_part.png" alt="toolbar viewlib part" width="70%"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择多单元符号的单元。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/datasheet_24.png" alt="icons/datasheet_png"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">打开符号的数据手册，如果它被定义。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_symbol_to_schematic_24.png" alt="将符号添加到原理图的图标"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将当前符号插入原理图中。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

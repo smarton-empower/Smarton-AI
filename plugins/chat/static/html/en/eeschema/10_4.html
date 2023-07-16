@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>Custom Netlist and BOM Formats</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body>
+
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="custom-netlist-and-bom-formats">10.4. Custom Netlist and BOM Formats</h3>
+<div class="paragraph">
+<p>KiCad can output netlists and BOMs in various formats, and users can define new
+formats if desired.</p>
+</div>
+<div class="paragraph">
+<p>The process of exporting a netlist is described in the
+<a href="#netlist-export">netlist export section</a>. BOM output is described in the
+<a href="#bom-export">BOM export section</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following section describes how to create an exporter for a new output
+format.</p>
+</div>
+<div class="sect3">
+<h4 id="adding-new-netlist-generators">10.4.1. Adding new netlist generators</h4>
+<div class="paragraph">
+<p>New netlist generators are added to the <strong>Export Netlist</strong> dialog by clicking
+the <strong>Add Generator&#8230;&#8203;</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_netlist_dialog_add_plugin.png" alt="Custom Netlist Generator">
+</div>
+</div>
+<div class="paragraph">
+<p>New generators require a name and a command. The name is shown in the tab label,
+and the command is run whenever the <strong>Export Netlist</strong> button is clicked.</p>
+</div>
+<div class="paragraph">
+<p>When the netlist is generated, KiCad creates an intermediate XML file which
+contains all of the netlist information from the schematic. The generator
+command is then run in order to transform the intermediate netlist into the
+desired netlist format.</p>
+</div>
+<div class="paragraph">
+<p>The netlist command must be set up properly so that the netlist generator script
+takes the intermediate netlist file as input and outputs the desired netlist
+file. The exact netlist command will depend on the generator script used. The
+<a href="#generator-command-line-format">command format</a> is described below.</p>
+</div>
+<div class="paragraph">
+<p>Python and XSLT are commonly used tools to create custom netlist generators.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_a_new_bom_generator">10.4.2. Adding a new BOM generator</h4>
+<div class="paragraph">
+<p>KiCad also uses the intermediate netlist file to generate BOMs with the
+<a href="#bom-export">Generate BOM tool</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/en/dialog_bom.png" alt="BOM dialog">
+</div>
+</div>
+<div class="paragraph">
+<p>Additional scripts can be added to the list of BOM generator scripts by clicking
+the <span class="image"><img src="images/icons/small_plus_16.png" alt="Plus icon"></span> button. Scripts can be
+removed by clicking the <span class="image"><img src="images/icons/small_trash_16.png" alt="Delete icon"></span>
+button. The <span class="image"><img src="images/icons/small_edit_16.png" alt="Edit icon"></span> button opens the
+selected script in a text editor.</p>
+</div>
+<div class="paragraph">
+<p>Generator scripts written in Python and XSLT can contain a header comment that
+describes the generator&#8217;s functionality and usage. This header comment is
+displayed in the BOM dialog as the description for each generator. The header
+comment must contain the string <code>@package</code>. Everything following that string
+until the end of the comment is used as the description for the generator.</p>
+</div>
+<div class="paragraph">
+<p>KiCad automatically fills the command line field when a new generator script is
+added, but the command line might need to be adjusted by hand depending on the
+generator script. KiCad attempts to automatically determine the output file
+extension from the example command line in the generator script&#8217;s header.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="generator-command-line-format">10.4.3. Generator command line format</h4>
+<div class="paragraph">
+<p>The command line for a netlist or BOM exporter defines the command that KiCad
+will run to generate the selected output file.</p>
+</div>
+<div class="paragraph">
+<p>For a netlist exporter using <code>xsltproc</code>, an example is:</p>
+</div>
+<div class="paragraph">
+<p><code>xsltproc -o %O.net /usr/share/kicad/plugins/netlist_form_pads-pcb.asc.xsl %I</code></p>
+</div>
+<div class="paragraph">
+<p>For a BOM exporter using Python, an example is:</p>
+</div>
+<div class="paragraph">
+<p><code>/usr/bin/python3 /usr/share/kicad/plugins/bom_csv_grouped_by_value.py "%I" "%O.csv"</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+It is recommended to surround arguments in the command line with quotes
+(<code>"</code>) in case they contain spaces or other special characters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Some character sequences like <code>%I</code> and <code>%O</code> have a special meaning in the
+command line, because KiCad replaces them with a filename or path before
+executing the command.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Replaced with&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%I</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;project path&gt;/&lt;project name&gt;.xml</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Absolute path and filename of the intermediate netlist file, which is the input
+    to the BOM or netlist generator plugin</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%O</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;project path&gt;/&lt;project name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Absolute path and filename of the output BOM or netlist file (without file
+    extension). An appropriate file extension may need to be specified after the
+    <code>%O</code> sequence.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;project name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base filename of the output BOM or netlist file (without path or file
+    extension). An appropriate file extension may need to be specified after the
+    <code>%B</code> sequence.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%P</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;project path&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Absolute path of the project directory, without trailing slash.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="intermediate-netlist-file">10.4.4. Intermediate Netlist File</h4>
+<div class="paragraph">
+<p>When exporting BOM files and netlists, KiCad creates an intermediate netlist
+file and then runs a separate tool which post-processes the intermediate netlist
+into the desired netlist or BOM format.</p>
+</div>
+<div class="paragraph">
+<p>The intermediate netlist uses XML syntax. It contains a large amount of data
+about the design. Depending on the output (BOM or netlist), different subsets of
+the complete intermediate netlist file will be included in the final output
+file.</p>
+</div>
+<div class="paragraph">
+<p>The structure of the intermediate netlist file is described in detail
+<a href="#intermediate-netlist-structure">below</a>.</p>
+</div>
+<div class="paragraph">
+<p>Because the conversion from intermediate netlist file to output netlist or BOM
+is a text-to-text transformation, the post-processing filter can be written
+using Python, XSLT, or any other tool capable of taking XML as input.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+XSLT is not recommended for new netlist or BOM exporters; Python or
+another tool should be used instead. Beginning with KiCad 7, <code>xsltproc</code> is no
+longer installed with KiCad, although it can be installed separately.
+Nevertheless, several examples of netlist exporters using XSLT are included
+below.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="intermediate-netlist-structure">10.4.5. Intermediate Netlist structure</h4>
+<div class="paragraph">
+<p>This sample gives an idea of the netlist file format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;export version="D"&gt;
+  &lt;design&gt;
+    &lt;source&gt;F:\kicad_aux\netlist_test\netlist_test.sch&lt;/source&gt;
+    &lt;date&gt;29/08/2010 21:07:51&lt;/date&gt;
+    &lt;tool&gt;eeschema (2010-08-28 BZR 2458)-unstable&lt;/tool&gt;
+  &lt;/design&gt;
+  &lt;components&gt;
+    &lt;comp ref="P1"&gt;
+      &lt;value&gt;CONN_4&lt;/value&gt;
+      &lt;libsource lib="conn" part="CONN_4"/&gt;
+      &lt;sheetpath names="/" tstamps="/"/&gt;
+      &lt;tstamps&gt;4C6E2141&lt;/tstamps&gt;
+    &lt;/comp&gt;
+    &lt;comp ref="U2"&gt;
+      &lt;value&gt;74LS74&lt;/value&gt;
+      &lt;libsource lib="74xx" part="74LS74"/&gt;
+      &lt;sheetpath names="/" tstamps="/"/&gt;
+      &lt;tstamps&gt;4C6E20BA&lt;/tstamps&gt;
+    &lt;/comp&gt;
+    &lt;comp ref="U1"&gt;
+      &lt;value&gt;74LS04&lt;/value&gt;
+      &lt;libsource lib="74xx" part="74LS04"/&gt;
+      &lt;sheetpath names="/" tstamps="/"/&gt;
+      &lt;tstamps&gt;4C6E20A6&lt;/tstamps&gt;
+    &lt;/comp&gt;
+    &lt;comp ref="C1"&gt;
+      &lt;value&gt;CP&lt;/value&gt;
+      &lt;libsource lib="device" part="CP"/&gt;
+      &lt;sheetpath names="/" tstamps="/"/&gt;
+      &lt;tstamps&gt;4C6E2094&lt;/tstamps&gt;
+    &lt;comp ref="R1"&gt;
+      &lt;value&gt;R&lt;/value&gt;
+      &lt;libsource lib="device" part="R"/&gt;
+      &lt;sheetpath names="/" tstamps="/"/&gt;
+      &lt;tstamps&gt;4C6E208A&lt;/tstamps&gt;
+    &lt;/comp&gt;
+  &lt;/components&gt;
+  &lt;libparts/&gt;
+  &lt;libraries/&gt;
+  &lt;nets&gt;
+    &lt;net code="1" name="GND"&gt;
+      &lt;node ref="U1" pin="7"/&gt;
+      &lt;node ref="C1" pin="2"/&gt;
+      &lt;node ref="U2" pin="7"/&gt;
+      &lt;node ref="P1" pin="4"/&gt;
+    &lt;/net&gt;
+    &lt;net code="2" name="VCC"&gt;
+      &lt;node ref="R1" pin="1"/&gt;
+      &lt;node ref="U1" pin="14"/&gt;
+      &lt;node ref="U2" pin="4"/&gt;
+      &lt;node ref="U2" pin="1"/&gt;
+      &lt;node ref="U2" pin="14"/&gt;
+      &lt;node ref="P1" pin="1"/&gt;
+    &lt;/net&gt;
+    &lt;net code="3" name=""&gt;
+      &lt;node ref="U2" pin="6"/&gt;
+    &lt;/net&gt;
+    &lt;net code="4" name=""&gt;
+      &lt;node ref="U1" pin="2"/&gt;
+      &lt;node ref="U2" pin="3"/&gt;
+    &lt;/net&gt;
+    &lt;net code="5" name="/SIG_OUT"&gt;
+      &lt;node ref="P1" pin="2"/&gt;
+      &lt;node ref="U2" pin="5"/&gt;
+      &lt;node ref="U2" pin="2"/&gt;
+    &lt;/net&gt;
+    &lt;net code="6" name="/CLOCK_IN"&gt;
+      &lt;node ref="R1" pin="2"/&gt;
+      &lt;node ref="C1" pin="1"/&gt;
+      &lt;node ref="U1" pin="1"/&gt;
+      &lt;node ref="P1" pin="3"/&gt;
+    &lt;/net&gt;
+  &lt;/nets&gt;
+&lt;/export&gt;</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="general-netlist-file-structure">General netlist file structure</h5>
+<div class="paragraph">
+<p>The intermediate Netlist accounts for five sections.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The header section.</p>
+</li>
+<li>
+<p>The components section.</p>
+</li>
+<li>
+<p>The lib parts section.</p>
+</li>
+<li>
+<p>The libraries section.</p>
+</li>
+<li>
+<p>The nets section.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The file content has the delimiter <code>&lt;export&gt;</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;export version="D"&gt;
+...
+&lt;/export&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="the-header-section">The header section</h5>
+<div class="paragraph">
+<p>The header has the delimiter <code>&lt;design&gt;</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;design&gt;
+&lt;source&gt;F:\kicad_aux\netlist_test\netlist_test.sch&lt;/source&gt;
+&lt;date&gt;21/08/2010 08:12:08&lt;/date&gt;
+&lt;tool&gt;eeschema (2010-08-09 BZR 2439)-unstable&lt;/tool&gt;
+&lt;/design&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This section can be considered a comment section.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="the-components-section">The components section</h5>
+<div class="paragraph">
+<p>The component section has the delimiter <code>&lt;components&gt;</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;components&gt;
+&lt;comp ref="P1"&gt;
+&lt;value&gt;CONN_4&lt;/value&gt;
+&lt;libsource lib="conn" part="CONN_4"/&gt;
+&lt;sheetpath names="/" tstamps="/"/&gt;
+&lt;tstamps&gt;4C6E2141&lt;/tstamps&gt;
+&lt;/comp&gt;
+&lt;/components&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This section contains the list of components in your schematic. Each
+component is described like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;comp ref="P1"&gt;
+&lt;value&gt;CONN_4&lt;/value&gt;
+&lt;libsource lib="conn" part="CONN_4"/&gt;
+&lt;sheetpath names="/" tstamps="/"/&gt;
+&lt;tstamps&gt;4C6E2141&lt;/tstamps&gt;
+&lt;/comp&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 37%;">
+<col style="width: 63%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element name</th>
+<th class="tableblock halign-left valign-top">Element description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>libsource</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name of the lib where this component was found.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>part</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">component name inside this library.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sheetpath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">path of the sheet inside the hierarchy: identify the sheet
+within the full schematic hierarchy.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tstamps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timestamp of the component.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect5">
+<h6 id="note-about-time-stamps-for-components">Note about time stamps for components</h6>
+<div class="paragraph">
+<p>To identify a component in a netlist and therefore on a board, the
+timestamp reference is used as unique for each component. However KiCad
+provides an auxiliary way to identify a component which is the
+corresponding footprint on the board. This allows the re-annotation of
+components in a schematic project and does not lose the link between
+the component and its footprint.</p>
+</div>
+<div class="paragraph">
+<p>A time stamp is an unique identifier for each component or sheet in a
+schematic project. However, in complex hierarchies, the same sheet is
+used more than once, so this sheet contains components having the same
+time stamp.</p>
+</div>
+<div class="paragraph">
+<p>A given sheet inside a complex hierarchy has an unique identifier: its
+sheetpath. A given component (inside a complex hierarchy) has a unique
+identifier: the sheetpath and its timestamp.</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="the-libparts-section">The libparts section</h5>
+<div class="paragraph">
+<p>The libparts section has the delimiter <code>&lt;libparts&gt;</code>, and the content of
+this section is defined in the schematic libraries.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;libparts&gt;
+&lt;libpart lib="device" part="CP"&gt;
+  &lt;description&gt;Condensateur polarise&lt;/description&gt;
+  &lt;footprints&gt;
+    &lt;fp&gt;CP*&lt;/fp&gt;
+    &lt;fp&gt;SM*&lt;/fp&gt;
+  &lt;/footprints&gt;
+  &lt;fields&gt;
+    &lt;field name="Reference"&gt;C&lt;/field&gt;
+    &lt;field name="Valeur"&gt;CP&lt;/field&gt;
+  &lt;/fields&gt;
+  &lt;pins&gt;
+    &lt;pin num="1" name="1" type="passive"/&gt;
+    &lt;pin num="2" name="2" type="passive"/&gt;
+  &lt;/pins&gt;
+&lt;/libpart&gt;
+&lt;/libparts&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element name</th>
+<th class="tableblock halign-left valign-top">Element description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;footprints&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The symbol&#8217;s footprint filters. Each footprint filter is in a separate <code>&lt;fp&gt;</code> tag.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;fields&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The symbol&#8217;s fields. Each field&#8217;s name and value is given in a separate `&lt;field name="fieldname"&gt;&#8230;&#8203;&lt;/field&gt; tag.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;pins&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The symbol&#8217;s pins. Each pin is given in a separate <code>&lt;pin num="pinnum" type="pintype"/&gt;</code> tag. Possible pintypes are described below.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Possible electrical pin types are:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 94%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Pintype</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usual input pin</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usual output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bidirectional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input or Output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tri-state</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bus input/output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usual ends of passive components</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unspecified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unknown electrical type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power input of a component</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power output like a regulator output</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open collector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open collector often found in analog comparators</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open emitter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open emitter sometimes found in logic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not connected</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be left open in schematic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="the-libraries-section">The libraries section</h5>
+<div class="paragraph">
+<p>The libraries section has the delimiter <code>&lt;libraries&gt;</code>. This section
+contains the list of schematic libraries used in the project.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;libraries&gt;
+  &lt;library logical="device"&gt;
+    &lt;uri&gt;F:\kicad\share\library\device.lib&lt;/uri&gt;
+  &lt;/library&gt;
+  &lt;library logical="conn"&gt;
+    &lt;uri&gt;F:\kicad\share\library\conn.lib&lt;/uri&gt;
+  &lt;/library&gt;
+&lt;/libraries&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="the-nets-section">The nets section</h5>
+<div class="paragraph">
+<p>The nets section has the delimiter <code>&lt;nets&gt;</code>. This section describes the
+connectivity of the schematic by listing all nets and the pins connected to
+each net.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;nets&gt;
+  &lt;net code="1" name="GND"&gt;
+    &lt;node ref="U1" pin="7"/&gt;
+    &lt;node ref="C1" pin="2"/&gt;
+    &lt;node ref="U2" pin="7"/&gt;
+    &lt;node ref="P1" pin="4"/&gt;
+  &lt;/net&gt;
+  &lt;net code="2" name="VCC"&gt;
+    &lt;node ref="R1" pin="1"/&gt;
+    &lt;node ref="U1" pin="14"/&gt;
+    &lt;node ref="U2" pin="4"/&gt;
+    &lt;node ref="U2" pin="1"/&gt;
+    &lt;node ref="U2" pin="14"/&gt;
+    &lt;node ref="P1" pin="1"/&gt;
+  &lt;/net&gt;
+&lt;/nets&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A possible net contains the following.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;net code="1" name="GND"&gt;
+  &lt;node ref="U1" pin="7"/&gt;
+  &lt;node ref="C1" pin="2"/&gt;
+  &lt;node ref="U2" pin="7"/&gt;
+  &lt;node ref="P1" pin="4"/&gt;
+&lt;/net&gt;</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 77%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element name</th>
+<th class="tableblock halign-left valign-top">Element Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>net code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an internal identifier for this net</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the net name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>node</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the pin (identified by <code>pin</code>) of a symbol (identified by <code>ref</code>) which is connected to the net</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_netlist_exporters">10.4.6. Example netlist exporters</h4>
+<div class="paragraph">
+<p>Some example netlist exporters using XSLT are included below.</p>
+</div>
+<div class="paragraph">
+<p>XSLT itself is an XML language very suitable for XML transformations.
+<a href="http://xmlsoft.org/XSLT/xsltproc.html">The <code>xsltproc</code> program</a> can be used to
+read the Intermediate XML netlist input file, apply a style-sheet to transform
+the input, and save the results in an output file. Use of <code>xsltproc</code> requires a
+style-sheet file using XSLT conventions. The full conversion process is handled
+by KiCad, after it is configured once to run <code>xsltproc</code> in a specific way.</p>
+</div>
+<div class="paragraph">
+<p>The document that describes XSL Transformations (XSLT) is available
+here: <a href="http://www.w3.org/TR/xslt" class="bare">http://www.w3.org/TR/xslt</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+When writing a new netlist exporter, consider using Python or another tool rather than XSLT.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_pads_netlist_example_using_xslt">PADS netlist example using XSLT</h5>
+<div class="paragraph">
+<p>The following example shows how to create an exporter for the PADS netlist
+format using <code>xlstproc</code>.</p>
+</div>
+<div class="paragraph">
+<p>The PADS netlist format is comprised of two sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A list of footprints</p>
+</li>
+<li>
+<p>A list of nets, together with the pads connected to each net.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is an XSL style-sheet which converts the intermediate netlist file to the
+PADS netlist format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;!--XSL style sheet to Eeschema Generic Netlist Format to PADS netlist format
+    Copyright (C) 2010, SoftPLC Corporation.
+    GPL v2.
+
+    How to use:
+        https://lists.launchpad.net/kicad-developers/msg05157.html
+--&gt;
+
+&lt;!DOCTYPE xsl:stylesheet [
+  &lt;!ENTITY nl  "&amp;#xd;&amp;#xa;"&gt; &lt;!--new line CR, LF --&gt;
+]&gt;
+
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;xsl:output method="text" omit-xml-declaration="yes" indent="no"/&gt;
+
+&lt;xsl:template match="/export"&gt;
+    &lt;xsl:text&gt;*PADS-PCB*&amp;nl;*PART*&amp;nl;&lt;/xsl:text&gt;
+    &lt;xsl:apply-templates select="components/comp"/&gt;
+    &lt;xsl:text&gt;&amp;nl;*NET*&amp;nl;&lt;/xsl:text&gt;
+    &lt;xsl:apply-templates select="nets/net"/&gt;
+    &lt;xsl:text&gt;*END*&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each component --&gt;
+&lt;xsl:template match="comp"&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@ref"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test = "footprint != '' "&gt;
+            &lt;xsl:apply-templates select="footprint"/&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+            &lt;xsl:text&gt;unknown&lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each net --&gt;
+&lt;xsl:template match="net"&gt;
+    &lt;!-- nets are output only if there is more than one pin in net --&gt;
+    &lt;xsl:if test="count(node)&gt;1"&gt;
+        &lt;xsl:text&gt;*SIGNAL* &lt;/xsl:text&gt;
+        &lt;xsl:choose&gt;
+            &lt;xsl:when test = "@name != '' "&gt;
+                &lt;xsl:value-of select="@name"/&gt;
+            &lt;/xsl:when&gt;
+            &lt;xsl:otherwise&gt;
+                &lt;xsl:text&gt;N-&lt;/xsl:text&gt;
+                &lt;xsl:value-of select="@code"/&gt;
+            &lt;/xsl:otherwise&gt;
+        &lt;/xsl:choose&gt;
+        &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+        &lt;xsl:apply-templates select="node"/&gt;
+    &lt;/xsl:if&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each node --&gt;
+&lt;xsl:template match="node"&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@ref"/&gt;
+    &lt;xsl:text&gt;.&lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@pin"/&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And here is the PADS netlist output file after running <code>xsltproc</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>*PADS-PCB*
+*PART*
+P1 unknown
+U2 unknown
+U1 unknown
+C1 unknown
+R1 unknown
+*NET*
+*SIGNAL* GND
+U1.7
+C1.2
+U2.7
+P1.4
+*SIGNAL* VCC
+R1.1
+U1.14
+U2.4
+U2.1
+U2.14
+P1.1
+*SIGNAL* N-4
+U1.2
+U2.3
+*SIGNAL* /SIG_OUT
+P1.2
+U2.5
+U2.2
+*SIGNAL* /CLOCK_IN
+R1.2
+C1.1
+U1.1
+P1.3
+
+*END*</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command line to make this conversion is:</p>
+</div>
+<div class="paragraph">
+<p><code>kicad\\bin\\xsltproc.exe -o test.net kicad\\bin\\plugins\\netlist_form_pads-pcb.xsl test.tmp</code></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_cadstar_netlist_example_using_xslt">Cadstar netlist example using XSLT</h5>
+<div class="paragraph">
+<p>The following example shows how to create an exporter for the Cadstar netlist
+format using <code>xlstproc</code>.</p>
+</div>
+<div class="paragraph">
+<p>The Cadstar format is comprised of two sections:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The footprint list</p>
+</li>
+<li>
+<p>The Nets list: grouping pads references by nets</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is an XSL style-sheet which converts the intermediate netlist file to the
+Cadstar netlist format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;!--XSL style sheet to Eeschema Generic Netlist Format to CADSTAR netlist format
+    Copyright (C) 2010, Jean-Pierre Charras.
+    Copyright (C) 2010, SoftPLC Corporation.
+    GPL v2. --&gt;
+
+&lt;!DOCTYPE xsl:stylesheet [
+  &lt;!ENTITY nl  "&amp;#xd;&amp;#xa;"&gt; &lt;!--new line CR, LF --&gt;
+]&gt;
+
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;xsl:output method="text" omit-xml-declaration="yes" indent="no"/&gt;
+
+&lt;!-- Netlist header --&gt;
+&lt;xsl:template match="/export"&gt;
+    &lt;xsl:text&gt;.HEA&amp;nl;&lt;/xsl:text&gt;
+    &lt;xsl:apply-templates select="design/date"/&gt;  &lt;!-- Generate line .TIM &lt;time&gt; --&gt;
+    &lt;xsl:apply-templates select="design/tool"/&gt;  &lt;!-- Generate line .APP &lt;eeschema version&gt; --&gt;
+    &lt;xsl:apply-templates select="components/comp"/&gt;  &lt;!-- Generate list of components --&gt;
+    &lt;xsl:text&gt;&amp;nl;&amp;nl;&lt;/xsl:text&gt;
+    &lt;xsl:apply-templates select="nets/net"/&gt;          &lt;!-- Generate list of nets and connections --&gt;
+    &lt;xsl:text&gt;&amp;nl;.END&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+ &lt;!-- Generate line .TIM 20/08/2010 10:45:33 --&gt;
+&lt;xsl:template match="tool"&gt;
+    &lt;xsl:text&gt;.APP "&lt;/xsl:text&gt;
+    &lt;xsl:apply-templates/&gt;
+    &lt;xsl:text&gt;"&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+ &lt;!-- Generate line .APP "eeschema (2010-08-17 BZR 2450)-unstable" --&gt;
+&lt;xsl:template match="date"&gt;
+    &lt;xsl:text&gt;.TIM &lt;/xsl:text&gt;
+    &lt;xsl:apply-templates/&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each component --&gt;
+&lt;xsl:template match="comp"&gt;
+    &lt;xsl:text&gt;.ADD_COM &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@ref"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test = "value != '' "&gt;
+            &lt;xsl:text&gt;"&lt;/xsl:text&gt; &lt;xsl:apply-templates select="value"/&gt; &lt;xsl:text&gt;"&lt;/xsl:text&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+            &lt;xsl:text&gt;""&lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each net --&gt;
+&lt;xsl:template match="net"&gt;
+    &lt;!-- nets are output only if there is more than one pin in net --&gt;
+    &lt;xsl:if test="count(node)&gt;1"&gt;
+    &lt;xsl:variable name="netname"&gt;
+        &lt;xsl:text&gt;"&lt;/xsl:text&gt;
+        &lt;xsl:choose&gt;
+            &lt;xsl:when test = "@name != '' "&gt;
+                &lt;xsl:value-of select="@name"/&gt;
+            &lt;/xsl:when&gt;
+            &lt;xsl:otherwise&gt;
+                &lt;xsl:text&gt;N-&lt;/xsl:text&gt;
+                &lt;xsl:value-of select="@code"/&gt;
+        &lt;/xsl:otherwise&gt;
+        &lt;/xsl:choose&gt;
+        &lt;xsl:text&gt;"&amp;nl;&lt;/xsl:text&gt;
+        &lt;/xsl:variable&gt;
+        &lt;xsl:apply-templates select="node" mode="first"/&gt;
+        &lt;xsl:value-of select="$netname"/&gt;
+        &lt;xsl:apply-templates select="node" mode="others"/&gt;
+    &lt;/xsl:if&gt;
+&lt;/xsl:template&gt;
+
+&lt;!-- for each node --&gt;
+&lt;xsl:template match="node" mode="first"&gt;
+    &lt;xsl:if test="position()=1"&gt;
+       &lt;xsl:text&gt;.ADD_TER &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@ref"/&gt;
+    &lt;xsl:text&gt;.&lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@pin"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;/xsl:if&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template match="node" mode="others"&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test='position()=1'&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:when test='position()=2'&gt;
+           &lt;xsl:text&gt;.TER     &lt;/xsl:text&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+           &lt;xsl:text&gt;         &lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:if test="position()&gt;1"&gt;
+        &lt;xsl:value-of select="@ref"/&gt;
+        &lt;xsl:text&gt;.&lt;/xsl:text&gt;
+        &lt;xsl:value-of select="@pin"/&gt;
+        &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+    &lt;/xsl:if&gt;
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the Cadstar output file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.HEA
+.TIM 21/08/2010 08:12:08
+.APP "eeschema (2010-08-09 BZR 2439)-unstable"
+.ADD_COM P1 "CONN_4"
+.ADD_COM U2 "74LS74"
+.ADD_COM U1 "74LS04"
+.ADD_COM C1 "CP"
+.ADD_COM R1 "R"
+
+
+.ADD_TER U1.7 "GND"
+.TER     C1.2
+         U2.7
+         P1.4
+.ADD_TER R1.1 "VCC"
+.TER     U1.14
+         U2.4
+         U2.1
+         U2.14
+         P1.1
+.ADD_TER U1.2 "N-4"
+.TER     U2.3
+.ADD_TER P1.2 "/SIG_OUT"
+.TER     U2.5
+         U2.2
+.ADD_TER R1.2 "/CLOCK_IN"
+.TER     C1.1
+         U1.1
+         P1.3
+
+.END</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_orcadpcb2_netlist_example_using_xslt">OrcadPCB2 netlist example using XSLT</h5>
+<div class="paragraph">
+<p>This format has only one section which is the footprint list. Each footprint
+includes a list of its pads with reference to a net.</p>
+</div>
+<div class="paragraph">
+<p>Below is an XSL style-sheet which converts the intermediate netlist file to the
+Orcad netlist format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;!--XSL style sheet to Eeschema Generic Netlist Format to CADSTAR netlist format
+    Copyright (C) 2010, SoftPLC Corporation.
+    GPL v2.
+
+    How to use:
+        https://lists.launchpad.net/kicad-developers/msg05157.html
+--&gt;
+
+&lt;!DOCTYPE xsl:stylesheet [
+  &lt;!ENTITY nl  "&amp;#xd;&amp;#xa;"&gt; &lt;!--new line CR, LF --&gt;
+]&gt;
+
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;xsl:output method="text" omit-xml-declaration="yes" indent="no"/&gt;
+
+&lt;!--
+    Netlist header
+    Creates the entire netlist
+    (can be seen as equivalent to main function in C
+--&gt;
+&lt;xsl:template match="/export"&gt;
+    &lt;xsl:text&gt;( { Eeschema Netlist Version 1.1  &lt;/xsl:text&gt;
+    &lt;!-- Generate line .TIM &lt;time&gt; --&gt;
+&lt;xsl:apply-templates select="design/date"/&gt;
+&lt;!-- Generate line eeschema version ... --&gt;
+&lt;xsl:apply-templates select="design/tool"/&gt;
+&lt;xsl:text&gt;}&amp;nl;&lt;/xsl:text&gt;
+
+&lt;!-- Generate the list of components --&gt;
+&lt;xsl:apply-templates select="components/comp"/&gt;  &lt;!-- Generate list of components --&gt;
+
+&lt;!-- end of file --&gt;
+&lt;xsl:text&gt;)&amp;nl;*&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!--
+    Generate id in header like "eeschema (2010-08-17 BZR 2450)-unstable"
+--&gt;
+&lt;xsl:template match="tool"&gt;
+    &lt;xsl:apply-templates/&gt;
+&lt;/xsl:template&gt;
+
+&lt;!--
+    Generate date in header like "20/08/2010 10:45:33"
+--&gt;
+&lt;xsl:template match="date"&gt;
+    &lt;xsl:apply-templates/&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!--
+    This template read each component
+    (path = /export/components/comp)
+    creates lines:
+     ( 3EBF7DBD $noname U1 74LS125
+      ... pin list ...
+      )
+    and calls "create_pin_list" template to build the pin list
+--&gt;
+&lt;xsl:template match="comp"&gt;
+    &lt;xsl:text&gt; ( &lt;/xsl:text&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test = "tstamp != '' "&gt;
+            &lt;xsl:apply-templates select="tstamp"/&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+            &lt;xsl:text&gt;00000000&lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test = "footprint != '' "&gt;
+            &lt;xsl:apply-templates select="footprint"/&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+            &lt;xsl:text&gt;$noname&lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@ref"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test = "value != '' "&gt;
+            &lt;xsl:apply-templates select="value"/&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:otherwise&gt;
+            &lt;xsl:text&gt;"~"&lt;/xsl:text&gt;
+        &lt;/xsl:otherwise&gt;
+    &lt;/xsl:choose&gt;
+    &lt;xsl:text&gt;&amp;nl;&lt;/xsl:text&gt;
+    &lt;xsl:call-template name="Search_pin_list" &gt;
+        &lt;xsl:with-param name="cmplib_id" select="libsource/@part"/&gt;
+        &lt;xsl:with-param name="cmp_ref" select="@ref"/&gt;
+    &lt;/xsl:call-template&gt;
+    &lt;xsl:text&gt; )&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!--
+    This template search for a given lib component description in list
+    lib component descriptions are in /export/libparts,
+    and each description start at ./libpart
+    We search here for the list of pins of the given component
+    This template has 2 parameters:
+        "cmplib_id" (reference in libparts)
+        "cmp_ref"   (schematic reference of the given component)
+--&gt;
+&lt;xsl:template name="Search_pin_list" &gt;
+    &lt;xsl:param name="cmplib_id" select="0" /&gt;
+    &lt;xsl:param name="cmp_ref" select="0" /&gt;
+        &lt;xsl:for-each select="/export/libparts/libpart"&gt;
+            &lt;xsl:if test = "@part = $cmplib_id "&gt;
+                &lt;xsl:apply-templates name="build_pin_list" select="pins/pin"&gt;
+                    &lt;xsl:with-param name="cmp_ref" select="$cmp_ref"/&gt;
+                &lt;/xsl:apply-templates&gt;
+            &lt;/xsl:if&gt;
+        &lt;/xsl:for-each&gt;
+&lt;/xsl:template&gt;
+
+
+&lt;!--
+    This template writes the pin list of a component
+    from the pin list of the library description
+    The pin list from library description is something like
+          &lt;pins&gt;
+            &lt;pin num="1" type="passive"/&gt;
+            &lt;pin num="2" type="passive"/&gt;
+          &lt;/pins&gt;
+    Output pin list is ( &lt;pin num&gt; &lt;net name&gt; )
+    something like
+            ( 1 VCC )
+            ( 2 GND )
+--&gt;
+&lt;xsl:template name="build_pin_list" match="pin"&gt;
+    &lt;xsl:param name="cmp_ref" select="0" /&gt;
+
+    &lt;!-- write pin numner and separator --&gt;
+    &lt;xsl:text&gt;  ( &lt;/xsl:text&gt;
+    &lt;xsl:value-of select="@num"/&gt;
+    &lt;xsl:text&gt; &lt;/xsl:text&gt;
+
+    &lt;!-- search net name in nets section and write it: --&gt;
+    &lt;xsl:variable name="pinNum" select="@num" /&gt;
+    &lt;xsl:for-each select="/export/nets/net"&gt;
+        &lt;!-- net name is output only if there is more than one pin in net
+             else use "?" as net name, so count items in this net
+        --&gt;
+        &lt;xsl:variable name="pinCnt" select="count(node)" /&gt;
+        &lt;xsl:apply-templates name="Search_pin_netname" select="node"&gt;
+            &lt;xsl:with-param name="cmp_ref" select="$cmp_ref"/&gt;
+            &lt;xsl:with-param name="pin_cnt_in_net" select="$pinCnt"/&gt;
+            &lt;xsl:with-param name="pin_num"&gt; &lt;xsl:value-of select="$pinNum"/&gt;
+            &lt;/xsl:with-param&gt;
+        &lt;/xsl:apply-templates&gt;
+    &lt;/xsl:for-each&gt;
+
+    &lt;!-- close line --&gt;
+    &lt;xsl:text&gt; )&amp;nl;&lt;/xsl:text&gt;
+&lt;/xsl:template&gt;
+
+&lt;!--
+    This template writes the pin netname of a given pin of a given component
+    from the nets list
+    The nets list description is something like
+      &lt;nets&gt;
+        &lt;net code="1" name="GND"&gt;
+          &lt;node ref="J1" pin="20"/&gt;
+              &lt;node ref="C2" pin="2"/&gt;
+        &lt;/net&gt;
+        &lt;net code="2" name=""&gt;
+          &lt;node ref="U2" pin="11"/&gt;
+        &lt;/net&gt;
+    &lt;/nets&gt;
+    This template has 2 parameters:
+        "cmp_ref"   (schematic reference of the given component)
+        "pin_num"   (pin number)
+--&gt;
+
+&lt;xsl:template name="Search_pin_netname" match="node"&gt;
+    &lt;xsl:param name="cmp_ref" select="0" /&gt;
+    &lt;xsl:param name="pin_num" select="0" /&gt;
+    &lt;xsl:param name="pin_cnt_in_net" select="0" /&gt;
+
+    &lt;xsl:if test = "@ref = $cmp_ref "&gt;
+        &lt;xsl:if test = "@pin = $pin_num"&gt;
+        &lt;!-- net name is output only if there is more than one pin in net
+             else use "?" as net name
+        --&gt;
+            &lt;xsl:if test = "$pin_cnt_in_net&gt;1"&gt;
+                &lt;xsl:choose&gt;
+                    &lt;!-- if a net has a name, use it,
+                        else build a name from its net code
+                    --&gt;
+                    &lt;xsl:when test = "../@name != '' "&gt;
+                        &lt;xsl:value-of select="../@name"/&gt;
+                    &lt;/xsl:when&gt;
+                    &lt;xsl:otherwise&gt;
+                        &lt;xsl:text&gt;$N-0&lt;/xsl:text&gt;&lt;xsl:value-of select="../@code"/&gt;
+                    &lt;/xsl:otherwise&gt;
+                &lt;/xsl:choose&gt;
+            &lt;/xsl:if&gt;
+            &lt;xsl:if test = "$pin_cnt_in_net &amp;lt;2"&gt;
+                &lt;xsl:text&gt;?&lt;/xsl:text&gt;
+            &lt;/xsl:if&gt;
+        &lt;/xsl:if&gt;
+    &lt;/xsl:if&gt;
+
+&lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is the OrcadPCB2 output file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>( { Eeschema Netlist Version 1.1  29/08/2010 21:07:51
+eeschema (2010-08-28 BZR 2458)-unstable}
+ ( 4C6E2141 $noname P1 CONN_4
+  (  1 VCC )
+  (  2 /SIG_OUT )
+  (  3 /CLOCK_IN )
+  (  4 GND )
+ )
+ ( 4C6E20BA $noname U2 74LS74
+  (  1 VCC )
+  (  2 /SIG_OUT )
+  (  3 N-04 )
+  (  4 VCC )
+  (  5 /SIG_OUT )
+  (  6 ? )
+  (  7 GND )
+  (  14 VCC )
+ )
+ ( 4C6E20A6 $noname U1 74LS04
+  (  1 /CLOCK_IN )
+  (  2 N-04 )
+  (  7 GND )
+  (  14 VCC )
+ )
+ ( 4C6E2094 $noname C1 CP
+  (  1 /CLOCK_IN )
+  (  2 GND )
+ )
+ ( 4C6E208A $noname R1 R
+  (  1 VCC )
+  (  2 /CLOCK_IN )
+ )
+)
+*</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

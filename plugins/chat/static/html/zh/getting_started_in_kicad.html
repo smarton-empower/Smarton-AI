@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>KiCad 入门</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>KiCad 入门</h1>
+<div class="details">
+<span id="author" class="author">The KiCad Team</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#introduction-to-kicad">1. KiCad 第 7 版介绍</a>
+<ul class="sectlevel2">
+<li><a href="#download-and-install-kicad">1.1. 下载和安装 KiCad</a></li>
+<li><a href="#support">1.2. 支持</a></li>
+</ul>
+</li>
+<li><a href="#_基本概念和工作流程">2. 基本概念和工作流程</a>
+<ul class="sectlevel2">
+<li><a href="#_pcb_设计工作流程">2.1. PCB 设计工作流程</a></li>
+</ul>
+</li>
+<li><a href="#_教程第一部分工程">3. 教程第一部分：工程</a></li>
+<li><a href="#_教程第_2_部分原理图">4. 教程第 2 部分：原理图</a>
+<ul class="sectlevel2">
+<li><a href="#sym-lib-table-setup">4.1. 符号库表设置</a></li>
+<li><a href="#_原理图编辑器基础知识">4.2. 原理图编辑器基础知识</a></li>
+<li><a href="#_原理图图框设置">4.3. 原理图图框设置</a></li>
+<li><a href="#fp-lib-table-setup">4.4. 将符号添加到原理图中</a></li>
+<li><a href="#_选择和移动对象">4.5. 选择和移动对象</a></li>
+<li><a href="#_为原理图布线">4.6. 为原理图布线</a></li>
+<li><a href="#_批注符号属性和封装">4.7. 批注、符号属性和封装</a></li>
+<li><a href="#_电气规则检查">4.8. 电气规则检查</a></li>
+<li><a href="#_物料清单">4.9. 物料清单</a></li>
+</ul>
+</li>
+<li><a href="#_教程第_3_部分电路板">5. 教程第 3 部分：电路板</a>
+<ul class="sectlevel2">
+<li><a href="#_pcb_编辑器基础知识">5.1. PCB 编辑器基础知识</a></li>
+<li><a href="#_板子的设置和压层">5.2. 板子的设置和压层</a></li>
+<li><a href="#_从原理图中导入更改">5.3. 从原理图中导入更改</a></li>
+<li><a href="#_绘制电路板边框">5.4. 绘制电路板边框</a></li>
+<li><a href="#_放置封装">5.5. 放置封装</a></li>
+<li><a href="#_布线">5.6. 布线</a></li>
+<li><a href="#_放置敷铜">5.7. 放置敷铜</a></li>
+<li><a href="#drc">5.8. 设计规则检查</a></li>
+<li><a href="#_3d_查看器">5.9. 3D 查看器</a></li>
+<li><a href="#fab">5.10. 制造输出</a></li>
+</ul>
+</li>
+<li><a href="#_教程第_4_部分自定义符号和封装">6. 教程第 4 部分：自定义符号和封装</a>
+<ul class="sectlevel2">
+<li><a href="#_库和库表的基础知识">6.1. 库和库表的基础知识</a></li>
+<li><a href="#_创建新的全局库或工程库">6.2. 创建新的全局库或工程库</a></li>
+<li><a href="#_新建符号">6.3. 新建符号</a></li>
+<li><a href="#_新建封装">6.4. 新建封装</a></li>
+<li><a href="#linking-symbols-footprints-3d-models">6.5. 链接符号、封装和 3D 模型</a></li>
+</ul>
+</li>
+<li><a href="#_今后的发展方向">7. 今后的发展方向</a>
+<ul class="sectlevel2">
+<li><a href="#_更多学习资源">7.1. 更多学习资源</a></li>
+<li><a href="#_帮助改进_kicad">7.2. 帮助改进 KiCad</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div id="copyright" class="paragraph">
+<p><strong>版权</strong></p>
+</div>
+<div class="paragraph">
+<p>本文件的版权 &#169;2010-2023 由下列贡献者拥有。您可以根据 GNU 通用公共许可证（http://www.gnu.org/licenses/gpl.html）第 3 版或更高版本，或知识共享署名许可证（http://creativecommons.org/licenses/by/3.0/）第 3.0 版或更高版本的条款发布它和/或修改它。</p>
+</div>
+<div class="paragraph">
+<p>本指南中的所有商标均属于其合法所有者。</p>
+</div>
+<div id="contributors" class="paragraph">
+<p><strong>贡献人员</strong></p>
+</div>
+<div class="paragraph">
+<p>Graham Keeth, Jon Evans, Glenn Peterson.</p>
+</div>
+<div id="translation" class="paragraph">
+<p><strong>翻译人员</strong></p>
+</div>
+<div class="paragraph">
+<p>taotieren &lt;<a href="mailto:admin@taotieren.com">admin@taotieren.com</a>&gt;, 2019-2023.</p>
+</div>
+<div class="paragraph">
+<p>Telegram 简体中文交流群: <a href="https://t.me/KiCad_zh_CN" class="bare">https://t.me/KiCad_zh_CN</a></p>
+</div>
+<div id="former-contributors" class="paragraph">
+<p><strong>以前的贡献者</strong></p>
+</div>
+<div class="paragraph">
+<p>David Jahshan, Phil Hutchinson, Fabrizio Tappero, Christina Jarron, Melroy van den Berg.</p>
+</div>
+<div id="feedback" class="paragraph">
+<p><strong>反馈</strong></p>
+</div>
+<div class="paragraph">
+<p>KiCad 项目欢迎与软件或其文档相关的反馈、错误报告和建议。有关如何汇总反馈或报告问题的详细信息，请参阅 <a href="https://www.kicad.org/help/report-an-issue/" class="bare">https://www.kicad.org/help/report-an-issue/</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction-to-kicad">1. KiCad 第 7 版介绍</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KiCad 是一个开源的软件套件，用于创建电子电路原理图、印刷电路板（PCB）和相关的零件描述。KiCad 支持综合设计工作流程，其中原理图和相应的 PCB 一起设计，也支持特殊用途的独立工作流程。KiCad 还包括一些帮助电路和 PCB 设计的实用程序，包括用于确定电路结构电气特性的 PCB 计算器、用于检查制造文件的 Gerber 查看器、用于可视化成品 PCB 的 3D 查看器以及用于检查电路行为的集成 SPICE 仿真器。</p>
+</div>
+<div class="paragraph">
+<p>KiCad 可在所有主要的操作系统和广泛的计算机硬件上运行。它支持多达 32 个铜层的 PCB，适合创建各种复杂的设计。KiCad 是由世界各地的软件和电气工程师组成的志愿者团队开发的，其使命是创建适合专业设计师的免费和开源的电子设计软件。</p>
+</div>
+<div class="paragraph">
+<p>KiCad 的最新文档可在 <a href="https://docs.kicad.org。本文件适用于" class="bare">https://docs.kicad.org。本文件适用于</a> KiCad 7.0 版本。</p>
+</div>
+<div class="sect2">
+<h3 id="download-and-install-kicad">1.1. 下载和安装 KiCad</h3>
+<div class="paragraph">
+<p>KiCad 可在许多操作系统上运行，包括微软 Windows、苹果 macOS 和许多主要的 Linux 发行版。</p>
+</div>
+<div class="paragraph">
+<p>你可以在 <a href="https://www.kicad.org/download/" class="bare">https://www.kicad.org/download/</a> 找到最新的说明和下载链接。这些说明没有包括在本手册中，因为它们可能随着操作系统更新的发布而改变。</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+根据 <a href="https://dev-docs.kicad.org/en/rules-guidelines/release-policy/">KiCad 稳定发布政策</a>，KiCad 的稳定发布会定期进行。新的功能正在不断地被添加到开发分支中。如果你想利用这些新功能，并通过测试它们来提供帮助，请下载你的平台的最新夜间构建包。夜间构建可能会引入一些错误，如文件损坏、生成不良 Gerbers 等，但 KiCad 开发团队的目标是在新功能开发期间尽可能保持开发分支的可用性。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="support">1.2. 支持</h3>
+<div class="paragraph">
+<p>如果您有想法，评论或问题，或者您只是需要帮助：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>这是 <a href="https://forum.kicad.info/">KiCad 官方用户论坛</a> 是一个与其他 KiCad 用户联系并获得帮助的好地方。</p>
+</li>
+<li>
+<p>加入我们在 <a href="https://www.kicad.org/community/chat/">Discord 或 IRC</a> 的社区，与用户和开发者进行实时讨论。</p>
+</li>
+<li>
+<p>查看 KiCad 网站，了解 KiCad 社区制作的 <a href="https://www.kicad.org/help/learning-resources/">学习资源</a>。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_基本概念和工作流程">2. 基本概念和工作流程</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>KiCad 的典型工作流程包括两个主要任务：绘制原理图和布局电路板。</p>
+</div>
+<div class="paragraph">
+<p>原理图是电路的符号表示：使用了哪些元件，它们之间有哪些连接。原理图符号是电子元件在原理图中的象形表示，如一个电阻的人字形或矩形，或一个运算放大器的三角形。原理图包含了设计中每个元件的符号，符号中的线连接着引脚。原理图通常是先画出来，然后再布线电路板。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/coldfire-schematic.png" alt="原理图示例">
+</div>
+</div>
+<div class="paragraph">
+<p>板子是原理图的物理实现，元件的封装被放置在板子上，铜线实现原理图中描述的连接。封装是一组铜焊盘，与物理元件上的引脚相匹配。当电路板被制造和组装时，该元件将被焊接到电路板上相应的封装上。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/coldfire-layout.png" alt="布局示例">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad 有单独的窗口用于绘制原理图（"原理图编辑器"）、布局电路板（"PCB 编辑器"）以及编辑符号和封装（"符号编辑器 "和 "封装编辑器"）。KiCad 自带了大量高质量的、由用户提供的符号和封装库，但创建新的符号和封装或修改现有符号和封装也很简单。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/coldfire-symbol.png" alt="布局示例">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/coldfire-footprint.png" alt="封装示例">
+</div>
+</div>
+<div class="paragraph">
+<p>最后，重要的是要了解 KiCad 有一个基于工程的工作流程。 KiCad 工程是一个包含工程文件、原理图、电路板布局的文件夹，也可以选择其他相关文件，如符号和封装库、仿真数据、采购信息等。许多与项目相关的设置，包括网络类和设计规则，都存储在工程层面。在其相关工程之外打开一个电路板可能会导致设计信息的丢失，所以要确保将所有与工程相关的文件放在一起。</p>
+</div>
+<div class="sect2">
+<h3 id="_pcb_设计工作流程">2.1. PCB 设计工作流程</h3>
+<div class="paragraph">
+<p>通常情况下，首先绘制原理图。这意味着在原理图上添加符号，并绘制它们之间的连接。如果没有合适的符号，可能需要创建自定义符号。在这个阶段，还要为每个部件选择封装，必要时还要创建自定义封装。当原理图完成后，设计通过了电气规则检查（ERC），原理图中的设计信息被转移到电路板编辑器中，并开始布局。</p>
+</div>
+<div class="paragraph">
+<p>原理图描述了设计中的哪些元件以及它们的连接方式；电路板编辑器利用这些信息使布局更容易，并防止原理图和 PCB 之间的不匹配。布局过程需要在电路板上仔细放置每个封装。在元件放置完毕后，根据原理图中的连接以及其他电气方面的考虑，如跟踪电阻、控制阻抗要求、串扰等，在元件之间绘制铜线。</p>
+</div>
+<div class="paragraph">
+<p>通常情况下，原理图在布局开始后需要更新；原理图的变化可以很容易地拉到电路板设计中。相反的情况也经常发生：在电路板布局中的任何设计变化都可以被推回到原理图中，以保持两者的一致性。</p>
+</div>
+<div class="paragraph">
+<p>当电路板布局完成，并且电路板通过了设计规则检查（DRC），就会产生制造输出，这样电路板就可以由 PCB 制造者制造。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_教程第一部分工程">3. 教程第一部分：工程</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>开始新设计时，首先要做的是创建一个新的工程。 打开 KiCad 会出现工程管理器。点击 <strong>文件</strong> &#8594; <strong>新建工程</strong>，浏览到你想要的位置，并给你的工程起个名字，如 "入门"。确保 <strong>为工程创建一个新的文件夹</strong> 复选框被选中，然后点 击<strong>保存</strong>。这将在一个新的子文件夹中创建你的工程文件，其名称与你的工程相同。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/project-manager-new-project.png" alt="创建一个新工程后的工程管理">
+</div>
+</div>
+<div class="paragraph">
+<p>在左边，工程文件窗格列出了新工程中的文件。有一个扩展名为 <code>.kicad_pro</code> 的工程文件，一个扩展名为 <code>.kicad_sch</code> 的原理图文件，以及一个扩展名为 <code>.kicad_pcb</code> 的电路板文件。这些文件都与你的工程共享一个名称。</p>
+</div>
+<div class="paragraph">
+<p>也可能有一个`备份`目录。KiCad 会在你保存时自动创建工程的备份，也可以选择在固定的时间间隔内进行备份。 备份设置可以通过进入 <strong>偏好设置</strong> &#8594; <strong>偏好设置</strong> &#8594; <strong>常用</strong> &#8594; <strong>工程备份</strong> 来配置。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/project-backup-settings.png" alt="工程备份设置">
+</div>
+</div>
+<div class="paragraph">
+<p>在工程窗口的右侧，有一些按钮可以启动 KiCad 提供的各种工具。启动这些工具将自动打开当前项目中的相关设计文件（原理图或 PCB）。首先打开原理图编辑器。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_教程第_2_部分原理图">4. 教程第 2 部分：原理图</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="sym-lib-table-setup">4.1. 符号库表设置</h3>
+<div class="paragraph">
+<p>第一次打开原理图编辑器时，会出现一个对话框询问如何配置全局符号库表。符号库表告诉 KiCad 要使用哪些符号库以及它们的位置。如果你已经安装了 KiCad 的默认库，建议你选择默认选项。<strong>复制默认的全局符号库表（推荐）</strong>。</p>
+</div>
+<div id="sym-lib-table-default-location" class="paragraph">
+<p>如果 KiCad 无法在其预期的安装位置找到库，该选项将被禁用。在这种情况下，用户应该选择第二个选项，<strong>复制自定义全局符号库表</strong>。点击底部的文件夹按钮，并浏览到下面给出的位置。选择 <code>sym-lib-table</code> 文件。</p>
+</div>
+<div class="paragraph">
+<p>默认库表文件的位置取决于操作系统，并可能根据安装位置而有所不同。下面是每个操作系统的默认值：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows: <code>C:\Program Files\KiCad\7.0\share\kicad\template\</code></p>
+</li>
+<li>
+<p>Linux: <code>/usr/share/kicad/template/</code></p>
+</li>
+<li>
+<p>macOS: <code>/Applications/KiCad/KiCad.app/Contents/SharedSupport/template/</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol-lib-table-configuration.png" alt="符号库表配置">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_原理图编辑器基础知识">4.2. 原理图编辑器基础知识</h3>
+<div class="paragraph">
+<p>要在原理图上移动，用鼠标中键或鼠标右键点击并拖动。用鼠标滚轮或 <kbd>F1</kbd> 和 <kbd>F2</kbd> 进行放大和缩小。笔记本电脑用户可能会发现，改变鼠标控制，使其更适合于触摸板；鼠标控制可在 <strong>偏好设置</strong> &#8594; <strong>偏好设置&#8230;&#8203;</strong> &#8594; <strong>鼠标和触摸板</strong> 中配置。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，KiCad 启用了一个名为 <strong>缩放时的中心和经纬光标的鼠标设置</strong>。启用该功能后，当用户放大或缩小时，鼠标光标会自动移动到屏幕中央。这使缩放区域始终保持在中心位置。这个功能是不寻常的，但许多用户一旦习惯了它就会发现它很有用。试着用鼠标光标在画布的不同区域进行放大和缩小。如果默认的缩放行为让人不舒服，请在鼠标和触摸板偏好设置中禁用该功能。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/mouse-and-touchpad-prefs.png" alt="鼠标和触摸板偏好设置">
+</div>
+</div>
+<div class="paragraph">
+<p>屏幕左侧的工具栏包含基本的显示设置。屏幕右侧的工具栏包含了编辑原理图的工具。</p>
+</div>
+<div class="paragraph">
+<p>KiCad 中的大多数工具要么有默认的快捷键，要么可以分配自定义的快捷键。要查看所有快捷键，请进入 <strong>帮助</strong> &#8594; <strong>列出快捷键&#8230;&#8203;</strong>。 快捷键可以在 <strong>偏好设置</strong> &#8594; <strong>偏好设置&#8230;&#8203;</strong> &#8594; <strong>快捷键</strong> 进行更改。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_原理图图框设置">4.3. 原理图图框设置</h3>
+<div class="paragraph">
+<p>在绘制原理图中的任何内容之前，先对原理图页面本身进行设置。 点击 <strong>文件</strong> &#8594; <strong>页面设置</strong>。给原理图一个标题和日期，如果需要的话，改变原理图大小。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/schematic-page-setup.png" alt="图框设置">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fp-lib-table-setup">4.4. 将符号添加到原理图中</h3>
+<div class="paragraph">
+<p>通过在原理图上添加一些符号开始制作电路。点击窗口右侧的 <strong>添加符号</strong> 按钮 <span class="image"><img src="images/add_component_24.png" alt="add component 24"></span> 或按 <kbd>A</kbd>，打开选择符号对话框。</p>
+</div>
+<div class="paragraph">
+<p>这个动作将触发 "封装库表设置" 对话框。这个对话框等同于前面解释过的《符号库表设置，符号库表设置》对话框，但是是针对封装而不是符号。</p>
+</div>
+<div class="paragraph">
+<p>同样，选择默认选项。<strong>复制默认全局封装库表（推荐）</strong>。如果这个选项被禁用，请选择第二个选项，<strong>复制自定义全局封装库表</strong>。点击底部的文件夹按钮，浏览到《符号库表默认位置，符号库表设置说明》中给出的位置。 选择 <code>fp-lib-table</code> 文件并点击 <strong>OK</strong>。</p>
+</div>
+<div class="paragraph">
+<p>选择符号对话框列出了可用的符号库和其中包含的元件符号。基本设备如无源元件、二极管和其他通用符号在 <code>Device</code> 库中找到。特定的设备，如一个特定的 LED，可能在其他库中找到。</p>
+</div>
+<div class="paragraph">
+<p>向下滚动到 <code>Device</code> 库，展开它，并选择 <code>LED</code> 符号。 点击 <strong>确定</strong>，然后再次点击，将该符号放入原理图中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol-led.png" alt="选择符号对话框中的 LED 符号">
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，添加一个限流电阻。回到符号选择器，但这次尝试通过在顶部的过滤框中输入 <code>R</code> 来搜索一个电阻。 同样，它可以在 <code>Device</code> 库中找到。<code>R</code> 设备是一个 IEC 风格的矩形电阻符号。对于喜欢 ANSI 风格人字形符号的用户，也有一个 <code>R_US</code> 符号。选择一个电阻符号并将其添加到原理图中。</p>
+</div>
+<div class="paragraph">
+<p>最后，添加一个电池为LED供电。<code>Device</code> 库有一个合适的 <code>Battery_Cell</code> 符号。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbols-placed.png" alt="放置了符号的原理图">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_选择和移动对象">4.5. 选择和移动对象</h3>
+<div class="paragraph">
+<p>接下来，如截图所示，正确定位符号之间的关系。通过选择、移动和旋转符号来做到这一点。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbols-moved.png" alt="符号移动和旋转的原理图">
+</div>
+</div>
+<div class="paragraph">
+<p>在 KiCad 7.0 中，对象是通过点击来选择的。可以用 <kbd>Shift</kbd> + 单击 将其他对象添加到选择中，或用
+<span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd></span> + 单击（macOS：<span class="keyseq"><kbd>Cmd</kbd>+<kbd>Shift</kbd></span> + 单击）将其删除。你可以用 <kbd>Ctrl</kbd><br>
+单击（macOS：<kbd>Cmd</kbd> + 单击）来切换一个项目的选择状态。</p>
+</div>
+<div class="paragraph">
+<p>拖动选择也是可以的；从左到右拖动可以选择完全被选择框包围的对象，而从右到左拖动也可以选择部分被选择框包围的对象。 <kbd>Shift</kbd>, <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd></span> (<span class="keyseq"><kbd>Cmd</kbd>+<kbd>Shift</kbd></span>), 和 <kbd>Ctrl</kbd> (<kbd>Cmd</kbd>) 也可以和拖动选择一起使用，分别从选择中增加、减少或切换。</p>
+</div>
+<div class="paragraph">
+<p>注意，可以选择整个符号（通过点击符号形状本身）或选择符号中的一个文本字段而不选择符号的其他部分（通过点击文本）。当只选择一个文本字段时，所执行的任何操作将只作用于所选择的文本，而不作用于符号的其他部分。</p>
+</div>
+<div class="paragraph">
+<p>按 <kbd>M</kbd> 可以移动选中的对象，按 <kbd>R</kbd> 可以旋转。 <kbd>G</kbd> 热快捷键（拖动）也可用于移动对象。对于移动未连接的符号，<kbd>G</kbd> 和 <kbd>M</kbd> 的行为是相同的，但对于连接有导线的符号，<kbd>G</kbd> 移动符号并保持导线连接，而 <kbd>M</kbd> 移动符号并留下导线。选定的对象可以用 <kbd>Del</kbd> 键删除。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_为原理图布线">4.6. 为原理图布线</h3>
+<div class="paragraph">
+<p>符号引脚上都有小圆圈，表明它们没有连接。通过在符号引脚之间画导线来解决这个问题，如截图中所示。点击右侧工具栏上的 <strong>添加导线</strong> 按钮 <span class="image"><img src="images/add_line_24.png" alt="add line 24"></span> 或使用 <kbd>W</kbd> 快捷键。点击开始画导线，通过点击符号引脚或双击任何地方完成画导线。按 Escape 键将取消画导线。</p>
+</div>
+<div class="paragraph">
+<p>另一种方便的画导线方法是将鼠标悬停在一个未连接的引脚上。 鼠标指针会改变，表示可以从该位置开始画导线。点击该引脚就会自动开始画导线。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbols-wired.png" alt="带网络线的原理图">
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，在原理图上添加电源和接地符号。虽然在这样一个简单的原理图中没有严格意义上的必要，但这些符号使大型原理图更容易理解。</p>
+</div>
+<div class="paragraph">
+<p>在 <code>Power</code> 符号库中，有许多电源和地线符号。 然而，有一个添加这些符号的快捷方式：点击 <strong>添加电源符号* <strong>按钮 <span class="image"><img src="images/add_power_24.png" alt="add power 24"></span> 或使用 <kbd>P</kbd> 快捷键。这将弹出 </strong>选择符号</strong>* 对话框，但只显示包含电源符号的符号库。</p>
+</div>
+<div class="paragraph">
+<p>添加一个 VCC 符号和 GND 符号，然后用导线将它们连接到电路上。</p>
+</div>
+<div class="paragraph">
+<p>最后，在 LED 和电阻之间的导线上加一个标签。同样，在一个简单的电路中可能没有必要这样做，但给重要的网络贴上标签是个好的做法。 点击右侧工具栏（<kbd>L</kbd>）中的 <strong>网络标签</strong> 按钮，输入标签名称（<code>led</code>），并将标签放入原理图中，使方形连接点与导线重合。根据需要旋转和对齐标签。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbols-labeled.png" alt="带有网络标签的原理图">
+</div>
+</div>
+<div class="paragraph">
+<p>请注意，同名的标签和电源符号是连接在一起的。 在这个原理图页面上，另一个 GND 符号或标记为` led` 的导线将与现有的导线短路，即使没有导线将它们直观地连接起来。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_批注符号属性和封装">4.7. 批注、符号属性和封装</h3>
+<div class="sect3">
+<h4 id="_批注">4.7.1. 批注</h4>
+<div class="paragraph">
+<p>每个符号都需要为其分配一个独特的位号。这个过程也被称为注解。</p>
+</div>
+<div class="paragraph">
+<p>在 KiCad 7.0 中，默认情况下，符号被添加到原理图中时，会自动进行批注。可以使用左侧工具栏中的 <span class="image"><img src="images/annotate_24.png" alt="annotate 24"></span> 按钮来启用或禁用自动批注。</p>
+</div>
+<div class="paragraph">
+<p>虽然在本指南中没有必要，但可以使用顶部工具栏中的 <strong>填写原理图符号位号</strong> 按钮（<span class="image"><img src="images/annotate_24.png" alt="annotate 24"></span>）对符号进行手动批注或重新批注。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_符号属性">4.7.2. 符号属性</h4>
+<div class="paragraph">
+<p>接下来，填入每个元件的数值。选择 LED，右键单击，并选择属性&#8230;&#8203;（<kbd>E</kbd>）。这个工程将使用一个红色的 LED，所以将 <code>值</code> 字段改为 <code>红色</code>。在一个真正的工程中，在这里写上 LED 制造商的零件编号可能会更好。注意，可以在每个符号的属性中单独编辑位号。</p>
+</div>
+<div class="paragraph">
+<p>这个工程将使用一个 3V 的纽扣电池，所以把 <code>BT1</code> 的 <code>值</code> 字段改为 <code>3V'。将电阻的值改为 `1k</code>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="footprint-assignment">4.7.3. 封装分配</h4>
+<div class="paragraph">
+<p>最后，给每个元件指定一个封装。这定义了每个元件将如何连接到 PCB 上。有些符号预留了封装，但对许多元件来说，有多种可能的封装，所以用户需要选择适当的一个。</p>
+</div>
+<div class="paragraph">
+<p>有几种分配封装的方法，但有一种方便的方法是使用封装分配工具，点击顶部工具栏的 <span class="image"><img src="images/icon_cvpcb_24_24.png" alt="icon cvpcb 24 24"></span> 按钮。</p>
+</div>
+<div class="paragraph">
+<p>该窗口的左窗格列出了可用的封装库。中间的窗格显示原理图中的符号。所有这些符号都会被分配到封装。右边的窗格显示了可以为中间窗格中的符号选择的封装。右键点击一个封装，选择 <strong>查看所选封装</strong>，就可以预览封装了。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprint-assignment-tool.png" alt="分配封装工具">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad 中包含了许多封装，因此封装分配工具提供了几种方法来筛选掉与有关符号不相关的封装。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprint-assignment-filters.png" alt="封装筛选按钮">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="封装筛选器"></a> 最左边的按钮 <span class="image"><img src="images/module_filtered_list_24.png" alt="module filtered list 24"></span> 可以激活每个符号中可以定义的筛选器。例如，一个运算放大器符号可以定义筛选器，只显示 SOIC 和 DIP 封装。有时，这些预定义的筛选器缺失或限制性太强，所以在某些情况下，关闭这个筛选器可能会很有用。</p>
+</li>
+<li>
+<p>中间的按钮 <span class="image"><img src="images/module_pin_filtered_list_24.png" alt="module pin filtered list 24"></span> 按引脚数筛选，所以只有 8 个引脚的符号才会显示 8 个引脚的封装。这个筛选器几乎总是有用的。</p>
+</li>
+<li>
+<p>右边的按钮 <span class="image"><img src="images/module_library_list_24.png" alt="module library list 24"></span> 按所选库筛选。库在左侧窗格中被选中；不在所选库中的封装将被筛选掉。只要知道哪个库包含正确的封装，这个筛选器就很有用。通常情况下，最好使用这个筛选器或符号筛选器，但不能同时使用。</p>
+</li>
+<li>
+<p>文本框筛选掉与框中文本不匹配的封装。 当方框为空时，这个筛选器被禁用。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>使用筛选器，找到并分配上面截图中中央栏所示的封装。点击 <strong>确定</strong>。</p>
+</div>
+<div class="paragraph">
+<p>还有其他方法来分配封装；一种方法是通过符号属性窗口。关于分配封装的更多信息，请参见 <a href="../eeschema/eeschema_assigning_footprints.html#assigning-footprints">手册</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_电气规则检查">4.8. 电气规则检查</h3>
+<div class="paragraph">
+<p>原理图中剩下的最后一件事是检查电气错误。KiCad 的电气规则检查器（ERC）不能确保原理图中的设计能够工作，但它可以检查一些常见的连接问题，如未连接的引脚、两个电源输出短路，或没有任何电源的电源输入。它还能检查其他一些错误，如没有批注的符号和网络标签中的错别字。要查看电气规则的完整列表并调整其严重性，请到 <strong>原理图设置</strong> &#8594; <strong>电气规则</strong> &#8594; <strong>违规严重性</strong>。在开始布局之前，运行 ERC 是一个好主意。</p>
+</div>
+<div class="paragraph">
+<p>通过点击顶部工具栏的 <strong>ERC</strong> 按钮（<span class="image"><img src="images/erc_24.png" alt="erc 24"></span>），然后点击 <strong>运行 ERC</strong>，运行电气规则检查。</p>
+</div>
+<div class="paragraph">
+<p>即使在这个简单的原理图中，KiCad 也发现了两个潜在的错误。这些错误列在 ERC 窗口中，箭头指向原理图中的违规位置。在 ERC 窗口中选择一个错误，就会显示出相应的箭头。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/erc-messages.png" alt="ERC 违规消息">
+</div>
+</div>
+<div class="paragraph">
+<p>你可以通过右键点击每条错误信息来排除个别违规行为或忽略整个违规类别。然而，为了得到一份干净的 ERC 报告，避免遗漏真正的问题，通常值得处理这些违规行为，即使它们不是实际的设计错误。</p>
+</div>
+<div class="paragraph">
+<p>在这种情况下，KiCad 对 <code>VCC</code> 和 <code>GND</code> 网络报告 "输入电源引脚没有被任何输出电源引脚驱动"。这是一个常见的 KiCad ERC 错误。 电源符号被设置为需要一个电源输出引脚，如电压调节器的输出，在同一网络上；否则 KiCad 认为该网络未被驱动。 对人来说，<code>VCC</code> 和 <code>GND</code> 显然是由电池驱动的，但有必要在原理图中明确显示。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbols-pwr-flag.png" alt="PWR_FLAG 添加到原理图中">
+</div>
+</div>
+<div class="paragraph">
+<p>在 <code>Power</code> 符号库中有一个特殊的 <code>PWR_FLAG</code> 符号，用于解决这个问题，告诉 KiCad 这些网络实际上是被驱动的。将这个符号添加到 <code>VCC</code> 和 <code>GND</code> 网络上，然后重新运行 ERC。当 ERC 通过而没有任何违反时，原理图就完成了。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_物料清单">4.9. 物料清单</h3>
+<div class="paragraph">
+<p>最后一个可选的步骤是生成一个 BOM，列出工程中使用的所有元件。点击 <strong>工具</strong> &#8594; <strong>生成 BOM&#8230;&#8203;</strong>。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/bom-generator.png" alt="BOM 对话框">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad 7.0 使用 Python 脚本来生成 BOM。包括三个 BOM 脚本，用户也可以创建自己的脚本，以任何需要的格式生成 BOM。</p>
+</div>
+<div class="paragraph">
+<p>选择 <code>bom_csv_grouped_extra</code> 脚本，并点击生成。一个包含 BOM 信息的 CSV 文件会在工程目录中被创建。BOM 生成器也会生成一个中间的 XML 文件，这个文件可以安全地删除。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/bom.png" alt="生成 BOM">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_教程第_3_部分电路板">5. 教程第 3 部分：电路板</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>原理图完成后，回到工程窗口并打开 PCB 编辑器，可以通过点击 PCB 编辑器按钮或打开电路板文件。</p>
+</div>
+<div class="sect2">
+<h3 id="_pcb_编辑器基础知识">5.1. PCB 编辑器基础知识</h3>
+<div class="paragraph">
+<p>PCB 编辑器中的导航与原理图编辑器相同：用鼠标中键或右键拖动平移，用滚轮或 <kbd>F1</kbd> / <kbd>F2</kbd> 缩放。</p>
+</div>
+<div class="paragraph">
+<p>PCB 编辑器的主要部分是一块画布，将在这里设计电路板。 左边的工具栏有各种板子的显示选项，包括单位和布线、过孔、焊盘和区域的边框/填充显示模式的切换。画布右边的工具条包含了设计 PCB 的工具。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+右边工具栏上的一些按钮在右下角有一个小三角形 <span class="image"><img src="images/pcbnew_palette_buttons.png" alt="pcbnew palette buttons"></span>。这个三角形表示该按钮有一个扩展的调色板，包含几个相关的工具，比如说不同种类的尺寸。要选择一个备用工具，请点击并按住按钮直到调色板出现，然后点击备用工具。另一种使用调色板的方法是点击按钮并向左拖动，直到调色板出现，然后在所需的工具被突出显示时释放鼠标按钮。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最右边的是外观面板和选择筛选器。外观面板用于改变 PCB 层、对象和网络的可见性、颜色和不透明度。通过点击层的名称可以改变活动层。</p>
+</div>
+<div class="paragraph">
+<p>在外观面板下面是选择筛选器，它可以启用和禁用各种类型的 PCB 对象的选择。这对于在拥挤的布局中选择特定的项目很有用。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_板子的设置和压层">5.2. 板子的设置和压层</h3>
+<div class="paragraph">
+<p>在设计电路板报之前，先设置页面大小，并在标题栏中添加信息。点击 <strong>文件</strong> &#8594; <strong>页面设置&#8230;&#8203;</strong>，然后选择一个合适的纸张尺寸，并输入日期、修订和标题。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/layout-page-setup.png" alt="布局页面设置">
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，进入 <strong>文件</strong> &#8594; <strong>电路板设置&#8230;&#8203;</strong>，定义如何制造 PCB。最重要的设置是压层，即 PCB 将有哪些铜层和介质层（以及它们的厚度），以及设计规则，例如布线和过孔的尺寸和间距。</p>
+</div>
+<div class="paragraph">
+<p>要设置压层，打开电路板设置窗口的 <strong>电路板压层</strong> &#8594; <strong>物理压层</strong> 页面。在本指南中，将铜层的数量定为 2，但更复杂的工程可能需要更多的铜层。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/board-setup-stackup.png" alt="物理压层">
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，进入 <strong>设计规则</strong> &#8594; <strong>约束</strong> 页面。这个页面上的设置为电路板设计中的所有内容指定了首要的设计规则。就本指南的目的而言，默认值是好的。然而，对于一个真正的工程来说，应该根据 PCB 工厂的能力来设置这些规则，这样才能使 PCB 设计具有可制造性。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/board-setup-constraints.png" alt="约束">
+</div>
+</div>
+<div class="paragraph">
+<p>最后，打开 <strong>设计规则</strong> &#8594; <strong>网络类</strong> 页面。网络类是一组与特定网络组相关的设计规则。这个页面列出了设计中每个网络类的设计规则，并允许将网络类分配给每个网络类。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/board-setup-net-classes.png" alt="网络类">
+</div>
+</div>
+<div class="paragraph">
+<p>布线的宽度和间距可以由设计者在布局过程中手动管理，但推荐使用网络类，因为它们提供了一种自动管理和检查设计规则的方法。</p>
+</div>
+<div class="paragraph">
+<p>在这个设计中，没有指定网络类，所以所有的网络都属于 <code>默认</code> 网络类。这个网络类的默认设计规则对这个工程来说是可以接受的，但是其他设计可能有多个网络类，每个网络类有不同的设计规则。例如，一块板子可能有一个宽线 <code>高电流</code> 网络类，有，或者一个 <code>50 ohm</code> 网络类，有特定的宽度和 50 欧姆控制阻抗线的间隙规则。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_从原理图中导入更改">5.3. 从原理图中导入更改</h3>
+<div class="paragraph">
+<p>原理图已经完成，但布局中还没有任何元件。 要从原理图中导入设计数据到布局中，请点击 <strong>工具</strong> &#8594; <strong>从原理图更新 PCB&#8230;&#8203;</strong>，或按 <kbd>F8</kbd>。在顶部的工具栏上还有一个按钮 <span class="image"><img src="images/update_pcb_from_sch_24.png" alt="update pcb from sch 24"></span> 。</p>
+</div>
+<div class="paragraph">
+<p>仔细阅读 <strong>要应用的改变</strong> 窗口中的信息，其中会说原理图中的三个元件将被添加到电路板上。点击 <strong>更新 PCB</strong>，<strong>关闭</strong>，然后点击画布来放置这三个封装。每个封装相对于其他封装的位置将在以后被改变。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/update-pcb-from-schematic.png" alt="从原理图更新 PCB">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprints-added.png" alt="添加的封装">
+</div>
+</div>
+<div class="paragraph">
+<p>在 KiCad 中，根据原理图的变化更新 PCB 是一个手动过程：设计者决定何时适合根据原理图的修改来更新 PCB。每次编辑原理图时，设计者必须使用 <strong>从原理图更新 PCB</strong> 工具来保持原理图和布局的同步。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_绘制电路板边框">5.4. 绘制电路板边框</h3>
+<div class="paragraph">
+<p>现在这三个元件已经被放置好了，但是电路板本身还没有被定义。通过在 <code>Edge.Cuts</code> 层上画一个板的边框来定义电路板。</p>
+</div>
+<div class="paragraph">
+<p>用粗大的网格来绘制电路的板框通常是很有用的，这样可以很容易得到画布尺寸的整数。在画布上方的网格下拉菜单中选择 1 毫米，就可以切换到粗略的网格。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/coarse-grid.png" alt="1mm 网格">
+</div>
+</div>
+<div class="paragraph">
+<p>要在 <code>Edge.Cuts</code> 图层上绘制，在右侧的外观面板的图层标签中点击 <strong>Edge.Cuts</strong>。在右边的工具栏中选择矩形工具 <span class="image"><img src="images/add_rectangle_24.png" alt="add rectangle 24"></span>，用它来画一个大致围绕三个封装的矩形。其他图形工具（直线 <span class="image"><img src="images/add_line_24.png" alt="add line 24"></span>, 圆弧 <span class="image"><img src="images/add_arc_24.png" alt="add arc 24"></span>, 圆形 <span class="image"><img src="images/add_circle_24.png" alt="add circle 24"></span>, 或多边形 <span class="image"><img src="images/add_graphical_polygon_24.png" alt="add graphical polygon 24"></span>）也可以用来定义板的边框；唯一的要求是，这个边框是一个不与自身相交的单一封闭形状。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/select-edge-cuts.png" alt="板框">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_放置封装">5.5. 放置封装</h3>
+<div class="paragraph">
+<p>布局过程中的下一步是在电路板上安排封装。 一般来说，在定位封装时有几个考虑因素：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>有些封装可能对其位置有确切的要求，如连接器、指示灯或按钮和开关。</p>
+</li>
+<li>
+<p>一些元件可能需要根据电气方面的考虑来放置。 旁路电容应靠近相关 IC 的电源引脚，敏感的模拟元件应远离数字干扰。</p>
+</li>
+<li>
+<p>几乎所有的元件都有一个 "边框"（或两个，如果前面和后面都有定义）。一般来说，边框不应该相交。</p>
+</li>
+<li>
+<p>否则元件的位置应便于布线。连接的元件一般应紧靠在一起，并将布线的复杂性降到最低。飞线（表示焊盘之间连接的细线）对于确定如何将封装相对于其他封装的最佳位置很有用。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在本指南中，唯一的放置目标是使布线过程尽可能简单。</p>
+</div>
+<div class="paragraph">
+<p>首先将电池座 <code>BT1</code> 移到电路板的背面。点击它来选择它，然后按 <kbd>M</kbd> 来移动它。按 <kbd>F</kbd> 将其翻转到另一侧；现在它看起来是镜像的，它的焊盘从红色变成了蓝色。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/bt1-flipped.png" alt="BT1 翻到后面">
+</div>
+</div>
+<div class="paragraph">
+<p>所有的 PCB 层都是从板子的正面看的。因此，电路板底部的封装是颠倒的，看起来是镜像的。</p>
+</div>
+<div class="paragraph">
+<p>每个 PCB 层都有一个独特的颜色，由外观面板的层标签中的色板显示。在默认的颜色方案中，<code>F.Cu</code> （正面铜）层上的项目是红色的，而 <code>B.Cu</code>（背面铜）上的项目是蓝色。</p>
+</div>
+<div class="paragraph">
+<p>现在放置另外两个元件。一次一个，选择每个元件，然后用 <kbd>M</kbd> 和 <kbd>R</kbd> 移动和旋转它。观察每个焊盘之间的飞线，以选择最简单的元件排列；一个好的排列将使这些线不被缠住。一个可能的安排显示在下面的截图中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprints-positioned.png" alt="封装的最佳位置">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_布线">5.6. 布线</h3>
+<div class="paragraph">
+<p>元件就位后，现在是用铜线连接焊盘的时候了。</p>
+</div>
+<div class="paragraph">
+<p>第一条布线将被画在电路板的正面，所以在外观面板的层标签中把活动层改为 <code>F.Cu</code>。</p>
+</div>
+<div class="paragraph">
+<p>点击右侧工具栏中的 <strong>布线</strong> <span class="image"><img src="images/add_tracks_24.png" alt="add tracks 24"></span> 或按 <kbd>X</kbd>。点击 <code>D1</code> 的 <code>led</code> 焊盘。鼠窝线表明有一个与 <code>R1</code> 的 <code>led</code> 焊盘的飞线布线连接，所以点击该焊盘来画一个连接这两个焊盘的布线。点击第二个焊盘就完成了布线。<code>led</code> 引脚之间的飞线不再被画出，因为连接已经在铜中完成。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/route-first-connection.png" alt="第一个连接的布线">
+</div>
+</div>
+<div class="paragraph">
+<p>现在在 <code>BT1</code> 和 <code>D1</code> 的 <code>GND</code> 焊盘之间布线，从电路板背面的 <code>BT1</code> 焊盘开始。注意在点击 <code>BT1</code> 焊盘后，活动层自动变成了 <code>B.Cu</code>。点击 <code>D1</code> 焊盘来完成这个布线。</p>
+</div>
+<div class="paragraph">
+<p><code>BT1</code> 的表面贴装焊盘只在电路板的底部，而 <code>D1</code> 的通孔焊盘可以连接到前面和后面的布线。过孔焊盘是在多层板之间进行连接的一种方式。在这种情况下，<code>D1</code> 是电路板正面的一个元件，但它的通孔焊盘被用来连接到电路板背面的布线上。</p>
+</div>
+<div class="paragraph">
+<p>另一种跨层连接的方法是用过孔。在电路板背面的 <code>BT1</code> 的 <code>VCC</code> 焊盘上开始布线。按 <kbd>V</kbd> 并在 <code>BT1</code> 和 <code>R1</code> 之间点击，插入一个过孔，同时将活动层切换到 <code>F.Cu</code>。通过点击 <code>R1</code> 的 <code>VCC</code> 焊盘完成电路板顶部的布线。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/routing-complete.png" alt="所有连接的布线">
+</div>
+</div>
+<div class="paragraph">
+<p>在这一点上，所有的连接都被布线了。这可以通过查看窗口左下方的状态屏幕来确认，其中未被布线的网络数量为 0。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_放置敷铜">5.7. 放置敷铜</h3>
+<div class="paragraph">
+<p>敷铜通常用于接地和电源连接，因为它们提供了比导线更低的阻抗连接。</p>
+</div>
+<div class="paragraph">
+<p>通过切换到底部铜层并点击右侧工具栏中的 <strong>添加敷铜</strong> 按钮 <span class="image"><img src="images/add_zone_24.png" alt="add zone 24"></span>，在电路板的底部添加一个 <code>GND</code> 敷铜。在 PCB 上点击，放置该敷铜的第一个角。</p>
+</div>
+<div class="paragraph">
+<p>在出现的 "敷铜属性" 对话框中，选择 <code>GND</code> 网络并确保 <code>B.Cu</code> 层被选中。点击 <strong>确定</strong>，然后点击放置该敷铜的其他三个角。在放置最后一个角时，双击来完成该敷铜。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zone-outline.png" alt="敷铜边框">
+</div>
+</div>
+<div class="paragraph">
+<p>敷铜边框显示在画布上，但区还没有被填满&#8201;&#8212;&#8201;在敷铜的范围内没有铜，因此敷铜没有进行任何电气连接。用 <strong>编辑</strong> &#8594; <strong>填充所有敷铜</strong> (<kbd>B</kbd>)填充该敷铜。铜已经被添加到该敷铜，但是它没有连接到 <code>VCC</code> 或 <code>led</code> 焊盘和导线，并且被板子的边缘剪掉。它与前面画的 <code>GND</code> 线重叠，并通过细线与 <code>GND</code> 焊盘连接。这些是散热条，使焊盘更容易焊接。 散热条和其他敷铜设置可以在敷铜属性对话框中修改。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zone-filled.png" alt="填充敷铜">
+</div>
+</div>
+<div class="paragraph">
+<p>在 KiCad 中，当第一次绘制或修改敷铜时，或移动敷铜内的封装时，敷铜不会被自动填充。敷铜是通过手动填充和运行《DRC，DRC》时重新填充。在生成《制造，制造输出》之前，请确保敷铜填充是最新的。</p>
+</div>
+<div class="paragraph">
+<p>有时，在一个拥挤的画布设计中，填满的敷铜会让人很难看到其他的对象。可以使用左侧工具栏上的 <strong>只显示敷铜边界</strong> 按钮隐藏敷铜，<span class="image"><img src="images/show_zone_disable_24.png" alt="show zone disable 24"></span> 。当只显示敷铜的边框时，敷铜会保留其填充状态&#8212;&#8203;隐藏敷铜的填充与取消填充是不同的。</p>
+</div>
+<div class="paragraph">
+<p>敷铜也可以使用外观面板使之透明，非活动层也可以使用外观面板中的 <strong>层显示选项</strong> 隐藏或调暗。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="drc">5.8. 设计规则检查</h3>
+<div class="paragraph">
+<p>设计规则检查相当于原理图上的电气规则检查的布局。DRC 寻找设计错误，如原理图和布局之间的不匹配，敷铜间隙不足或被短路，以及没有连接到任何东西的布线。自定义规则也可以在 KiCad 7.0 中编写。要查看被检查的设计规则的完整列表并调整其严重程度，请进入 <strong>电路板设置</strong> &#8594; <strong>设计规则</strong> &#8594; <strong>违反严重程度</strong>。强烈建议在生成《制造，制造输出》之前运行 DRC 并修复所有错误。</p>
+</div>
+<div class="paragraph">
+<p>用 <strong>检查</strong> &#8594; <strong>设计规则检查</strong> 来运行 DRC 检查，或者使用顶部工具栏的 <span class="image"><img src="images/erc_24.png" alt="erc 24"></span> 按钮。单击 <strong>运行 DRC</strong>。当检查完成后，不应该有错误或警告报告。关闭 DRC 窗口。</p>
+</div>
+<div class="paragraph">
+<p>现在故意造成 DRC 错误，将电阻的封装移动到与该敷铜的填充区域重叠。使用 <kbd>D</kbd>（拖动）稍微移动电阻的封装，同时保持导线连接到其焊盘上。这就产生了间隙违规，因为电阻的 <code>VCC</code> 和 <code>led</code> 焊盘与 <code>GND</code> 区的填充物短路了。通常情况下，这可以通过重新填充敷铜来解决，但现在不要重新填充敷铜。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/resistor-moved.png" alt="电阻的封装被移动以违反间隙">
+</div>
+</div>
+<div class="paragraph">
+<p>再次运行 DRC，但要确保取消勾选 <strong>在执行 DRC 之前重新填充所有敷铜</strong> 的复选框。DRC 报告了 4 个违规情况：对于 <code>R1</code> 的每个焊盘，在焊盘和敷铜之间有一个间隙违规，在焊盘的通孔和敷铜之间有一个间隙违规。箭头指向画布上的每个违规行为。点击每个违规信息，就会放大相应的违规行为。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/drc-errors.png" alt="由于 `R1` 和 `GND` 之间的间隙违反，导致 DRC 错误">
+</div>
+</div>
+<div class="paragraph">
+<p>关闭 DRC 对话框，按 <kbd>B</kbd> 重新填充敷铜，并重新运行 DRC。 或者，勾选 <strong>在执行 DRC 之前重新填充所有敷铜</strong> 复选框并重新运行 DRC。所有的违规行为都被修复。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3d_查看器">5.9. 3D 查看器</h3>
+<div class="paragraph">
+<p>KiCad 提供了一个 3D 查看器，对检查 PCB 很有用。用 <strong>查看</strong> &#8594; <strong>3D 查看器</strong> 打开 3D 查看器。用鼠标中键拖动进行平移，用鼠标左键拖动进行绕行。绕着 PCB 板运行，可以看到顶部的 LED 和电阻，以及底部的电池座。</p>
+</div>
+<div class="paragraph">
+<p>有一种光线追踪模式，它比较慢，但能提供更精确的渲染。用 <strong>偏好设置</strong> &#8594; <strong>光线追踪</strong> 切换到光线追踪模式。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/raytracing.png" alt="PCB 的光线追踪视图">
+</div>
+</div>
+<div class="paragraph">
+<p>KiCad 库中的许多封装都带有 3D 模型，包括本指南中使用的所有封装。有些封装没有附带 3D 模型，《封装和 3D 模型，但用户可以添加自己的模型》。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fab">5.10. 制造输出</h3>
+<div class="paragraph">
+<p>随着电路板设计的完成，最后一步是生成制造输出，这样电路板就可以被制造出来。</p>
+</div>
+<div class="paragraph">
+<p>用 <strong>文件</strong> &#8594; <strong>绘制&#8230;&#8203;</strong> 打开绘制对话框。这个对话框可以将设计绘制成几种格式，但 Gerber 通常是向 PCB 制造厂家制造的正确格式。</p>
+</div>
+<div class="paragraph">
+<p>指定一个输出目录，这样绘制的文件就会被收集到一个文件夹中。否则，默认设置就可以了，但要确保所有必要的层都被选中：包括铜层（<code>*.Cu</code>）、电路板边框（<code>Edge.Cuts</code>）、阻焊层（<code>*.Mask</code>）和丝印（<code>*.Silkscreen</code>）。 锡膏层（<code>*.Paste</code>）对于制造锡膏模版（钢网）很有用。粘合层（<code>*.Adhesive</code>）只有在组装过程中任何元件将被粘在电路板上时才需要。其他层可能对绘图有帮助，但通常对 PCB 的制作没有必要。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fabrication-outputs.png" alt="绘制对话框">
+</div>
+</div>
+<div class="paragraph">
+<p>点击 <strong>绘制</strong> 来生成 Gerber 文件。同时点击 <strong>生成钻孔文件&#8230;&#8203;</strong>，然后点击 <strong>生成钻孔文件</strong> 来创建文件，指定所有将在电路板上钻孔的位置。最后，关闭 "绘制" 对话框。设计就完成了。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/generate-drill-files.png" alt="生成钻孔文件对话框">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_教程第_4_部分自定义符号和封装">6. 教程第 4 部分：自定义符号和封装</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>通过添加一个开关来打开和关闭 LED，该电路将得到改善。添加这个开关的过程需要创建一个新的符号和封装库，绘制一个开关符号，并为开关创建一个封装。</p>
+</div>
+<div class="paragraph">
+<p>本指南将使用的具体开关是 <a href="https://www.nkkswitches.com/pdf/MtogglesBushing.pdf">NKK M2011S3A1W03</a>，一种 SPST（单刀单置） 拨动开关。许多其他开关也可以使用，但引脚编号和封装尺寸可能需要调整。</p>
+</div>
+<div class="sect2">
+<h3 id="_库和库表的基础知识">6.1. 库和库表的基础知识</h3>
+<div class="paragraph">
+<p>符号和封装被组织到库中。一个库可以容纳符号或封装，但不能同时容纳。</p>
+</div>
+<div class="paragraph">
+<p>KiCad 在符号库表和封装库表中分别记录了用户的符号库和封装库。每个库表都是一个库名的列表，以及每个库在硬盘上存在的位置。</p>
+</div>
+<div class="paragraph">
+<p>除了全局的符号和封装库表，还有用于符号和封装的工程库表。添加到全局表的符号和封装在所有工程中都可用，而专用工程表中的符号和封装只对该专用工程有效。用户可以将自己的库添加到全局库表或工程专用表中。</p>
+</div>
+<div class="paragraph">
+<p>符号库表可以在原理图编辑器或符号编辑器窗口中通过 <strong>偏好设置</strong> &#8594; <strong>管理符号库&#8230;&#8203;</strong> 来查看或编辑。 封装库表可以在电路板编辑器或封装编辑器中通过 <strong>偏好设置</strong> &#8594; <strong>管理封装库&#8230;&#8203;</strong> 查看或编辑。这两个库表也可以从工程管理器中访问。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol-library-table.png" alt="符号库表">
+</div>
+</div>
+<div class="paragraph">
+<p>通常，库的路径是用路径替换变量来定义的。这使用户能够在不修改库表的情况下将所有的库移到一个新的位置。唯一需要改变的是重新定义变量以指向新的位置。KiCad 的路径替代变量可以在工程管理器或任何编辑器窗口中通过 <strong>偏好设置</strong> &#8594; <strong>配置路径&#8230;&#8203;</strong> 进行编辑。</p>
+</div>
+<div class="paragraph">
+<p>一个有用的路径替换变量是 <code>${KIPRJMOD}</code>。这个变量总是指向当前的工程目录，所以它可以用来包括存储在工程目录内的工程专用库。</p>
+</div>
+<div class="paragraph">
+<p>在第一次运行时，KiCad 《符号库表设置，提示用户设置符号库表》和《封装库表设置，提示用户设置封装库表》。要再次进行这种设置，请删除或重命名符号库表或封装库表文件。在删除这些表之前，请对它们进行备份。</p>
+</div>
+<div class="paragraph">
+<p>符号和封装库表文件的位置取决于操作系统。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows: <code>%APPDATA%\kicad\7.0\sym-lib-table</code> and <code>%APPDATA%\kicad\7.0\fp-lib-table</code></p>
+</li>
+<li>
+<p>Linux: <code>~/.config/kicad/7.0/sym-lib-table</code> and <code>~/.config/kicad/7.0/fp-lib-table</code></p>
+</li>
+<li>
+<p>macOS: <code>~/Library/Preferences/kicad/7.0/sym-lib-table</code> and
+<code>~/Library/Preferences/kicad/7.0/fp-lib-table</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_创建新的全局库或工程库">6.2. 创建新的全局库或工程库</h3>
+<div class="paragraph">
+<p>绘制一个新的符号或封装的第一步是选择一个库来存储它。在本指南中，开关符号和封装将进入新的工程专用库。</p>
+</div>
+<div class="paragraph">
+<p>从工程管理器中打开符号编辑器。点击 <strong>文件</strong> &#8594; <strong>新建库</strong>，并选择 <strong>工程</strong>。为新库选择一个名字（例如：<code>getting-started.kicad_sym</code>）并保存在工程目录中。空的新库现在在左边的库窗格中被选中，并被自动添加到工程库表中（在 <strong>偏好设置</strong> &#8594; <strong>管理符号库&#8230;&#8203;</strong> 中检查工程专用库标签）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_新建符号">6.3. 新建符号</h3>
+<div class="paragraph">
+<p>现在在新库中创建开关符号。在 "库" 窗格中选择 <code>getting-started</code> 库，点击 <strong>文件</strong> &#8594; <strong>新建符号&#8230;&#8203;</strong>。在 <strong>符号名称</strong> 栏中，输入元件编号：<code>M2011S3A1W03</code>。开关符号的位号应以 <code>SW</code> 开头，所以将 <strong>默认位号</strong> 字段改为 <code>SW</code>。所有其他字段可以保持默认值。</p>
+</div>
+<div class="paragraph">
+<p>在 "库" 窗格中，<code>M2011S3A1W03</code> 符号现在出现在 <code>getting-started</code> 库下。在画布上，一个十字表示封装的中心，并添加了符号名称和位号的文字。现在，将文本从封装的中心移开，使其不碍事。</p>
+</div>
+<div class="sect3">
+<h4 id="_符号引脚">6.3.1. 符号引脚</h4>
+<div class="paragraph">
+<p>通过添加一个引脚开始绘制符号。点击右侧工具栏上的 <strong>添加引脚</strong> 按钮 <span class="image"><img src="images/pin_24.png" alt="pin 24"></span> 。会出现 "引脚属性" 对话框。将 <strong>引脚名称</strong> 为 <code>A</code>，<strong>引脚数量</strong> 为 <code>2</code>，<strong>电气类型</strong> 为 <code>无源</code>，<strong>方向</strong> 为 <code>右</code>。设置 <strong>X 位置</strong> 为 <code>-5.08 mm</code>，<strong>Y 位置</strong> 为`0`。点击 <strong>确定</strong>，然后点击画布来放置引脚。 如果在点击 <strong>确认</strong> 后，引脚移动了，可能需要再次编辑引脚的属性（双击引脚，或右击引脚 &#8594; <strong>属性&#8230;&#8203;</strong>）来正确设置位置。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pin-properties.png" alt="引脚属性">
+</div>
+</div>
+<div class="paragraph">
+<p>添加第二个引脚，但这次不要使用 <strong>添加引脚</strong> 工具。相反，按 <kbd>Insert</kbd>。一个编号为 3 的新引脚被添加到符号中，就在引脚 2 下面。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+在 KiCad 的许多地方，按 <kbd>Insert</kbd> 会重复上次的操作。新项目的位置将被移位，并根据情况自动增加编号。在符号编辑器中，这可以用来快速放置大量的引脚。在原理图编辑器中，它可以用来重复放置一个元件，或者用编号标签标记一个大元件的引脚。 <kbd>Insert</kbd> 在封装和电路板编辑器中也很有用。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们希望引脚 3 在开关符号的右边，所以编辑引脚 3 的属性，将 <strong>X 位置</strong> 改为 <code>5.08</code>，<strong>Y 位置</strong> 改为 <code>0</code>，<strong>方向</strong> 改为 <code>左</code>。另外，将 <strong>引脚名称</strong> 改为 <code>B</code>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_图形特征">6.3.2. 图形特征</h4>
+<div class="paragraph">
+<p>放好引脚后，使用圆圈 <span class="image"><img src="images/add_circle_24.png" alt="add circle 24"></span> 和直线 <span class="image"><img src="images/add_line_24.png" alt="add line 24"></span> 工具，使符号看起来像一个 SPST （单刀单置）开关。对于这一步，切换到一个更小的网格将是有用的：右击画布，在 <strong>网格</strong> 子菜单中选择一个更小的网格。添加图形后，再切换回 50 mil 的网格。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+小网格对图形特征很有用，但 <strong>符号引脚必须始终放在 50 mil（1.27 mm）的网格上</strong>。没有对准 50 mil 网格的引脚将无法与原理图中的导线连接。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol-drawn.png" alt="绘制符号">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_符号属性_2">6.3.3. 符号属性</h4>
+<div class="paragraph">
+<p>现在用 <strong>文件</strong> &#8594; <strong>符号属性</strong> 编辑整个符号的属性，或者在画布上双击。将 <strong>值</strong> 字段改为 `M2011S3A1W03'，并在 <strong>关键字</strong> 字段中添加 `spst switch toggle'，以便通过搜索更容易找到该符号。对于这个符号，引脚名称并没有增加任何有用的信息，所以取消勾选 <strong>显示引脚名称</strong>，使符号在视觉上更简单。</p>
+</div>
+<div class="paragraph">
+<p>点击 <strong>确定</strong> 后，将值的文字移至较低位置，使其不与符号图形重叠。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol-properties.png" alt="符号属性">
+</div>
+</div>
+<div class="paragraph">
+<p>符号现在已经完成。保存它并继续创建一个封装。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_新建封装">6.4. 新建封装</h3>
+<div class="paragraph">
+<p>打开封装编辑器，创建一个新的工程专用封装库，命名为 <code>getting-started.pretty</code>（<strong>文件</strong> &#8594; <strong>新建库&#8230;&#8203;</strong>）。和符号库一样，新的封装库被添加到工程库表中。在 "库" 窗格中选择新的库，创建一个新的封装（<strong>文件</strong> &#8594; <strong>新建封装&#8230;&#8203;</strong>）。设置名称为 <code>Switch_Toggle_SPST_NKK_M2011S3A1x03</code>，类型为 "通孔"。</p>
+</div>
+<div class="sect3">
+<h4 id="_封装焊盘">6.4.1. 封装焊盘</h4>
+<div class="paragraph">
+<p>该开关有两个引脚，在数据手册中编号为 2 和 3，间隔为 4.7 mm。为了便于放置，调整网格以配合焊盘的间距。点击 <strong>视图</strong> &#8594; <strong>网格属性&#8230;&#8203;</strong>，将 <strong>用户定义的网格</strong> 尺寸改为 <code>4.7 mm</code>。接受该对话框，然后切换到顶部工具栏中 <strong>网格：</strong> 下拉菜单的用户网格。</p>
+</div>
+<div class="paragraph">
+<p>按照惯例，通孔封装的引脚 1 位于(0,0)处，并以引脚 1 在左上方的方向排列。这个开关的 SPST 版本没有引脚 1，所以封装会把 (0,0) 空出来，把焊盘 2 和 3 放在 (0, 4.7 mm) 和 (0, 9.4 mm) 处。请注意，在 KiCad 的默认坐标系中，正 Y 轴的方向是向下的。</p>
+</div>
+<div class="paragraph">
+<p>使用右侧工具栏中的 <strong>添加焊盘</strong> 工具 <span class="image"><img src="images/pad_24.png" alt="pad 24"></span>，在原点下方的一个网格划分上放置一个焊盘，即 (0, 4.7 mm)。按 Escape 键退出焊盘工具，然后双击焊盘来编辑其属性。将焊盘编号改为 <code>2</code>，并验证其位置是否正确。开关的引脚是 1.17 mm × 0.8 mm，这使得对角线（最大引脚尺寸）为 1.42 mm。因此，将通孔的直径设置为 1.42 mm + 0.2 mm =<code>1.62 mm</code>，将焊盘直径设置为 1.62 mm + 2 * 0.15 mm =<code>1.92 mm</code>，以提供足够的圆环形圈。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pad-properties.png" alt="焊盘属性">
+</div>
+</div>
+<div class="paragraph">
+<p>现在再次使用 <strong>添加焊盘</strong> 工具，将另一个焊盘放在 (0, 9.4mm) 处。 注意，焊盘的编号会自动递增，包括焊盘尺寸和通孔的大小在内的属性会从前一个焊盘上复制下来。</p>
+</div>
+<div class="paragraph">
+<p>在放置了两个焊盘后，圆环形环看起来略小。如果将圆环形环做大，开关将更容易焊接，机械上也更坚固。通过编辑焊盘 2 并将焊盘尺寸改为 1.62 mm + 2 * 0.3 mm = <code>2.22 mm</code>，将圆环形环的厚度从 0.15 mm 增加到 0.3 mm。不要改变通孔的尺寸。请注意，焊盘尺寸字段接受数学表达式，所以 <code>1.62 + 2 * 0.3</code> 可以直接输入，并将评估为 2.22 mm。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+KiCad 中的许多文本框支持数学表达，包括单位转换。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>对另一个焊盘也做同样的圆环形圈修改。作为一个快捷方式，在焊盘 2 上点击右键，点击 <strong>将焊盘属性推到其它焊盘上&#8230;&#8203;</strong>，然后点击 <strong>改变当前封装上的焊盘</strong>。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_封装图形">6.4.2. 封装图形</h4>
+<div class="paragraph">
+<p>一个好的封装会在制造层（<code>F.Fab</code>）上画出准确的元件边框，在丝印层（<code>F.Silkscreen</code>）上画出稍大的边框，并在整个封装周围有一个边框（<code>F.Courtyard</code>）以防止与其他封装重叠。</p>
+</div>
+<div class="paragraph">
+<p>通过点击右边的图层面板中的 <strong>F.Fab</strong> 切换到顶层的制造层。制造的边框应该与元件的物理尺寸精确匹配，即 7.9 mm 宽，13 mm 高。使用直线 <span class="image"><img src="images/add_line_24.png" alt="add line 24"></span>, 矩形 <span class="image"><img src="images/add_rectangle_24.png" alt="add rectangle 24"></span>, 或多边形 <span class="image"><img src="images/add_graphical_polygon_24.png" alt="add graphical polygon 24"></span> 工具来绘制元件的边框，如下截图所示。精确放置边框的一个方法是设置用户网格，如下所示:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>X grid: <code>7.9 mm</code></p>
+</li>
+<li>
+<p>Y grid: <code>13 mm</code></p>
+</li>
+<li>
+<p>X origin: 7.9 mm / 2 = <code>3.95 mm</code></p>
+</li>
+<li>
+<p>Y origin: 4.7 mm - (13 mm / 2) = <code>-1.8 mm</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/fab-outline.png" alt="制造边框坐标">
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，切换到 <code>F.Silkscreen</code> 层。丝网的边框应该正好在元件边框之外，所以丝网线要从制造图中向外移动 0.11 mm（0.10 mm 制造线宽度的一半，加上 0.12 mm 丝网线宽度的一半）。准确的坐标显示在下面的截图中，有用的网格设置是:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>X grid: 7.9 mm + 2 * 0.11 mm = <code>8.12 mm</code></p>
+</li>
+<li>
+<p>Y grid: 13 mm + 2 * 0.11 mm = <code>13.22 mm</code></p>
+</li>
+<li>
+<p>X origin: 8.12 mm / 2 = <code>4.06 mm</code></p>
+</li>
+<li>
+<p>Y origin: -1.8 mm - 0.11 mm = <code>-1.91 mm</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/silk-outline.png" alt="丝印边框坐标">
+</div>
+</div>
+<div class="paragraph">
+<p>最后，选择 <code>F.Courtyard</code> 层。边框的边框应该以 0.25 mm 的间隙围绕着这个元件。</p>
+</div>
+<div class="paragraph">
+<p>使用不同的策略来绘制这个图层。切换到 1 mm 的网格，而不是用户网格，并画一个大致围绕封装的矩形。双击矩形来编辑其属性，并直接输入矩形的角坐标&#8212;&#8203;它们显示在下面的截图中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/courtyard-outline.png" alt="边框坐标">
+</div>
+</div>
+<div class="paragraph">
+<p>完成边框后，将文字定位如下图所示。封装就完成了。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/switch-footprint.png" alt="完成的开关封装">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_kicad_库公约">6.4.3. Kicad 库公约</h4>
+<div class="paragraph">
+<p>为了维护高质量的符号和封装库，KiCad 有一个 <a href="https://klc.kicad.org/">KiCad 库公约</a> 文件，这是一套符号和封装的准则。个人库不一定要遵循这些约定，但它们是一个很好的出发点。 <a href="https://gitlab.com/kicad/libraries">官方库</a> 中的封装和符号都需要遵循 KLC。KLC 被用作本指南中的符号和封装的基础。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_在原理图中添加开关">6.4.4. 在原理图中添加开关</h4>
+<div id="default-footprint" class="paragraph">
+<p>现在，封装已经完成，可以修改开关符号，以便默认为其使用匹配的封装。</p>
+</div>
+<div class="paragraph">
+<p>回到符号编辑器中，打开开关符号。编辑符号属性。点击 <code>封装</code> 字段，然后点击出现的库图标 <span class="image"><img src="images/small_library_16.png" alt="small library 16"></span> 。浏览到工程封装库，双击开关封装。保存该符号。</p>
+</div>
+<div class="paragraph">
+<p>现在，开关封装被默认分配给该符号；每次将该符号添加到原理图中时，都不需要手动选择封装。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/switch-symbol-footprint.png" alt="开关封装设置为符号的默认值">
+</div>
+</div>
+<div class="paragraph">
+<p>打开原理图，添加一个新符号，并选择新的开关符号。给它接线以连接或断开 LED 和电池。</p>
+</div>
+<div class="paragraph">
+<p>重新批注原理图，将开关的位号设为 <code>SW1</code>。没有必要为开关手动选择一个封装，因为开关符号已经指定了一个封装。运行 ERC 以确保修改后的原理图不违反任何电气规则。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/schematic-with-switch.png" alt="编辑了原理图以包括开关">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_在布局中添加开关">6.4.5. 在布局中添加开关</h4>
+<div class="paragraph">
+<p>确保原理图被保存，然后打开电路板编辑器，将符号添加到布局中。使用 <strong>工具</strong> &#8594; <strong>从原理图更新 PCB&#8230;&#8203;</strong> 更新 PCB，并将开关的封装放到电路板上，如图所示。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/board-with-switch-unrouted.png" alt="添加了开关的板子，在布线之前">
+</div>
+</div>
+<div class="paragraph">
+<p>飞线显示了需要布线的新连接。此外，电池和电阻之间的连接也需要删除。</p>
+</div>
+<div class="paragraph">
+<p>首先，删除不需要的布线段。选择电池和电阻之间的一条布线&#8201;&#8212;&#8201;哪条线并不重要。按 <kbd>U</kbd> 几次，扩大选择范围，包括电池和电阻之间的所有布线段。按 <kbd>Delete</kbd> 来删除连接。</p>
+</div>
+<div class="paragraph">
+<p>在电池和开关之间，以及开关和电阻之间布局新的导线。按 <kbd>B</kbd> 键，重新填充各敷铜。</p>
+</div>
+<div class="paragraph">
+<p>最后，重新运行 DRC 以确保修改后的电路板不违反任何设计规则。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/board-with-switch-routed.png" alt="添加了开关的板子，在布线之前">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="linking-symbols-footprints-3d-models">6.5. 链接符号、封装和 3D 模型</h3>
+<div class="sect3">
+<h4 id="_符号和封装">6.5.1. 符号和封装</h4>
+<div class="paragraph">
+<p>正如《封装分配，封装分配部分》中所述，在原理图输入过程中，原理图中的每个符号都需要为其分配一个封装。分配给每个符号的封装名称被存储在符号属性的 <code>封装</code> 字段中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/switch-symbol-footprint.png" alt="符号属性中的封装字段">
+</div>
+</div>
+<div class="paragraph">
+<p>符号可以指定一个预选的封装。封装不需要手动分配给这些符号，因为在创建符号的时候就已经选择了一个封装。用户可以在封装分配过程中正常覆盖预选的封装。定义一个默认的封装对于那些通常或总是被分配相同封装的符号来说是个好主意，例如一个只在一个包中可用的元件。开关封装《默认封装，被设置为其匹配符号的默认封装》</p>
+</div>
+<div class="paragraph">
+<p>符号也可以指定封装筛选器，可以用来隐藏与符号不兼容的封装。例如，<code>74HC00</code> 符号有封装过滤器，导致只有适用的 DIP 和 SO14 封装显示在《封装筛选器，分配封装工具》中。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprint-filters.png" alt="用于 74HC00 的封装筛选器">
+</div>
+</div>
+<div class="paragraph">
+<p>这个 <a href="https://klc.kicad.org/symbol/s5/s5.2/">KLC 对封装筛选器的要求</a> 包含一些有效的封装筛选器的提示。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="footprints-and-3d-models">6.5.2. 封装和 3D 模型</h4>
+<div class="paragraph">
+<p>元件的 3D 模型被保存在单独的文件中。元件的 3D 模型的文件名被保存在封装中。每个封装可以添加任何数量的 3D 模型。3D 模型的文件名，以及模型的比例、旋转、偏移和不透明度，都在 "封装属性" 的 <strong>3D 模型</strong> 标签中设置。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/footprint-3d-model.png" alt="footprint 3D model properties">
+</div>
+</div>
+<div class="paragraph">
+<p>支持 STEP（<code>.step</code>）和 VRML（<code>.wrl</code>）两种 3D 模型格式。STEP 文件在需要尺寸精度的情况下非常有用，而 VRML 文件可以用来制作更具视觉吸引力的渲染图。KiCad 库中的许多封装都有相关的 3D 模型；这些模型都以 VRML 和 STEP 格式提供。 两种模型中只有一种需要在封装中列出（通常是给出 VRML 文件名）。在为机械 CAD 目的导出电路板的 3D 模型时，KiCad 可以自动替换 STEP 版本。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+并非所有 KiCad 库中的封装都提供了 3D 模型，但所有封装都列出了 3D 模型的文件名，即使 3D 模型不存在。这样做是为了以后可以添加 3D 模型，而不需要编辑封装。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="https://www.freecadweb.org/">FreeCAD</a> 与 <a href="https://github.com/easyw/kicadStepUpMod/">StepUp Workbench</a> 一起对创建元件式 3D 模型很有用；KiCad 库中的许多模型都使用了它们。StepUp 用于生成具有正确位置、缩放和旋转的 STEP 和 VRML 文件。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_今后的发展方向">7. 今后的发展方向</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_更多学习资源">7.1. 更多学习资源</h3>
+<div class="paragraph">
+<p>关于如何使用 KiCad 的更多信息，请参阅 <a href="https://docs.kicad.org/">手册</a>。</p>
+</div>
+<div class="paragraph">
+<p>其他资源包括 <a href="https://forum.kicad.info/">KiCad 官方用户论坛</a>，https://www.kicad.org/community/chat/[Discord 或 IRC]，以及来自 KiCad 社区的其他 <a href="https://www.kicad.org/help/learning-resources/">学习资源</a>。</p>
+</div>
+<div class="paragraph">
+<p>要想了解 KiCad 的更多功能，请浏览网站的 <a href="https://www.kicad.org/made-with-kicad/">用 KiCad 设计</a> 部分，或打开 KiCad 附带的演示工程（<strong>文件</strong> &#8594; <strong>打开演示工程&#8230;&#8203;</strong>）。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_帮助改进_kicad">7.2. 帮助改进 KiCad</h3>
+<div class="paragraph">
+<p>要报告一个错误或要求一个功能，请使用 <strong>帮助</strong> &#8594; <strong>报告一个错误</strong> 或在 <a href="https://gitlab.com/kicad/code/kicad/-/issues">Gitlab</a> 上打开一个问题。</p>
+</div>
+<div class="paragraph">
+<p>要为 KiCad 的发展做出贡献，请参见 <a href="https://dev-docs.kicad.org/en/contribute/">开发者贡献页面</a>。用户也可以通过为 <a href="https://www.kicad.org/libraries/contribute/">库</a> 或 <a href="https://www.kicad.org/contribute/docs-team/">文档和翻译</a> 提供帮助。 最后，请考虑 <a href="https://www.kicad.org/donate/faq/">捐赠支持</a> 继续开发 KiCad。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-02-11 10:04:59 -0800
+</div>
+</div>
+</body>
+</html>

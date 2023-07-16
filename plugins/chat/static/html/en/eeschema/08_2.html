@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>Creating and editing symbols</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body>
+
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="creating-and-editing-symbols">8.2. Creating and editing symbols</h3>
+<div class="sect3">
+<h4 id="_overview_of_symbols_and_symbol_libraries">8.2.1. Overview of symbols and symbol libraries</h4>
+<div class="paragraph">
+<p>A symbol is a schematic representation of a component. A symbol is composed of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Graphical items (lines, circles, arcs, text, etc.) that determine how
+symbol looks in a schematic.</p>
+</li>
+<li>
+<p>Pins, which have both graphic properties (line, clock, inverted, low
+level active, etc.) and electrical properties (input, output,
+bidirectional, etc.) used by the Electrical Rules Check (ERC) tool.</p>
+</li>
+<li>
+<p>Fields, such as references, values, corresponding footprint names for
+PCB design, etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A symbol library is composed of one or more symbols. Generally the
+symbols are logically grouped by function, type, and/or manufacturer.</p>
+</div>
+<div class="paragraph">
+<p>Symbols can be derived from another symbol in the same library. Derived symbols
+share the base symbol&#8217;s graphical shape and pin definitions, but can override
+the base symbol&#8217;s property fields (value, footprint, footprint filters,
+datasheet, description, etc.). Derived symbols can be used to define symbols
+that are similar to a base part. For example, 74LS00, 74HC00, and 7437 symbols
+could all be derived from a 7400 symbol. In previous versions of KiCad, derived
+symbols were referred to as aliases.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_symbol_editor_overview">8.2.2. Symbol Editor overview</h4>
+<div class="paragraph">
+<p>KiCad provides a symbol editing tool that allows you to create libraries, add,
+delete or transfer symbols between libraries, export symbols to files, and
+import symbols from files.</p>
+</div>
+<div class="paragraph">
+<p>In general, the flow for designing a symbol involves:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Defining if the symbol is made up of one or more units.</p>
+</li>
+<li>
+<p>Defining if the symbol has an alternate body style (also known as a
+De Morgan representation).</p>
+</li>
+<li>
+<p>Designing its symbolic representation using lines, rectangles,
+circles, polygons and text.</p>
+</li>
+<li>
+<p>Adding pins by carefully defining each pin&#8217;s graphical elements,
+name, number, and electrical property (input, output, tri-state, power
+output, etc.).</p>
+</li>
+<li>
+<p>Determining if the symbol should be derived from another symbol with
+the same graphical design and pin definition.</p>
+</li>
+<li>
+<p>Adding optional fields such as the name of the footprint used by the PCB
+design software and/or defining their visibility.</p>
+</li>
+<li>
+<p>Documenting the symbol by adding a description string and links to
+data sheets, etc.</p>
+</li>
+<li>
+<p>Saving it in the desired library.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The Symbol Editor main window is shown below. It consists of three toolbars for
+quick access to common features and a symbol viewing/editing area.  Not all
+commands are available on the toolbars, but all commands are available in the
+menus.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/libedit_main_window.png" alt="Symbol Editor main window">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_main_toolbar">Main Toolbar</h5>
+<div class="paragraph">
+<p>The main toolbar is at the top of the main window. It has buttons for the
+undo/redo commands, zoom commands, symbol properties dialogs, and
+unit/representation management controls.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/new_component_24.png" alt="New symbol icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a new symbol in the selected library.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/save_24.png" alt="Save icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Save the currently selected library. All modified symbols in the library will
+be saved.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/undo_24.png" alt="Undo icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo last edit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/redo_24.png" alt="Redo icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo last undo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/refresh_24.png" alt="Refresh icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refresh display.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_in_24.png" alt="Zoom in icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zoom in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_out_24.png" alt="Zoom out icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zoom out.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_fit_in_page_24.png" alt="Zoom to fit page icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zoom to fit symbol in display.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/zoom_area_24.png" alt="Zoom to selection icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zoom to fit selection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/rotate_ccw_24.png" alt="Rotate counterclockwise icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotate counter-clockwise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/rotate_cw_24.png" alt="Rotate clockwise icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotate clockwise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/mirror_h_24.png" alt="Mirror horizontally icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mirror horizontally.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/mirror_v_24.png" alt="Mirror vertically icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mirror vertically.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/part_properties_24.png" alt="Symbol properties icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit the current symbol properties.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_table_24.png" alt="Pin table icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edit the symbol&#8217;s pins in a tabular interface.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/datasheet_24.png" alt="Datasheet icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open the symbol&#8217;s datasheet, if it is defined.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/erc_24.png" alt="ERC icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test the current symbol for design errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/morgan1_24.png" alt="Normal body style icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select the normal body style. The button is disabled if the current
+symbol does not have an alternate body style.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/morgan2_24.png" alt="Alternate body style icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select the alternate body style. The button is disabled if the current
+symbol does not have an alternate body style.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/symbol_editor_unit_selector.png" alt="Unit dropdown" width="80%"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select the unit of a multi-unit symbol to display. The drop down control will
+be disabled if the current symbol is not derived from a symbol with multiple
+units.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin2pin_24.png" alt="Synchronized pin edit mode icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable synchronized pins edit mode. When this mode is enabled, any pin
+modifications are propagated to all other symbol units. Pin number changes are
+not propagated. This mode is automatically enabled for symbols with multiple
+interchangeable units and cannot be enabled for symbols with only one unit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_symbol_to_schematic_24.png" alt="Add symbol to schematic icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Insert current symbol into the schematic.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_element_toolbar">Element Toolbar</h5>
+<div class="paragraph">
+<p>The vertical toolbar located on the right hand side of the main window allows
+you to place all of the elements required to design a symbol.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/cursor_24.png" alt="Cursor icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select tool. Right-clicking with the select tool opens the context menu
+for the object under the cursor. Left-clicking with the select tool
+displays the attributes of the object under the cursor in the message
+panel at the bottom of the main window. Double-left-clicking with the
+select tool will open the properties dialog for the object under the
+cursor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_24.png" alt="Pin icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pin tool. Left-click to add a new pin.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/text_24.png" alt="Text icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graphical text tool. Left-click to add a new graphical text item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_textbox_24.png" alt="Textbox icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graphical textbox tool. Left-click to add a new graphical textbox item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_rectangle_24.png" alt="Add rectangle icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rectangle tool. Left-click to begin drawing the first corner of a
+graphical rectangle. Left-click again to place the opposite corner of
+the rectangle.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_circle_24.png" alt="Add circle icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Circle tool. Left-click to begin drawing a new graphical circle from
+the center. Left-click again to define the radius of the circle.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_arc_24.png" alt="Add arc icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arc tool. Left-click to begin drawing a new graphical arc item from the
+first arc end point. Left-click again to define the second arc end point.
+Adjust the radius by dragging the arc center point.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_line_24.png" alt="Add line icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connected line tool. Left-click to begin drawing a new graphical line item
+in the current symbol. Left-click for each additional connected line.
+Double-left-click to complete the line.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/anchor_24.png" alt="Anchor icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anchor tool. Left-click to set the anchor position of the symbol.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/delete_cursor_24.png" alt="Delete icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete tool. Left-click to delete an object from the current symbol.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_options_toolbar">Options Toolbar</h5>
+<div class="paragraph">
+<p>The vertical tool bar located on the left hand side of the main window allows
+you to set some of the editor drawing options.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/grid_24.png" alt="Grid icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toggle grid visibility on and off.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_inch_24.png" alt="Inch unit icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set units to inches.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_mil_24.png" alt="Millimeter unit icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set units to mils (0.001 inch).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/unit_mm_24.png" alt="Millimeter unit icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set units to millimeters.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/cursor_shape_24.png" alt="Cursor shape icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toggle full screen cursor on and off.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/pin_show_etype_24.png" alt="Show pintype icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toggle display of pin electrical types.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/search_tree_24.png" alt="Symbol tree icon"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toggle display of library and symbol tree.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_saving_symbols_to_libraries">8.2.3. Saving symbols to libraries</h4>
+<div class="paragraph">
+<p>The <span class="image"><img src="images/icons/search_tree_24.png" alt="Symbol tree icon"></span> button displays or
+hides the list of available libraries, which allows you to select an active
+library. When a symbol is saved, it will be placed in this library.</p>
+</div>
+<div class="paragraph">
+<p>Clicking the <span class="image"><img src="images/icons/search_tree_24.png" alt="Symbol tree icon"></span> icon
+on the left toolbar toggles the treeview of libraries and symbols. Clicking on
+a symbol opens that symbol.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Some symbols are derived from other symbols. Derived symbol names are displayed
+in <em>italics</em> in the treeview. If a derived symbol is opened, its symbol
+graphics will not be editable. Its symbol fields will be editable as normal. To
+edit the graphics of a base symbol and all of its derived symbols, open the
+base symbol.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After modification, a symbol can be saved in the current library or a different
+library.</p>
+</div>
+<div class="paragraph">
+<p>To save the modified symbol in the current library, click the
+<span class="image"><img src="images/icons/save_24.png" alt="Save icon"></span> icon. The modifications will be
+written to the existing symbol.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Saving a modified symbol also saves all other modified symbols in the same
+      library.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To save the symbol changes to a new symbol, click <strong>File</strong> &#8594; <strong>Save As&#8230;&#8203;</strong>.
+The symbol can be saved in the current library or a different library. A new
+name can be set for the symbol.</p>
+</div>
+<div class="paragraph">
+<p>To create a new file containing only the current symbol, click <strong>File</strong> &#8594;
+<strong>Export</strong> &#8594; <strong>Symbol&#8230;&#8203;</strong>. This file will be a standard library file which
+will contain only one symbol.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_creating_symbols">8.2.4. Creating symbols</h4>
+<div class="sect4">
+<h5 id="_creating_a_new_symbol">Creating a new symbol</h5>
+<div class="paragraph">
+<p>A new symbol can be created by clicking the
+<span class="image"><img src="images/icons/new_component_24.png" alt="New symbol icon"></span> icon.
+You will be asked for a number of symbol properties.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A symbol name</p>
+</li>
+<li>
+<p>An optional base symbol to derive the new symbol from. The new symbol will use
+the base symbol&#8217;s graphical shape and pin configuration, but other symbol
+information can be modified in the derived symbol. The base symbol must be in
+the same library as the new derived symbol.</p>
+</li>
+<li>
+<p>The reference designator prefix (<code>U</code>, <code>C</code>, <code>R</code>&#8230;&#8203;).</p>
+</li>
+<li>
+<p>The number of units per package, and whether those units are interchangeable
+(for example a 7400 quad NAND symbol could have 4 units, one for each gate).</p>
+</li>
+<li>
+<p>If an alternate body style (sometimes referred to as a "De Morgan equivalent")
+is desired.</p>
+</li>
+<li>
+<p>Whether the symbol is a power symbol. Power symbols appear in the <strong>Add Power
+Symbol</strong> dialog in the Schematic editor, their <code>Value</code> fields are not editable
+in the schematic, they cannot be assigned a footprint, they are not added
+to the PCB, and they are not included in the bill of materials.</p>
+</li>
+<li>
+<p>Whether the symbol should be excluded from the bill of materials.</p>
+</li>
+<li>
+<p>Whether the symbol should be excluded from the PCB.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are also several graphical options.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The offset between the end of each pin and its pin name.</p>
+</li>
+<li>
+<p>Whether the pin number and pin name should be displayed.</p>
+</li>
+<li>
+<p>Whether the pin names should be displayed alongside the pins or at the ends of the
+pins inside the symbol body.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These properties can also be changed later in the <a href="#symbol-properties">Symbol Properties window</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_new_symbol_properties.png" alt="New symbol properties">
+</div>
+</div>
+<div class="paragraph">
+<p>A new symbol will be created using the properties above and will
+appear in the editor as shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_new.png" alt="Newly created symbol">
+</div>
+</div>
+<div class="paragraph">
+<p>The blue cross in the center is the symbol anchor, which specifies the symbol
+origin i.e. the coordinates (0, 0). The anchor can be repositioned by selecting
+the <span class="image"><img src="images/icons/anchor_24.png" alt="Anchor icon"></span> icon and clicking on the new
+desired anchor position.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_creating_a_symbol_from_another_symbol">Creating a symbol from another symbol</h5>
+<div class="paragraph">
+<p>Often, the symbol that you want to make is similar to one already in
+a symbol library. In this case it is easy to load and modify an
+existing symbol.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Load the symbol which will be used as a starting point.</p>
+</li>
+<li>
+<p>Save a new copy of the symbol using <strong>File</strong> &#8594; <strong>Save As&#8230;&#8203;</strong>. The Save As
+dialog will prompt for a name for the new symbol and the library to save it
+in.</p>
+</li>
+<li>
+<p>Edit the new symbol as required.</p>
+</li>
+<li>
+<p>Save the modified symbol.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="symbol-properties">Symbol Properties</h5>
+<div class="paragraph">
+<p>Symbol properties are set when the symbol is created but they can be modified
+at any point. To change the symbol properties, click on the
+<span class="image"><img src="images/icons/part_properties_24.png" alt="Symbol properties icon"></span> button
+to show the Symbol Properties dialog. You can also double click an empty spot in
+the editing canvas.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_properties_for_symbol.png" alt="Symbol Properties">
+</div>
+</div>
+<div class="paragraph">
+<p>It is important to set the <strong>number of units</strong> and check
+<strong>all units are interchangeable</strong> and <strong>has alternate body style</strong>, as applicable,
+because these settings affect how pins and graphics are added to each symbol
+unit.</p>
+</div>
+<div class="paragraph">
+<p>If you change the number of units per package after adding the pins to the
+symbol, you will need to do extra work to add pins and graphics for the
+additional units. The pins and graphics would have been automatically added to
+each unit had these properties been correctly set initially. Nevertheless, it is
+possible to modify these properties at any time.</p>
+</div>
+<div class="paragraph">
+<p>The graphic options <strong>Show pin number</strong> and <strong>Show pin name</strong> define the
+visibility of the pin number and pin name text. The option <strong>Place pin
+names inside</strong> defines the pin name position relative to the pin body.
+The pin names will be displayed inside the symbol outline if the option
+is checked. In this case the <strong>Pin Name Position Offset</strong> property defines
+the shift of the text away from the body end of the pin. A value from
+<code>0.02</code> to <code>0.05</code> inches is usually reasonable.</p>
+</div>
+<div class="paragraph">
+<p>The example below shows a symbol with the <strong>Place pin name inside</strong>
+option unchecked. Notice the position of the names and pin numbers.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_uncheck_pin_name_inside.png" alt="Place pin name inside unchecked">
+</div>
+</div>
+<div class="sect5">
+<h6 id="_symbol_name_description_and_keywords">Symbol Name, Description, and Keywords</h6>
+<div class="paragraph">
+<p><strong>Symbol name</strong> is the symbol&#8217;s name in the library. Symbols are identified by a
+combination of the library and symbol name.</p>
+</div>
+<div class="paragraph">
+<p>In previous versions of KiCad, the symbol name was linked to the <code>Value</code> field.
+This link is removed in KiCad 7.0 and later.</p>
+</div>
+<div class="paragraph">
+<p>The symbol description should contain a brief description of the component, such
+as the component function, distinguishing features, and package options. The
+keywords should contain additional terms related to the component. Keywords are
+used primarily to assist in searching for the symbol.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_add_symbol_search_description.png" alt="Searching for a symbol in the add a symbol dialog">
+</div>
+</div>
+<div class="paragraph">
+<p>A symbol&#8217;s name, description, and keywords are all used when searching for
+symbols in the Symbol Editor and Add a Symbol dialog. The description and
+keywords are displayed in the Symbol Library Browser and Add a Symbol dialog.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="footprint-filters">Footprint Filters</h6>
+<div class="paragraph">
+<p>The footprint filters tab is used to define which footprints are appropriate to
+use with the symbol. The filters can be applied in the Footprint Assignment tool
+so that only appropriate footprints are displayed for each symbol.</p>
+</div>
+<div class="paragraph">
+<p>Multiple footprint filters can be defined. Footprints that match any of the
+filters will be displayed; if no filters are defined, then all footprints will
+be displayed.</p>
+</div>
+<div class="paragraph">
+<p>Filters can use wildcards: <code>*</code> matches any number of characters,
+including zero, and <code>?</code> matches zero or one characters. For example, <code>SOIC-*</code>
+would match the <code>SOIC-8_3.9x4.9mm_P1.27mm</code> footprint as well as any other
+footprint beginning with <code>SOIC-</code>. The filter <code>SOT?23</code> matches <code>SOT23</code> as well as
+<code>SOT-23</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_footprint.png" alt="Footprint filters">
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_symbols_with_alternate_symbolic_representation">Symbols with Alternate Symbolic Representation</h5>
+<div class="paragraph">
+<p>If the symbol has an alternate body style defined, one body style must be
+selected for editing at a time. To edit the normal representation, click
+the <span class="image"><img src="images/icons/morgan1_24.png" alt="Normal representation icon"></span> icon.</p>
+</div>
+<div class="paragraph">
+<p>To edit the alternate representation, click on the
+<span class="image"><img src="images/icons/morgan2_24.png" alt="Alternate representation icon"></span> icon.
+Use the
+<span class="image"><img src="images/symbol_editor_unit_selector.png" alt="unit selection dropdown"></span>
+unit selection dropdown to select the unit you wish to edit.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_graphical_elements">8.2.5. Graphical Elements</h4>
+<div class="paragraph">
+<p>Graphical elements create the visual representation of a symbol and
+contain no electrical connection information. Graphical elements are
+created with the following tools:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Lines and polygons defined by start and end points.</p>
+</li>
+<li>
+<p>Rectangles defined by two diagonal corners.</p>
+</li>
+<li>
+<p>Circles defined by the center and radius.</p>
+</li>
+<li>
+<p>Arcs defined by the starting and ending point of the arc and its
+center. An arc goes from 0° to 180°.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The vertical toolbar on the right hand side of the main window allows
+you to place all of the graphical elements required to design
+the representation of a symbol.</p>
+</div>
+<div class="sect4">
+<h5 id="_graphical_element_membership">Graphical Element Membership</h5>
+<div class="paragraph">
+<p>Each graphic element (line, arc, circle, etc.) can be defined as common
+to all units and/or body styles or specific to a given unit and/or body
+style. Element options can be quickly accessed by right-clicking on
+the element to display the context menu for the selected element. Below
+is the context menu for a line element.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_context_menu.png" alt="Graphic line context menu">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also double-left-click on an element to modify its properties.
+Below is the properties dialog for a polygon element.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_polyline_properties.png" alt="Graphic line properties">
+</div>
+</div>
+<div class="paragraph">
+<p>The properties of a graphic element are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Border</strong> determines whether the the shape&#8217;s outline should be drawn.</p>
+</li>
+<li>
+<p><strong>Width</strong> and <strong>color</strong> define the line width and color of the border. A border
+width of <code>0</code> uses the schematic&#8217;s default symbol line width. <strong>Style</strong>
+determines the line style of the border (solid, dashed, dotted, etc.).</p>
+</li>
+<li>
+<p><strong>Fill Style</strong> determines if the shape defined by the
+graphical element is to be drawn unfilled or filled. The fill color can be the
+color theme&#8217;s body outline color, body background color, or a custom color.</p>
+</li>
+<li>
+<p><strong>Common to all units in symbol</strong> determines if the graphical element is drawn
+for each unit in symbol with more than one unit per package or if the
+graphical element is only drawn for the current unit.</p>
+</li>
+<li>
+<p><strong>Common to all body styles (De Morgan)</strong> determines if the
+graphical element is drawn for each symbolic representation in
+symbols with an alternate body style or if the graphical element is
+only drawn for the current body style.</p>
+</li>
+<li>
+<p><strong>Private to Symbol Editor</strong> causes the shape to be visible only when the symbol
+is edited in the Symbol Editor. The shape will be hidden when the symbol is
+added to a schematic.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_graphical_text_elements">Graphical Text Elements</h5>
+<div class="paragraph">
+<p>The <span class="image"><img src="images/icons/text_24.png" alt="Text icon"></span> icon
+allows for the creation of graphical text. Graphical text is automatically
+oriented to be readable, even when the symbol is mirrored. Please note that
+graphical text items are not the same as symbol fields.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multiple_units_per_symbol_and_alternate_body_styles">8.2.6. Multiple Units per Symbol and Alternate Body Styles</h4>
+<div class="paragraph">
+<p>Symbols can have up to two body styles (a standard symbol and an alternate symbol
+often referred to as a "De Morgan equivalent") and/or have more than one unit
+per package (logic gates for example). Some symbols can have more than one unit
+per package each with different symbols and pin configurations.</p>
+</div>
+<div class="paragraph">
+<p>For example, consider a relay with two switches, which can be designed as
+a symbol with three different units: a coil, switch 1, and switch 2.
+Designing a symbol with multiple units per package and/or alternate
+body styles is very flexible. A pin or a body symbol item can be common
+to all units or specific to a given unit or they can be common to both
+symbolic representation so are specific to a given symbol representation.</p>
+</div>
+<div class="paragraph">
+<p>By default, pins are specific to a unit and body style. When a pin is common to
+all units or all body styles, it only needs to be created once. This is also the
+case for the body style graphic shapes and text, which may be common to each
+unit, but typically are specific to each body style.</p>
+</div>
+<div class="paragraph">
+<p>To add additional units to a symbol, set the <strong>Number of Units</strong> property to the
+appropriate number in the Symbol Properties dialog. By default, symbol units are
+named <code>Unit A</code>, <code>Unit B</code>, etc., but you can set an arbitrary name for the
+current unit using <strong>Edit</strong> &#8594; <strong>Set Unit Display Name&#8230;&#8203;</strong>.</p>
+</div>
+<div class="paragraph">
+<p>To add an alternate body style, set the <strong>Has alternate body style (De Morgan)</strong>
+property in the Symbol Properties dialog.</p>
+</div>
+<div class="sect4">
+<h5 id="_example_of_a_symbol_with_multiple_noninterchangeable_units">Example of a Symbol With Multiple Noninterchangeable Units</h5>
+<div class="paragraph">
+<p>For an example of a symbol with multiple units that are not interchangeable,
+consider a relay with 3 units per package: a coil, switch 1, and switch 2.</p>
+</div>
+<div class="paragraph">
+<p>The three units are not all the same, so <strong>All units are interchangeable</strong> should
+be deselected in the Symbol Properties dialog. Alternatively, this option could
+have been specified when the symbol was initially created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_not_interchangeable.png" alt="Uncheck all units are interchangeable">
+</div>
+</div>
+<div class="sect5">
+<h6 id="_unit_a">Unit A</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit1.png" alt="Relay unit A">
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_unit_b">Unit B</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit2.png" alt="Relay unit B">
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_unit_c">Unit C</h6>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_unit3.png" alt="Relay unit C">
+</div>
+</div>
+<div class="paragraph">
+<p>Unit A does not have the same symbol and pin layout as Units B and C, so the
+units are not interchangeable.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<strong>Synchronized Pins Edit Mode</strong> can be enabled by clicking the
+<span class="image"><img src="images/icons/pin2pin_24.png" alt="Synchronized pins edit mode icon"></span> icon. In
+this mode, pin modifications are propagated between symbol units; changes
+made in one unit will be reflected in the other units as well. When this mode is
+disabled, pin changes made in one unit do not affect other units. This mode is
+enabled automatically when <strong>All units are interchangeable</strong> is checked, but it
+can be disabled. The mode cannot be enabled when <strong>All units are interchangeable</strong>
+is unchecked or when the symbol only has one unit.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pin_creation_and_editing">8.2.7. Pin Creation and Editing</h4>
+<div class="paragraph">
+<p>You can create and insert a pin by clicking on the
+<span class="image"><img src="images/icons/pin_24.png" alt="Pin icon"></span> button. Pin properties can be edited by
+double clicking on the pin. You can also delete or move pins that you have
+already added. Pins must be created carefully, because any error will have
+consequences on the PCB design.</p>
+</div>
+<div class="sect4">
+<h5 id="_pin_overview">Pin Overview</h5>
+<div class="paragraph">
+<p>A pin is defined by its graphical representation, its name, and its number. The
+pin&#8217;s name and number can contain letters, numbers, and symbols, but not spaces.
+For the Electrical Rules Check (ERC) tool to be useful, the pin&#8217;s electrical
+type (input, output, tri-state&#8230;&#8203;) must also be defined correctly. If this type
+is not defined properly, the schematic ERC check results may be invalid.</p>
+</div>
+<div class="paragraph">
+<p>Important notes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Symbol pins are matched to footprint pads by number. The pin number
+in the symbol must match the corresponding pad number in the footprint.</p>
+</li>
+<li>
+<p>Do not use spaces in pin names and numbers. Spaces will be automatically
+replaced with underscores (<code>_</code>).</p>
+</li>
+<li>
+<p>To define a pin name with an inverted signal (overbar) use the
+<code>~</code> (tilde) character followed by the text to invert in braces.
+For example <code>~{FO}O</code> would display <span class="overline">FO</span> O.</p>
+</li>
+<li>
+<p>If the pin name is empty, the pin is considered unnamed.</p>
+</li>
+<li>
+<p>Pin names can be repeated in a symbol.</p>
+</li>
+<li>
+<p>Pin numbers must be unique in a symbol.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pin_properties">Pin Properties</h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_properties.png" alt="Pin properties">
+</div>
+</div>
+<div class="paragraph">
+<p>The pin properties dialog allows you to edit all of the characteristics
+of a pin. This dialog pops up automatically when you create a pin or
+when double-clicking on an existing pin. This dialog allows you to modify:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The pin name and text size.</p>
+</li>
+<li>
+<p>The pin number and text size.</p>
+</li>
+<li>
+<p>The pin length.</p>
+</li>
+<li>
+<p>The pin electrical type and graphical style.</p>
+</li>
+<li>
+<p>Unit and alternate representation membership.</p>
+</li>
+<li>
+<p>Pin visibility.</p>
+</li>
+<li>
+<p><a href="#alternate-pin-definitions">Alternate pin definitions</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pin_graphic_styles">Pin Graphic Styles</h5>
+<div class="paragraph">
+<p>The different pin graphic styles are shown in the figure below. These styles are
+purely graphical and do not affect the pin&#8217;s electrical type.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_properties_style.png" alt="Pin graphic styles">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="pin-electrical-types">Pin Electrical Types</h5>
+<div class="paragraph">
+<p>Choosing the correct electrical type is important for the schematic ERC tool.
+ERC will check that pins are connected appropriately, for example ensuring that
+input pins are driven and power inputs receive power from an appropriate source.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pin Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin which is exclusively an input.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin which is exclusively an output.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bidirectional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin that can be either an input or an output, such as a
+microcontroller data bus pin.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tri-state</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A three state output pin (high, low, or high impedance)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A passive symbol pin: resistors, connectors, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Free</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin that can be freely connected to any other pin without electrical
+concerns.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unspecified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin for which the ERC check does not matter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A symbol&#8217;s power pin. As a special case, power input pins that
+are marked invisible are automatically connected to the net with the same name.
+See the <a href="#creating-power-symbols">Power Symbols section</a> for more information.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin that provides power to other pins, such as a regulator
+output.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open collector</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An open collector logic output.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open emitter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An open emitter logic output.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unconnected</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pin that should not be connected to anything.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_pushing_pin_properties_to_other_pins">Pushing Pin Properties to Other Pins</h5>
+<div class="paragraph">
+<p>You can apply the length, name size, or number size of a pin to the other
+pins in the symbol by right clicking the pin and selecting <strong>Push Pin Length</strong>,
+<strong>Push Pin Name Size</strong>, or <strong>Push Pin Number Size</strong>, respectively. All other
+pins in the symbol will be updated.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_context_menu.png" alt="Pin context menu">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_defining_pins_for_multiple_units_and_alternate_symbolic_representations">Defining Pins for Multiple Units and Alternate Symbolic Representations</h5>
+<div class="paragraph">
+<p>Symbols with multiple units and/or graphical representations are particularly
+problematic when creating and editing pins. The majority of pins are specific to
+each symbol unit (because each unit has a different set of pins) and to each
+body style (because the form and position is different between the normal body
+style and the alternate form).</p>
+</div>
+<div class="paragraph">
+<p>The symbol library editor allows the simultaneous creation of pins. By default,
+changes made to a pin are made for all units of a multiple unit symbol and to
+both representations for symbols with an alternate symbolic representation.
+The only exception to this is the pin&#8217;s graphical type and name, which remain
+unlinked between symbol units and body styles. This dependency was established
+to allow for easier pin creation and editing in most cases. This dependency can
+be disabled by toggling the <span class="image"><img src="images/icons/pin2pin_24.png" alt="Synchronized pin edit mode icon"></span> icon on the main tool bar. This will allow you to create pins
+for each unit and representation completely independently.</p>
+</div>
+<div class="paragraph">
+<p>Pins can be common or specific to different units. Pins can also be common to
+both symbolic representations or specific to each symbolic representation. When
+a pin is common to all units, it only has to drawn once. Pins are set as common
+or specific in the pin properties dialog.</p>
+</div>
+<div class="paragraph">
+<p>An example is the output pin in the 7400 quad dual input NAND gate. Since there
+are four units and two symbolic representations, there are eight
+separate output pins defined in the symbol definition. When creating
+a new 7400 symbol, unit A of the normal symbolic representation will
+be shown in the library editor. To edit the pin style in the alternate
+symbolic representation, it must first be enabled by clicking the
+<span class="image"><img src="images/icons/morgan2_24.png" alt="Alternate representation icon"></span>
+button on the tool bar. To edit the pin number for each unit,
+select the appropriate unit using the
+<span class="image"><img src="images/symbol_editor_unit_selector.png" alt="unit selection dropdown"></span>
+drop down control.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pin_table">Pin Table</h5>
+<div class="paragraph">
+<p>Another way to edit pins is to use the Pin Table, which is accessible via the
+<span class="image"><img src="images/icons/pin_table_24.png" alt="Pin table icon"></span> icon. The Pin Table
+displays all of the pins in the symbol and their properties in a table view, so
+it is useful for making bulk pin changes.</p>
+</div>
+<div class="paragraph">
+<p>Any pin property can be edited by clicking on the appropriate cell. Pins can be
+added and removed with the <span class="image"><img src="images/icons/small_plus_16.png" alt="Plus icon"></span> and
+<span class="image"><img src="images/icons/small_trash_16.png" alt="Trash icon"></span> icons, respectively.</p>
+</div>
+<div class="paragraph">
+<p>You can edit the same property for multiple pins simultaneously by grouping
+pins.  Pins can be automatically grouped by name, or you manually group several
+pins by selecting them and clicking <strong>Group Selected</strong>. Click the
+<span class="image"><img src="images/icons/small_refresh_16.png" alt="small refresh 16"></span> button to clear the manual grouping.
+You can also filter the table to only display pins in certain units.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Columns of the pin table can be shown or hidden by right-clicking on the
+header row and checking or unchecking additional columns. Some columns are
+hidden by default.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The screenshot below shows the pin table for a quad opamp.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_pin_table.png" alt="Pin table">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="alternate-pin-definitions">Alternate Pin Definitions</h5>
+<div class="paragraph">
+<p>Pins can have alternate pin definitions added to them. Alternate pin definitions
+allow a user to select a different name, electrical type, and graphical style
+for a pin when the symbol has been placed in the schematic. This can be used for
+pins that have multiple functions, such as microcontroller pins.</p>
+</div>
+<div class="paragraph">
+<p>Alternate pin definitions are added in the Pin Properties dialog as shown below.
+Each alternate definition contains a pin name, electrical type, and graphic style.
+This microcontroller pin has all of its peripheral functions defined in the symbol
+as alternate pin names.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_alternate_pin_definitions.png" alt="Alternate pin definitions">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternate pin definitions are selected in the Schematic Editor once the symbol
+has been placed in the schematic. The alternate pin is assigned in the Alternate
+Pin Assignments tab of the Symbol Properties dialog. Alternate definitions are
+selectable in the dropdown in the Alternate Assignment column.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_alternate_pin_assignment_selection.png" alt="Selecting an alternate pin definition">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_symbol_fields">8.2.8. Symbol Fields</h4>
+<div class="paragraph">
+<p>All library symbols are defined with four default fields. The reference
+designator, value, footprint assignment, and datasheet link fields are created
+whenever a symbol is created or copied. Only the reference designator is
+required.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Footprint</code> field, if used, contains a reference to a footprint for the
+symbol. The format is <code>LIBNAME:FOOTPRINTNAME</code>, where <code>LIBNAME</code> is the name of
+the footprint library in the footprint library table (see the
+<a href="../pcbnew/pcbnew.html#managing-footprint-libraries">Footprint Library Table</a>
+section in the PCB Editor manual) and <code>FOOTPRINTNAME</code> is the name of the
+footprint in the library <code>LIBNAME</code>.</p>
+</div>
+<div class="paragraph">
+<p>Symbols defined in libraries are typically defined with only these four default
+fields. Additional fields such as vendor, part number, unit cost, etc. can be
+added to library symbols but generally this is done in the schematic editor so
+the additional fields can be applied to all of the symbols in the schematic.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+A convenient way to create additional empty symbol fields is to use define
+      field name templates. Field name templates define empty fields that are
+      added to each symbol when it is inserted into the schematic. Field name
+      templates can be defined globally (for all schematics) in the Schematic
+      Editor Preferences, or they can be defined locally (specific to each
+      project) in the Schematic Setup dialog.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you want to manage a large amount of component data in symbol fields,
+      consider using <a href="#database-libraries">database libraries</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_editing_symbol_fields">Editing Symbol Fields</h5>
+<div class="paragraph">
+<p>To edit an existing symbol field, double-click the field, select it or hover and
+press <kbd>E</kbd>, or right-click on the field text and select <strong>Properties&#8230;&#8203;</strong>.</p>
+</div>
+<div class="paragraph">
+<p>To add new fields, delete optional fields, or edit existing fields, use the
+<span class="image"><img src="images/icons/part_properties_24.png" alt="Component properties icon"></span>
+icon on the main tool bar to open the <a href="#symbol-properties">Symbol Properties dialog</a>.</p>
+</div>
+<div class="paragraph">
+<p>Fields are text information associated with the symbol. Do not confuse
+them with text in the graphic representation of a symbol.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="creating-power-symbols">8.2.9. Creating Power Symbols</h4>
+<div class="paragraph">
+<p>Power symbols are symbols that are used to label a wire as part of a power net,
+like <code>VCC</code> or <code>GND</code>. The behavior of power symbols is described in the
+<a href="#power-symbols">electrical connections section</a>. Power symbols are handled and
+created the same way as normal symbols, but there are several additional
+considerations described below.</p>
+</div>
+<div class="paragraph">
+<p>It may be useful to place power symbols in a dedicated library. KiCad&#8217;s symbol
+library places power symbols in the <code>power</code> library, and users may create
+libraries to store their own power symbols. If the <strong>Define as power symbol</strong> box
+is checked in a symbol&#8217;s properties, that symbol will appear in the Schematic
+Editor&#8217;s <strong>Add Power Symbol</strong> dialog for convenient access.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of a <code>GND</code> power symbol.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_power_symbol.png" alt="Editing a power symbol">
+</div>
+</div>
+<div class="paragraph">
+<p>Power symbols consist of a pin of type "Power input" that is marked invisible.
+They must also have the <strong>Define as power symbol</strong> property checked.
+<a href="#hidden-power-pins">Invisible power input pins</a> have a special property of
+making implicit global connections based on the pin name.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the power symbol has the <strong>Define as power symbol</strong> property checked,
+the power input pin does not need to be marked invisible. However, the
+convention is to make these pins invisible anyway.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/eeschema_libedit_power_symbol_pin.png" alt="Power symbol pin">
+</div>
+</div>
+<div class="paragraph">
+<p>To create a power symbol, use the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a pin of type <strong>Power input</strong>, with <strong>Visible</strong> unchecked, and the pin named
+according to the desired net. Make the pin number <code>1</code>, the length <code>0</code>, and set
+the graphic style to <strong>Line</strong>. The pin name establishes the connection to the
+net; in this case the pin will automatically connect to the net <code>GND</code>. The pin
+number, length, and line style do not matter electrically.</p>
+</li>
+<li>
+<p>Place the pin on the symbol anchor.</p>
+</li>
+<li>
+<p>Use the shape tools to draw the symbol graphics.</p>
+</li>
+<li>
+<p>Set the symbol value. The symbol value does not matter electrically, but it is
+displayed in the schematic. To eliminate confusion, it should match the pin
+name (which determines the connected net name).</p>
+</li>
+<li>
+<p>Check the <strong>Define as power symbol</strong> box in Symbol Properties window. This
+makes the symbol appear in the <strong>Add Power Symbol</strong> dialog, makes the <code>Value</code>
+field read-only in the schematic, prevents the symbol from being assigned a
+footprint, and excludes the symbol from the board, BOM, and netlists.</p>
+</li>
+<li>
+<p>Set the symbol reference and uncheck the <strong>Show</strong> box. The reference text is
+not important except for the first character, which should be <code>#</code>. For the
+power symbol shown above, the reference could be <code>#GND</code>. Symbols with
+references that begin with <code>#</code> are not added to the PCB, are not included in
+Bill of Materials exports or netlists, and they cannot be assigned a footprint
+in the footprint assignment tool. If a power symbol&#8217;s reference does not begin
+with <code>#</code>, the character will be inserted automatically when the annotation or
+footprint assignment tools are run.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An easier method to create a new power symbol is to use another symbol as a
+starting point, <a href="#creating-a-symbol-from-another-symbol">as described earlier</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The connected net name is determined by the power symbol&#8217;s <strong>pin name</strong>, not
+      the name or value of the symbol. When modifying an existing power symbol,
+      make sure to rename the pin so that the new symbol connects to the
+      appropriate power net. This means that power symbol net names can only be
+      changed in the symbol editor, not in the schematic.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="checking-symbols">8.2.10. Checking Symbols</h4>
+<div class="paragraph">
+<p>The Symbol Editor can check for common issues in your symbols. Run the symbol
+checker using the <span class="image"><img src="images/icons/erc_24.png" alt="symbol checker icon"></span> button in
+the top toolbar.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/symbol_checker.png" alt="symbol checker detecting an off-grid pin">
+</div>
+</div>
+<div class="paragraph">
+<p>The symbol checker checks for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pins that are off-grid</p>
+</li>
+<li>
+<p>Pins that are duplicated between symbol units</p>
+</li>
+<li>
+<p>Incorrectly designed <a href="#power-symbols">power symbols</a>. Power symbols should
+have:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A single unit</p>
+</li>
+<li>
+<p>No alternate body styles</p>
+</li>
+<li>
+<p>A single pin which is either of type Power Output (see
+<a href="#pwr-flag">PWR_FLAG</a>) or invisible and of type Power Input (see
+<a href="#power-symbols">power symbols</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Illegal reference designator prefixes: reference designator prefixes
+should not end with a number or <code>?</code></p>
+</li>
+<li>
+<p><a href="#hidden-power-pins">Hidden Power Input pins</a> in non-power symbols: these
+create implicit connections and are not recommended</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="The KiCad Team">
+<title>编辑电路板</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book toc2 toc-left">
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_编辑电路板">4. 编辑电路板</a>
+<ul class="sectlevel2">
+<li><a href="#_放置和绘制操作">4.1. 放置和绘制操作</a></li>
+<li><a href="#_捕捉">4.2. 捕捉</a></li>
+<li><a href="#_编辑对象属性">4.3. 编辑对象属性</a></li>
+<li><a href="#working-with-footprints">4.4. 使用封装</a></li>
+<li><a href="#_使用焊盘">4.5. 使用焊盘</a></li>
+<li><a href="#_使用区域">4.6. 使用区域</a></li>
+<li><a href="#_图形对象">4.7. 图形对象</a></li>
+<li><a href="#_标注">4.8. 标注</a></li>
+<li><a href="#_布线">4.9. 布线</a></li>
+<li><a href="#forward-and-back-annotation">4.10. 向前和向后批注</a></li>
+<li><a href="#_锁定">4.11. 锁定</a></li>
+<li><a href="#_批量编辑工具">4.12. 批量编辑工具</a></li>
+<li><a href="#_清理工具">4.13. 清理工具</a></li>
+<li><a href="#_正在导入图形">4.14. 正在导入图形</a></li>
+</ul>
+</li>
+
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="sect1">
+<h2 id="_编辑电路板">4. 编辑电路板</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_放置和绘制操作">4.1. 放置和绘制操作</h3>
+<div class="paragraph">
+<p>放置和绘图工具位于右边的工具栏中。 当一个工具被激活时，它将一直处于激活状态，直到选择了一个不同的工具或用 <kbd>Esc</kbd> 键取消该工具。 当任何其他工具被取消时，选择工具总是被激活。</p>
+</div>
+<div class="paragraph">
+<p>某些工具栏按钮在调色板中有多个可用工具。这些工具由按钮右下角的小箭头表示：<span class="image"><img src="images/pcbnew_palette_buttons.png" alt="pcbnew palette buttons"></span></p>
+</div>
+<div class="paragraph">
+<p>要显示调色板，你可以在工具上点击并按住鼠标按钮，或者点击并拖动鼠标。 调色板关闭时将显示最近使用的工具。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 5%;">
+<col style="width: 95%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/cursor_24.png" alt="cursor 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection tool (the default tool).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/tool_ratsnest_24.png" alt="tool ratsnest 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Local ratsnest tool: when the board ratsnest is hidden, selecting footprints with this tool
+      will show the ratsnest for the selected footprint only.  Selecting the same footprint again
+      will hide its ratsnest.  The local ratsnest setting for each footprint will remain in effect
+      even after the local ratsnest tool is no longer active.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/module_24.png" alt="module 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Footprint placement tool: click on the board to open the footprint chooser, then click again
+      after choosing a footprint to confirm its location.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_tracks_24.png" alt="add tracks 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/ps_diff_pair_24.png" alt="ps diff pair 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Route tracks / route differential pairs: These tools activate the interactive router and
+      allow placing tracks and vias.  The interactive router is described in more detail in the
+      Routing Tracks section below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/ps_tune_length_24.png" alt="ps tune length 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/ps_diff_pair_tune_length_24.png" alt="ps diff pair tune length 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/ps_diff_pair_tune_phase_24.png" alt="ps diff pair tune phase 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tune length: These tools allow you to tune the length of single tracks or the length or
+    skew of differential pairs, after they have been routed.  See the Routing Tracks section for
+    details.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_via_24.png" alt="add via 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add vias: allows placing vias without routing tracks.</p>
+<p class="tableblock">    Vias placed on top of tracks using this tool will take on the net of the closest track segment
+    and will become part of that track (the via net will be updated if the pads connected to the
+    tracks are updated).</p>
+<p class="tableblock">    Vias placed anywhere else will take on the net of a copper zone at that location, if one
+    exists.  These vias will not automatically take on a new net if the net of the copper zone is
+    changed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_zone_24.png" alt="add zone 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add filled zone: Click to set the start point of a zone, then configure its properties before
+      drawing the rest of the zone outline.  Zone properties are described in more detail below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_keepout_area_24.png" alt="add keepout area 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add rule area: Rule areas, formerly known as keepouts, can restrict the placement of items
+      and the filling of zones and can also define named areas to apply specific custom design
+      rules to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_line_24.png" alt="add line 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draw lines.</p>
+<p class="tableblock">    <strong>Note:</strong> Lines are graphical objects and are not the same as tracks placed with the Route Tracks
+          tool.  Graphical objects cannot be assigned to a net.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_arc_24.png" alt="add arc 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draw arcs: pick the center point of the arc, then the start and end points. By right clicking this button, you can change the arc editing mode between a mode that maintains the existing arc center and a mode that maintains the arc radius.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_rectangle_24.png" alt="add rectangle 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draw rectangles.  Rectangles can be filled or outlines.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_circle_24.png" alt="add circle 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draw circles.  Circles can be filled or outlines.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_graphical_polygon_24.png" alt="add graphical polygon 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draw graphical polygons.  Polygons can be filled or outlined.</p>
+<p class="tableblock">    <strong>Note:</strong> Filled graphical polygons are not the same as filled zones: graphical polygons cannot
+    be assigned to a net and will not keep clearance from other items.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/image_24.png" alt="image 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add bitmap image.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/text_24.png" alt="text 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/text_box_24.png" alt="text box 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a textbox.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/add_aligned_dimension_24.png" alt="add aligned dimension 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/add_orthogonal_dimension_24.png" alt="add orthogonal dimension 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/add_center_dimension_24.png" alt="add center dimension 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/add_radial_dimension_24.png" alt="add radial dimension 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/add_leader_24.png" alt="add leader 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add dimensions.  Dimension types are described in more detail below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/delete_cursor_24.png" alt="delete cursor 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletion tool: click objects to delete them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/set_origin_24.png" alt="set origin 24"></span></p>
+<p class="tableblock">  <span class="image"><img src="images/icons/grid_select_axis_24.png" alt="grid select axis 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set drill/place origin (used for fabrication outputs) or grid origin.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/icons/measurement_24.png" alt="measurement 24"></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interactively measure the distance between two points.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_捕捉">4.2. 捕捉</h3>
+<div class="paragraph">
+<p>移动、拖动和绘制电路板元素时，栅格、焊盘和其他元素可以具有捕捉点，具体取决于用户偏好设置中的设置。在复杂的设计中，捕捉点可能离得太近，这会使当前的工具操作变得困难。使用下表中的快捷键可以在移动鼠标时禁用栅格和对象捕捉。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">快捷键</th>
+<th class="tableblock halign-left valign-top">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Ctrl</kbd></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">关闭网格捕捉。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Shift</kbd></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">关闭对象捕捉。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_编辑对象属性">4.3. 编辑对象属性</h3>
+<div class="paragraph">
+<p>所有对象都有可在对话框中编辑的属性。 使用快捷键 <kbd>E</kbd> 或从右键菜单中选择属性来编辑所选项目的属性。 只有当你选择的所有项目都是同一类型时，你才能打开属性对话框。 要想一次编辑不同类型的项目的属性，请参阅下面关于批量编辑工具的章节。</p>
+</div>
+<div class="paragraph">
+<p>在属性对话框中，任何包含数字值的字段也可以接受一个基本的数学表达式，从而得到一个数字值。 例如，一个尺寸可以被输入为 <code>2 * 2mm</code>，结果是 <code>4mm</code> 的值。 支持基本算术运算符以及用于定义运算顺序的圆括号。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="working-with-footprints">4.4. 使用封装</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO: 编写这一节&#8212;&#8203;包括封装属性，从库中更新，等等。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用焊盘">4.5. 使用焊盘</h3>
+<div class="paragraph">
+<p>在将封装放置在电路板上之后，可以检查和编辑封装的每个单独的焊盘的属性。 换句话说，如果库中的封装设计不合适，就可以在电路板上封装的特定实例中覆盖单个封装焊盘的设计。 例如，你可能希望为一个需要在特定设计中保持不焊接的焊盘去除焊膏孔，或者你可能希望移动一个轴向引线电阻的通孔焊盘的位置，以适应特定的设计。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+默认情况下，所有封装焊盘的位置都被锁定，因此可以编辑焊盘属性，但不能移动焊盘相对于封装其他部分的位置。 焊盘可以被解锁以允许自由移动，这对某些应用很有用（如具有不同引线位置的通孔封装），但通常不建议用于表面贴装封装。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当一个焊盘被选中时，焊盘属性对话框将通过上下文菜单或默认的快捷键<kbd>E</kbd>打开。 请注意，KiCad 认为如果你在焊盘附近点击，你可能是想选择整个封装而不是单个焊盘。 要选择单个焊盘，请确保在焊盘区域内点击，或者关闭选择过滤器中的 "封装" 设置（并确保 "焊盘" 设置打开），以防止意外地选择整个封装而不是特定的焊盘。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pad_properties_general.png" alt="pad properties general">
+</div>
+</div>
+<div class="paragraph">
+<p>焊盘属性对话框的常规选项卡显示了焊盘的物理属性，包括它的几何、形状和层设置。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊盘类型：</strong> 此设置控制焊盘的哪些功能被启用。</p>
+</div>
+<div class="paragraph">
+<p><strong>SMD</strong> 焊盘是电连接的，没有孔。 换句话说，它们存在于一个单一的铜层上。</p>
+</div>
+<div class="paragraph">
+<p><strong>通孔</strong> 焊盘是电气连接的，有一个电镀孔。 孔存在于每一层，而铜焊盘存在于多层（见下文 <strong>铜层</strong> 设置）。</p>
+</div>
+<div class="paragraph">
+<p><strong>板边连接器</strong> 焊盘是允许与 Edge.Cuts 层上的电路板边框重叠的 SMD 焊盘。</p>
+</div>
+<div class="paragraph">
+<p><strong>NPTH，机械</strong> 焊盘是没有电镀的通孔，不具有电气连接。</p>
+</div>
+<div class="paragraph">
+<p><strong>SMD 光圈</strong> 焊盘是没有孔和没有电连接的焊盘。 这些可用于在技术层上添加特定的设计，例如锡膏或焊接掩模孔径。（SMD 定位孔）</p>
+</div>
+<div class="paragraph">
+<p><strong>铜层</strong> 设置控制哪些铜层将有一个与焊盘相关的形状。</p>
+</div>
+<div class="paragraph">
+<p>对于 SMD 焊盘，选项是 F.Cu 或 B.Cu，控制焊盘是在电路板的前面还是后面 <em>相对于封装的位置</em>。 换句话说，如果一个焊盘在其属性中被设置为存在于 B.Cu 上，而封装被翻转到电路板的背面，<em>该焊盘现在将存在于 F.Cu 上，因为它也被翻转了</em>。</p>
+</div>
+<div class="paragraph">
+<p>对于通孔焊盘，有可能从焊盘与其他铜（布线或填充区）没有电气连接的铜层中移除焊盘形状。 将铜层设置为 <strong>连接层</strong> 将从任何未连接层移除焊盘形状，而设置为 <strong>F.Cu、B.Cu 和连接层</strong> 将从任何内部未连接层移除焊盘形状。 这在密集的电路板设计中很有用，可以增加内部层的可布线面积。</p>
+</div>
+<div class="paragraph">
+<p><strong>技术层</strong> 复选框控制哪些技术层会有一个与焊盘形状相同的孔径。 默认情况下，焊盘在粘贴层和屏蔽层上的孔径与铜层相匹配。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+在当前版本的 KiCad 中，不可能在不同的铜层上定义不同的焊盘形状或尺寸。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>指定焊盘到模具的长度：</strong> 此设置允许将一个长度与此焊盘相关联，该长度将被布线长度调整工具和网络检测器添加到布线的长度中。这可以用来指定内部键合线的长度，以便更准确地进行长度匹配，或者在其他情况下，网络的电气长度长于电路板上的布线的长度。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pad_properties_overrides.png" alt="pad properties overrides">
+</div>
+</div>
+<div class="paragraph">
+<p>出现在任何技术层上的孔径将具有与铜层上的焊盘形状相同的形状和尺寸。 在 PCB 制造过程中，制造商经常会改变掩膜和浆料孔径相对于铜焊盘尺寸的相对尺寸，但由于这种尺寸变化是特定于制造过程的，大多数制造商希望在提供设计数据时将孔径设置为与铜焊盘相同的尺寸。 对于需要在设计数据中加大或缩小技术层孔径的特定情况，你可以使用 "覆盖" 标签中的设置。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊盘间隙</strong> 控制焊盘与不同网络上的任何铜形状（布线、通孔、焊盘、区域）之间的最小间隙。 这个值通常被设置为 <code>0</code>，这将导致焊盘的间隙被继承自封装上设置的任何间隙覆盖，或者电路板的设计规则和网络类规则（如果封装的间隙也被设置为 <code>0</code>）。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊接掩模间隙</strong> 控制 F.Mask 和 B.Mask 层上的焊盘形状和孔径形状之间的尺寸差异。 一个正数意味着焊接掩模孔径将大于铜的形状。 这个数字是一个适用于所有方向的膨胀。 例如，这里的 <code>0.1mm</code> 值将导致阻焊孔径膨胀 <code>0.1mm</code>，这意味着在焊盘的所有侧面将有 <code>0.1mm</code> 的边界，当沿给定轴线测量时，阻焊开口将比焊盘宽 <code>0.2mm</code>。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊膏绝对间隙</strong> 控制 F.Paste 和 B.Paste 层上焊盘形状和孔径形状之间的尺寸差异。 它的行为在其他方面与 <strong>焊膏间隙</strong> 设置的行为相同。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊膏相对间隙</strong> 允许将焊膏间隙值设置为焊盘尺寸的百分比，而不是绝对距离值。 如果同时指定了相对间隙和绝对间隙，它们将被加在一起以确定锡膏孔径的大小。</p>
+</div>
+<div class="paragraph">
+<p>"覆盖" 选项卡还可以控制焊盘如何连接到任何与之重叠并共享其网络的铜区。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊盘连接</strong> 控制焊盘是否与区段有实心的、散热的或无连接。 与其他覆盖项一样，这个覆盖项可以为单个垫块或整个封装设置。 这个控制的默认设置是 <em>从父系封装</em>，而默认的封装设置是使用区段属性中指定的连接模式。</p>
+</div>
+<div class="paragraph">
+<p><strong>散热辐条宽度</strong> 控制区段连接模式为散热时产生的辐条的宽度。</p>
+</div>
+<div class="paragraph">
+<p><strong>散热间隙</strong> 控制散热条的长度，或焊盘的形状和区域的填充铜面积之间的间隙。</p>
+</div>
+<div class="paragraph">
+<p><strong>区域内的自定义焊盘形状</strong> 当焊盘使用自定义形状而不是默认形状之一时，控制区域填充器的行为。 这可以用来在使用散热条和自定义焊盘形状时实现不同的结果。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用区域">4.6. 使用区域</h3>
+<div class="paragraph">
+<p>铜区，有时也被其他 EDA 工具称为铜岛或填充，是分配给一个特定网络的实心或多边形的铜区，自动保持与其他铜对象的间隙。 铜区通常用于填充板层（或板层的一部分）上的所有自由空间，以创建接地和电源平面，承载大电流，或提供屏蔽。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+一些 EDA 工具有单独的工具用于创建 "放置层" 和在信号层上创建铜区。 在 KiCad 中，铜区工具被用于这两种应用。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>区域是由一个多边形的 <strong>边框</strong> 来定义的，它定义了填充铜区的最大范围。 这个边框并不代表物理铜，也不会出现在导出的制造数据中。 每次修改边框或边框内的任何对象时，该区的实际铜区必须被 <strong>填充</strong>。 填充过程可以在单个区上运行，也可以在电路板的所有区上运行（默认快捷键 <kbd>B</kbd>）。 区域可以 <strong>不填充</strong>（默认快捷键 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>B</kbd></span>），以提高性能并减少编辑大板时的视觉混乱。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+区域填充是一个手动的过程，而不是在每次对象发生变化而导致区域铜的变化时才发生。 这是因为在老式计算机或非常大的设计中，区域填充可能是一个缓慢的过程。 在生成输出之前，确保区域填充是最新的，这一点很重要。 KiCad 会检查区域是否已经更新，并在生成输出或运行 DRC 之前警告您，如果区域尚未被重新填充。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To draw a zone, click the Add Filled Zone tool (<span class="image"><img src="images/icons/add_zone_24.png" alt="add zone 24"></span>) on the right toolbar, or use default hotkey <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></span>. Click to choose the first point of the zone outline. The Zone Properties dialog will appear, allowing you to choose the zone net and other properties. These properties may be edited at any time, so it is not critical to choose them all correctly at first. Accept the dialog and continue placing points to define the zone outline. To finish the zone, double-click to set the last point. Zone outline points may be modified like graphic polygons, by dragging the square handles to move a corner or dragging the circular handles to move an edge. To edit the zone&#8217;s properties, use hotkey <kbd>E</kbd> or select Properties from the context menu.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zone_properties.png" alt="zone properties">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>层：</strong> 一个区域对象可以在一个或多个铜层上创建填充铜。 勾选每个铜层旁边的方框，这个区域边框应该在这些铜层上填充。 每个层上的铜将被独立地填充，但所有层将共享同一个网络。</p>
+</div>
+<div class="paragraph">
+<p><strong>网络：</strong> 选择该区铜区应连接的电气网络。 可以创建没有网络分配的区域。 没有网络的区域将与任何网络上的任何铜对象保持间隙。</p>
+</div>
+<div class="paragraph">
+<p><strong>区域名</strong> 可以用来给一个区域指定一个特定的名称。 这个名字可以用来在自定义的 DRC 规则中指代该区域。</p>
+</div>
+<div class="paragraph">
+<p><strong>区域的优先级别</strong> 决定了在单一层上的多个区域被填充的顺序。一个给定层上最高优先级别的区将被首先填充。 较低优先级的区将保持与较高优先级区的填充区域的间隙。 同一层上的两个具有相同优先级的区将相互重叠（短路）。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+具有相同优先级的区将永远不会互相保持间隙，即使它们被分配到不同的网络中!  设计规则检查器将报告这些短路，但它们不会被区域填充器所阻止。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>限制边框为 H、V 和 45 度</strong> 控制区域边框绘制工具的 <em>初始</em> 行为。 当这个选项被启用时，区域边框将被限制在 45 度的角度。 请注意，在创建了区域边框之后，这个选项就没有作用了。 边框点在创建后可以自由修改。</p>
+</div>
+<div class="paragraph">
+<p><strong>锁定</strong> 控制区域边框对象是否被锁定。 被锁定的对象不能被操作或移动，也不能被选择，除非在选择过滤器面板中启用 <strong>锁定的项目</strong> 选项。</p>
+</div>
+<div class="paragraph">
+<p><strong>边框显示</strong> 控制区域边框在屏幕上的绘制方式。 在 <strong>直线</strong> 模式下，只绘制边框的边界线。 在 <strong>阴影</strong> 模式下，阴影线会在边框边界的内侧绘制一小段距离，以使区段边框更加明显。 在 <strong>完全阴影</strong> 模式下，阴影线被绘制在整个区域边框的内部。</p>
+</div>
+<div class="paragraph">
+<p><strong>拐角平滑</strong> 控制边框拐角处的填充铜区的行为。拐角可以通过倒角或圆角来平滑，如果平滑被禁用，也可以一直延伸到边框的拐角。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+默认情况下，倒角和圆角不会被添加到区域边框的<strong>内角</strong>，因为这将导致填充的铜延伸到边框之外。 如果需要光滑的内角，请在电路板设置对话框的约束部分启用 <strong>允许区域边框外的圆角</strong> 选项。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>间隙</strong> 控制该区域的填充区域与其他铜质物体保持的最小间隙。 请注意，如果两个间隙值有冲突，将使用较大的间隙值。 例如，如果一个区被设置为使用 0.2 毫米的间隙，但其网络类被设置为使用 0.3 毫米的间隙，结果将是 0.3 毫米的间隙。</p>
+</div>
+<div class="paragraph">
+<p><strong>最小宽度</strong> 控制在该区域内产生的铜间隙的最小尺寸。 任何低于这个最小宽度的铜区都会在填充过程中被移除。</p>
+</div>
+<div class="paragraph">
+<p><strong>焊盘连接</strong> 控制填充区与同一网络上的封装焊盘的连接方式。 <strong>实心</strong> 连接将导致铜完全重叠在焊盘上。<strong>散热焊盘</strong> 将导致小铜辐条连接焊盘和铜区的其余部分，增加焊盘和区的其余部分之间的热阻。 这对手工焊接很有用。 <strong>对 PTH 的散热焊盘</strong> 将对电镀通孔焊盘应用散热焊盘，并对表面贴装焊盘使用固体连接。 <strong>无</strong> 将导致该区不连接到同一网络上的任何焊盘。</p>
+</div>
+<div class="paragraph">
+<p><strong>散热间隙</strong> 控制任何焊盘和铜区之间保持的距离，当焊盘连接模式被设置为产生散热。</p>
+</div>
+<div class="paragraph">
+<p><strong>散热宽度</strong> 控制 "辐条" 的宽度，即连接焊盘和其他铜区的短铜段。</p>
+</div>
+<div class="paragraph">
+<p><strong>填充类型</strong> 控制铜区的填充方式：默认为 <strong>实心填充</strong>，这将导致铜填充在区域边框内的所有可用空间。 该区域也可以被设置为 <strong>填充图案</strong>，这将使该区域充满含铜量较少的图案。</p>
+</div>
+<div class="paragraph">
+<p><strong>方向</strong> 控制孵化图案线的角度。 一个 0 度的方向将导致孵化图案使用水平和垂直的线条。</p>
+</div>
+<div class="paragraph">
+<p><strong>填充宽度</strong>控制填充图案中每条线的宽度。</p>
+</div>
+<div class="paragraph">
+<p><strong>填充间隙</strong> 控制填充图案中每条线之间的距离。</p>
+</div>
+<div class="paragraph">
+<p><strong>平滑效果</strong> 控制应用于填充图案的平滑风格。 0 的值将导致无平滑，3 的值将导致最精细的平滑。 更高的值将导致更长的处理时间和更大的 Gerber 文件。</p>
+</div>
+<div class="paragraph">
+<p><strong>平滑量</strong> 是一个比率，控制平滑倒角或圆角的大小，当 <strong>平滑效果</strong> 被设置为 0 以外的值时，会产生平滑倒角。</p>
+</div>
+<div class="paragraph">
+<p><strong>移除孤岛</strong> 控制初始区域填充后孤立的铜区（也称为孤岛）的行为。 当设置为 <strong>总是</strong> 时，区域内的孤立区域会被移除。当设置为 <strong>从不</strong> 时，孤立区域会被搁置，并会导致铜区不与网络的其他部分连接。 当设置为 <strong>低于区域限制</strong>时，可以指定一个 **最小的孤岛尺寸，低于这个阈值的孤岛将被删除。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Regardless of the <strong>remove islands</strong> setting, islands are never removed
+      from zones that are electrically unconnected. In other words, islands are
+      only removed from zones that have at least one electrical connection.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_图形对象">4.7. 图形对象</h3>
+<div class="paragraph">
+<p>图形对象 (直线、圆弧、矩形、圆、多边形和文本)可以存在于任何图层上，但不能分配给网络。矩形、圆和多边形可以在其属性对话框中设置为填充或边框。线宽属性将控制边框的宽度，即使是填充形状也是如此。填充形状的线宽可以设置为 "0" 以禁用边框。</p>
+</div>
+<div class="sect3">
+<h4 id="_正在创建图形形状">4.7.1. 正在创建图形形状</h4>
+<div class="paragraph">
+<p>The right toolbar can be used to create lines (<span class="image"><img src="images/icons/add_line_24.png" alt="add line 24"></span>, default hotkey <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd></span>), arcs (<span class="image"><img src="images/icons/add_arc_24.png" alt="add arc 24"></span>, default hotkey <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></span>), rectangles (<span class="image"><img src="images/icons/add_rectangle_24.png" alt="add rectangle 24"></span>), circles (<span class="image"><img src="images/icons/add_circle_24.png" alt="add circle 24"></span>, default hotkey <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd></span>), and polygons (<span class="image"><img src="images/icons/add_graphical_polygon_24.png" alt="add graphical polygon 24"></span>, default hotkey <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></span>).</p>
+</div>
+<div class="paragraph">
+<p>矩形、圆形和多边形可以是填充形状或边框。 <strong>线宽</strong> 选项控制边框的宽度。 边框宽度在图形对象的 "理想" 形状的两边延伸。 例如，一个被定义为半径为 2 毫米、线宽为 0.2 毫米的图形圆将由一个外半径为 2.2 毫米、内半径为 1.8 毫米的圆环组成。 如果启用了 <strong>填充形状</strong> 选项，并且线宽被设置为 0，该形状将是一个半径为 2 毫米的填充圆。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/graphic_shape_properties.png" alt="graphic shape properties">
+</div>
+</div>
+<div class="paragraph">
+<p>Arcs have two editing modes, which are selectable in <strong>Preferences</strong> &#8594; <strong>PCB Editor</strong> &#8594; <strong>Editing Options</strong> or by right clicking the <span class="image"><img src="images/icons/add_arc_24.png" alt="add arc 24"></span> button on the right toolbar. The first mode (<strong>keep arc center, adjust radius</strong>) maintains the position of the arc center as as the arc endpoints or midpoint are dragged, changing the radius as necessary. The second mode (<strong>keep arc endpoints or direction of starting point</strong>) maintains the position of the arc endpoints and the arc&#8217;s direction of curvature as the midpoint or center are dragged.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_正在创建文本对象">4.7.2. 正在创建文本对象</h4>
+<div class="paragraph">
+<p>图形文字可以通过使用右侧工具栏的（<span class="image"><img src="images/icons/text_24.png" alt="text 24"></span>）图标或键盘快捷键 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></span> 来放置。 点击来放置文本原点，然后在出现的对话框中编辑文本及其属性：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/text_properties_dialog.png" alt="text properties dialog">
+</div>
+</div>
+<div class="paragraph">
+<p>文字可以放在任何层上，但要注意，铜层上的文字不能与网络关联，不能与布线或焊盘形成连接。 铜区将填充在文字对象的矩形边界框周围。</p>
+</div>
+<div class="paragraph">
+<p>Text supports markup for superscripts, subscripts, overbars, evaluating project variables, and accessing symbol field values.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 27.2727%;">
+<col style="width: 36.3636%;">
+<col style="width: 36.3637%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Feature</th>
+<th class="tableblock halign-left valign-top">Markup Syntax</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Superscript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text^{superscript}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text<sup>superscript</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>text_{subscript}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text<sub>subscript</sub></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overbar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>~{text}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="overline">text</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#schematic-setup-text-variables">Variables</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${variable}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>variable_value</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#text-variables">Symbol Fields</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${refdes:field}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>field_value</em> of symbol <em>refdes</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Variables must be defined in
+      <a href="#board-setup-text-variables">Board Setup</a> before they can be
+      used. There are also a number of
+      <a href="#text-variables">built-in text variables</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_电路板边框_边缘切割">4.7.3. 电路板边框 (边缘切割)</h4>
+<div class="paragraph">
+<p>KiCad 使用 <code>Edge.Cuts</code> 层上的图形对象来定义电路板的边框。 该边框必须是一个连续（封闭）的形状，但可以由不同类型的图形对象组成，如线和弧，或者是一个单一的对象，如矩形或多边形。 如果没有定义电路板的边框，或者电路板的边框无效，那么一些功能，如 3D 查看器和一些设计规则的检查将无法发挥作用。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="pcbnew-edit-text-and-graphics-properties">4.7.4. 批量编辑文本和图形</h4>
+<div class="paragraph">
+<p>文本和图形的属性可以通过 <strong>编辑文本和图形属性</strong> 对话框（<strong>工具</strong> &#8594; <strong>编辑文本和图形属性&#8230;&#8203;</strong>）来进行批量编辑。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/pcbnew_edit_text_and_graphics_properties.png" alt="pcbnew edit text and graphics properties">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_范围和筛选器">范围和筛选器</h5>
+<div class="paragraph">
+<p><strong>范围</strong> 设置限制了该工具只能编辑某些类型的对象。如果没有选择任何作用域，就不会有任何东西被编辑。</p>
+</div>
+<div class="paragraph">
+<p><strong>筛选器</strong> 限制该工具在选定的范围内编辑特定的对象。只有当对象符合所有启用的相关筛选器时才会被修改（有些筛选器不适用于某些类型的对象。例如，父封装筛选器不适用于图形项目，在改变图形属性时被忽略）。如果没有启用筛选器，所选范围内的所有对象都将被修改。对于带有文本框的筛选器，支持通配符。<code>\*</code> 匹配任何字符，<code>?</code> 匹配任何单个字符。</p>
+</div>
+<div class="paragraph">
+<p><strong>按层筛选项目</strong> 筛选到指定板层上的项目。</p>
+</div>
+<div class="paragraph">
+<p><strong>按名称筛选其他符号字段</strong> 筛选到指定的符号字段。</p>
+</div>
+<div class="paragraph">
+<p><strong>按父系位号筛选项目</strong> 筛选到封装中具有位号的字段。<strong>通过父系封装库 ID 筛选项目</strong> 筛选到封装中具有指定库标识符的字段。</p>
+</div>
+<div class="paragraph">
+<p><strong>只包括选定的项目</strong> 筛选到当前选择。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_操作">操作</h5>
+<div class="paragraph">
+<p>被筛选对象的属性可以在对话框的底部设置为新值。通过选择 <strong>设置为指定值</strong>，可以将属性设置为任意值，或者通过选择*设置为图层默认值*，将属性重置为其图层的默认值。</p>
+</div>
+<div class="paragraph">
+<p>下拉列表和文本框可以被设置为 <code>--保持不变--</code> 以保留现有值。复选框可以被选中或不被选中，以启用或禁用一个变化，但也可以切换到第三个 "保持不变" 状态。</p>
+</div>
+<div class="paragraph">
+<p>所有项目都可以设置其 <strong>层</strong>。</p>
+</div>
+<div class="paragraph">
+<p>图形项目可以修改其 <strong>线的厚度</strong>。</p>
+</div>
+<div class="paragraph">
+<p>可以修改的文本属性有 <strong>字体</strong>、<strong>文本宽度</strong>、<strong>文本高度</strong>、<strong>文本厚度</strong>（仅限 KiCad 字体）、强调（<strong>粗体</strong> 和 <strong>重体</strong>）和方向（<strong>保持直立</strong>）。封装文本也可以设置其 <strong>可见性</strong>。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_标注">4.8. 标注</h3>
+<div class="paragraph">
+<p>Dimensions are graphical objects used to show a measurement or other marking on a board design. They may be added on any drawing layer, but are normally added to one of the User layers. KiCad currently supports five different types of dimension: aligned, orthogonal, center, radial, and leader.</p>
+</div>
+<div class="paragraph">
+<p><strong>对齐</strong> 标注 (<span class="image"><img src="images/icons/add_aligned_dimension_24.png" alt="add aligned dimension 24"></span>) 表示两点之间距离的测量。
+测量轴是连接这两个点的线，标注图形与该轴保持平行。</p>
+</div>
+<div class="paragraph">
+<p><strong>正交</strong> 标注 (<span class="image"><img src="images/icons/add_orthogonal_dimension_24.png" alt="add orthogonal dimension 24"></span>) 也测量两点之间的距离，但测量轴是 X 轴或 Y 轴。
+换句话说，这些标注表示两点之间距离的水平或垂直分量。
+创建正交标注时，在选择要测量的两个点后，可以根据放置标注的位置选择要用作测量轴的轴。</p>
+</div>
+<div class="paragraph">
+<p><strong>中心</strong> 标注 (<span class="image"><img src="images/icons/add_center_dimension_24.png" alt="add center dimension 24"></span>) 创建一个十字标记来指示一个点或圆或圆弧的圆心。</p>
+</div>
+<div class="paragraph">
+<p><strong>Radial</strong> dimensions (<span class="image"><img src="images/icons/add_radial_dimension_24.png" alt="add radial dimension 24"></span>) show a measurement between
+a center point and the outside of a circle or arc. The center point is indicated by a cross.</p>
+</div>
+<div class="paragraph">
+<p><strong>引线</strong> 标注 (<span class="image"><img src="images/icons/add_leader_24.png" alt="add leader 24"></span>) 创建一个箭头，将一条引线连接到文本字段。
+此文本字段可以包含任何文本以及文本周围的可选圆形或矩形框。
+这种类型的标注通常用来提醒人们注意设计的某些部分，以便在制造说明中参考。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/dimensions.png" alt="dimensions">
+</div>
+</div>
+<div class="paragraph">
+<p>创建一个标注后，可以编辑其属性（快捷键 <kbd>E</kbd>）以改变显示数字的格式以及文本和图形线的风格。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+您可以在电路板设置对话框的文本和图形默认值部分自定义新创建的标注对象的默认样式。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/dimensions_dialog.png" alt="dimensions dialog">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_标注格式选项">4.8.1. 标注格式选项</h4>
+<div class="paragraph">
+<p><strong>覆盖值：</strong> 启用后，您可以直接在 <strong>值</strong> 字段中输入测量值，而不是实际测量值。</p>
+</div>
+<div class="paragraph">
+<p><strong>前缀：</strong> 此处输入的任何文字都将显示在测量值之前。</p>
+</div>
+<div class="paragraph">
+<p><strong>后缀：</strong> 此处输入的任何文字都将显示在测量值之后。</p>
+</div>
+<div class="paragraph">
+<p><strong>图层:</strong> 选择标注对象存在的层。</p>
+</div>
+<div class="paragraph">
+<p><strong>单位：</strong> 选择显示测量值的单位。
+当更改电路板编辑器的显示单位时，<strong>自动</strong> 单位会导致标注单位发生变化。</p>
+</div>
+<div class="paragraph">
+<p><strong>单位格式：</strong> 从几种内置的单位显示风格中选择。</p>
+</div>
+<div class="paragraph">
+<p><strong>精度：</strong> 选择要显示多少位的精度。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_标注文本选项">4.8.2. 标注文本选项</h4>
+<div class="paragraph">
+<p>大多数标注文本选项与其他图形文本对象的选项相同（见上面的图形对象部分）。 也有一些特殊的选项适用于标注文本：</p>
+</div>
+<div class="paragraph">
+<p><strong>批注模式：</strong> 选择是手动定位批注文本，还是自动保持与批注测量线对齐。</p>
+</div>
+<div class="paragraph">
+<p><strong>与标注对齐：</strong> 开启后，标注文本的方向会自动调整，使文本与测量轴平行。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_标注线选项">4.8.3. 标注线选项</h4>
+<div class="paragraph">
+<p><strong>线条粗细：</strong> 设置构成标注形状的图形线的粗细。</p>
+</div>
+<div class="paragraph">
+<p><strong>标注界线偏移：</strong> 设置测量点到标注界线起点的距离。</p>
+</div>
+<div class="paragraph">
+<p><strong>箭头长度：</strong> 设置标注的形状的箭头段的长度。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_引线选项">4.8.4. 引线选项</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/dimensions_leader.png" alt="dimensions leader">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>值：</strong> 输入要在引线行末尾显示的文本。</p>
+</div>
+<div class="paragraph">
+<p><strong>文本框架：</strong> 选择所需的文本周围的边界（圆形、矩形或无）。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_布线">4.9. 布线</h3>
+<div class="paragraph">
+<p>KiCad 具有交互式布线器的功能：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>允许对单布线和差分对进行手动或拖动 (半自动) 布线。</p>
+</li>
+<li>
+<p>可通过以下方式修改现有设计：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>拖动现有布线时重新布线现有布线</p>
+</li>
+<li>
+<p>拖动封装时重新布线连接到封装焊盘的布线</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>允许通过插入蛇形线 + 来调整布线长度和差分对的偏移（相位）
+为具有严格时序要求的设计调整布线形状</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>默认情况下，布线器在放置布线时尊重配置的设计规则：新布线的尺寸（宽度）将取自设计规则，在确定新布线和过孔的放置位置时，布线器将尊重设计规则中设置的铜间隙。 如果需要的话，可以通过使用高亮冲突布线器模式和打开布线器设置中的允许 DRC 违规选项来禁用这种行为（见下文）。</p>
+</div>
+<div class="paragraph">
+<p>布线器有三种模式，可以随时选择。 布线器模式用于布线新布线，但也用于使用拖动（快捷键 <kbd>D</kbd>）命令拖动现有布线时。 这些模式是：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>高亮冲突</strong>：在此模式下，大部分布线器功能被关闭，布线完全手动。
+布线时，<em>冲突</em> (间隙违规) 将以绿色高亮，如果存在冲突，则新布线的布线无法修复，除非打开了允许 DRC 冲突选项。
+在此模式下，一次最多可以放置两个布线段 (例如，一个水平线段和一个对角线段)。</p>
+</li>
+<li>
+<p><strong>推挤</strong>：在此模式下，被布线的线段将绕过无法移动的障碍物 (例如，焊盘和锁定的布线/孔孔)和 <em>推挤</em> 障碍，这些障碍物可以移开。布线器在此模式下防止违反 DRC：如果无法布线到不违反 DRC 的光标位置，则不会创建新的布线。</p>
+</li>
+<li>
+<p><strong>绕走</strong>：在此模式下，布线器的行为与推挤模式相同，只是不会移动障碍物。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>使用哪种模式是一个偏好问题。 对于大多数用户，我们建议使用推挤模式以获得最高效的布线体验，或者，如果您不希望布线器修改未被布线的线段，则建议使用绕走模式。请注意，推挤和绕走模式始终创建水平、垂直和 45 度 (H/V/45) 布线段。如果需要使用 H/V/45 以外的角度布线段，则必须使用高亮碰撞模式，并在交互布线器设置对话框中启用自由角度模式选项。</p>
+</div>
+<div class="paragraph">
+<p>有五个主要的布线功能。单布线、差分对布线、调整单布线长度、调整差分对的长度和调整差分对的偏移 (相位)。 所有这些都存在于顶部工具栏上的路由菜单下拉菜单（单独）和绘图工具栏上的两个重载图标中，在右侧的绘图工具栏上。 上面介绍了重载图标的使用。 一个用于两个布线功能，一个用于三个调谐功能。 此外，布线菜单允许选择设置层对和交互式布线器设置。</p>
+</div>
+<div class="paragraph">
+<p>To route tracks, click the Route Tracks <span class="image"><img src="images/icons/add_tracks_24.png" alt="add tracks 24"></span> icon (from the drawing toolbar or from the top toolbar under <strong>Route</strong>) or use the hotkey <kbd>X</kbd>. Click on a starting location to select which net to route and begin routing. The net being routed will automatically be highlighted and the allowable clearance for the net will be indicated with a gray outline around the tracks being routed. The clearance outline can be disabled by changing the Clearance Outlines setting in the Display Options section of the Preferences dialog.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+间隙边框显示从布线网络到 PCB 上任何其他铜线的最大间隙。
+可以使用自定义设计规则为不同对象指定网络的不同间隙。
+布线器将考虑这些间隙，但仅直观地显示最大间距值。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当布线器处于活动状态时，将从布线起点到编辑器光标绘制新的线段。这些线段是未固定临时 (<em>unfixed</em> temporary) 对象，它们显示当您使用左击或 <kbd>Enter</kbd> 键来固定布线 (<em>fix</em> the route) 时将创建哪些线段。非固定布线段以比固定布线段更亮的颜色显示。当您使用 <kbd>Esc</kbd> 键或通过选择另一个工具退出布线器时，将只保存固定布线段。完成布线操作(快捷键 <kbd>End</kbd>) 将固定所有布线并退出布线器。</p>
+</div>
+<div class="paragraph">
+<p>在布线时，可以使用撤消最后一个布线段命令 (快捷键 <kbd>Backspace</kbd>) 取消固定最近固定的布线。您可以重复使用此命令以后退已固定的布线。</p>
+</div>
+<div class="paragraph">
+<p>在以前的 KiCad 版本中，使用鼠标左键或 <kbd>Enter</kbd> 来固定已布线的线段会固定所有线段，但不包括鼠标光标位置结束的线段。 在 KiCad 6 中，这种行为现在是可选的，默认情况下，所有的线段 <em>包括</em> 在鼠标光标位置结束的线段都会被固定。 通过在交互式布线器设置对话框中禁用 "点击后固定所有线段" 选项，可以恢复旧的行为。</p>
+</div>
+<div class="paragraph">
+<p>布线时，可以按住 <kbd>Ctrl</kbd> 键禁用网格捕捉，按住 <kbd>Shift</kbd> 键禁用对焊盘和过孔等对象的捕捉。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+也可以通过更改首选项对话框的编辑选项部分中的磁吸点首选项来禁用对对象的捕捉。
+我们建议您在一般情况下保持启用对象捕捉，这样就不会意外地在焊盘或过孔上略微偏离中心结束布线。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="track-posture">4.9.1. 布线形态</h4>
+<div class="paragraph">
+<p>在垂直(H) / 水平 (V) / 45 度模式下布线时，<em>形态</em> 是指一组两个线段如何连接单个 H/V/45 度线段无法到达的两个点。 在这种情况下，这些点将由一条水平或垂直线段和一条对角线 (45度) 线段连接。形态指的是这些线段的顺序：是水平/垂直线段还是对角线线段在前。</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/pcbnew_posture_a.png" alt="pcbnew posture a" width="45%"></span> <span class="image"><img src="images/pcbnew_posture_b.png" alt="pcbnew posture b" width="45%"></span></p>
+</div>
+<div class="paragraph">
+<p>KiCad 的布线器试图根据一系列因素自动选择最佳形态。一般说来，布线器会尝试最大限度地减少路线中的拐角数量，并尽可能避免 "坏" 拐角 (如锐角)。当从焊盘布线或布线到焊盘时，KiCad 将选择将路线与焊盘最长边缘对齐的形态。</p>
+</div>
+<div class="paragraph">
+<p>在某些情况下，KiCad 无法正确猜测您想要的形态。要在布线时切换布线的形态，请使用切换布线形态命令 (快捷键 <kbd>/</kbd>)。</p>
+</div>
+<div class="paragraph">
+<p>在没有明显的“最佳”形态的情况下(例如，从过孔开始布线时)，KiCad 将使用鼠标光标的移动来选择形态。如果希望布线从直线 (水平或垂直) 线段开始，请在水平或垂直方向上将鼠标从起始位置移开。如果您希望布线以对角线开始，请沿对角线方向移动。一旦光标与布线起始位置相距足够远，形态就会被锁定，并且除非光标回到起始位置，否则不会再更改。可以在交互式布线器设置对话框中禁用从鼠标光标移动检测形态，如下所述。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+如果使用切换布线形态命令覆盖 KiCad 选择的形态，则在当前布线操作的其余部分中，将禁用从鼠标移动自动检测形体。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_布线转角模式">4.9.2. 布线转角模式</h4>
+<div class="paragraph">
+<p>当以 H/V/45 模式布线时，KiCad 的布线器可以放置尖角或圆角的布线。要在尖角和圆角之间切换，请使用布线拐角模式命令 (快捷键 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>/</kbd></span>)。使用圆角布线时，每个布线步骤将放置直线段、单个圆弧或同时放置直线段和圆弧。布线形态决定首先放置圆弧还是直线段。</p>
+</div>
+<div class="paragraph">
+<p>选择所需布线后，还可以在布线后使用圆角布线命令对布线拐角进行圆角处理。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+尚不支持使用圆弧拖动布线。当拖动布线或在推挤模式下由布线器移动布线时，圆弧将转换回锐角。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_布线宽度">4.9.3. 布线宽度</h4>
+<div class="paragraph">
+<p>被布线的线段的宽度是通过以下三种方式之一来确定的：如果布线的起点是现有线段的终点，并且顶部工具栏上的 <span class="image"><img src="images/icons/auto_track_width.png" alt="auto track width"></span> 按钮被启用，宽度将被设置为现有布线的宽度。 否则，如果顶部工具栏中的布线宽度下拉菜单被设置为 "使用网络类宽度"，则宽度将取自被布线的网络类（或任何为网络类指定不同宽度的自定义设计规则，例如在凹陷区域内）。 最后，如果布线宽度下拉菜单被设置为电路板设置对话框中配置的预定义布线尺寸之一，则将使用该宽度。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+布线宽度永远不能低于在电路板设置对话框的约束部分中配置的最小布线宽度。如果添加的预定义宽度低于此最小约束，则将使用最小约束值。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>KiCad 的布线器支持活动路线的单一布线宽度。 换句话说，要在线段中间改变宽度，你必须结束路线，然后从上一条线段的末端重新开始一条新的线段。 要改变活动线段的宽度，可使用快捷键 <kbd>W</kbd> 和 <span class="keyseq"><kbd>Shift</kbd>+<kbd>W</kbd></span>，在电路板设置对话框中配置的布线宽度中逐步进行。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_放置过孔">4.9.4. 放置过孔</h4>
+<div class="paragraph">
+<p>在布线线段时，切换层会在当前（未固定）线段的末端插入一个过孔。 一旦你放置了过孔，布线将继续在新层上进行。 有几种方法可以选择一个新层并插入过孔：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用快捷键选择特定的图层，如 <kbd>PgUp</kbd> 选择 <code>F.Cu</code> 或 <kbd>PgDn</kbd> 选择 <code>B.Cu</code>。</p>
+</li>
+<li>
+<p>通过使用 "下一层" 或 "上一层" 快捷键 (<kbd>+</kbd> 和 <kbd>-</kbd>)。</p>
+</li>
+<li>
+<p>通过使用 "放置过孔" 快捷键 (<kbd>V</kbd>)，它将切换到活动层对中的下一层。</p>
+</li>
+<li>
+<p>通过使用 "选择图层并通过通孔放置" 操作(快捷键 <kbd>&lt;</kbd>)，将打开一个对话框来选择目标层。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>过孔的尺寸将从激活的过孔尺寸设置中获取，可通过顶部工具栏的下拉列表或增加过孔尺寸 (<kbd>'</kbd>) 和减小过孔尺寸 (<kbd>\</kbd>) 快捷键访问。与布线宽度非常相似，当通孔大小设置为"使用网络类尺寸" 时，将使用 "电路板设置" 的 "网络类" 部分中配置的过孔大小 (除非被自定义设计规则覆盖)。</p>
+</div>
+<div class="paragraph">
+<p>如果在电路板设置对话框的约束条件部分启用了微孔或盲/埋孔，就可以在布线时放置这些过孔。 使用快捷键 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>V</kbd></span> 来放置微孔，<span class="keyseq"><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></span> 来放置盲/埋孔。 微孔只能被放置在连接一个外铜层和相邻层的位置。 盲孔/埋孔可以放置在任何一层上。</p>
+</div>
+<div class="paragraph">
+<p>布线器放置的过孔被认为是已布线线段的一部分。 这意味着过孔网络可以自动更新（就像线段网络一样），例如，当从原理图中更新 PCB 时改变了线段的网络名。 在某些情况下，这可能是不需要的，例如在创建邮戳孔时。 对于特定的过孔，可以通过关闭过孔属性对话框中的 "自动更新过孔网络" 复选框来禁用过孔网络的自动更新。 使用 "添加独立过孔" 工具放置的过孔在创建时禁用这一设置。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_差分对布线">4.9.5. 差分对布线</h4>
+<div class="paragraph">
+<p>KiCad 中的差分对被定义为具有共同的 <em>基数名称</em> 和正负后缀的网路。 KiCad 支持使用 <code>+</code> 和 <code>-</code>，或者 <code>P</code> 和 <code>N</code> 作为后缀。 例如，<code>USB+</code> 和 <code>USB-</code> 构成一对差分，<code>USB_P</code> 和 <code>USB_N</code> 也是如此。 在第一个例子中，基本名称是 <code>USB</code>，第二个例子中是 <code>USB_</code>。 后缀样式不能混合：网路 <code>USB+</code> 和 <code>USB_N</code> 不构成差分对。 请确保你在原理图中相应地命名你的差分对网络，以便在 PCB 编辑器中使用差分对布线器。</p>
+</div>
+<div class="paragraph">
+<p>To route a differential pair, click the Route Differential Pairs <span class="image"><img src="images/icons/ps_diff_pair_24.png" alt="ps diff pair 24"></span> icon (from the drawing toolbar or from the top toolbar under <strong>Route</strong>) or use the hotkey <kbd>6</kbd>. Click on a pad, via, or the end of an existing differential pair track to start routing. You can start routing from either the positive or negative net of a differential pair.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+目前不可能在现有差分对布线的中间开始对差分对进行布线。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>差分对布线器将尝试用设计规则中的间隙布线这对布线(差分对间隙可以在电路板设置对话框的网络类部分中配置，也可以通过使用自定义设计规则来配置)。如果布线的起始或结束位置与配置的间隙不同，布线器将创建一个较短的 "扇出" 部分，以最大限度地缩短差分对未耦合的布线长度。</p>
+</div>
+<div class="paragraph">
+<p>当交换层或使用放置过孔 (<kbd>V</kbd>) 操作时，差分对布线器将创建两个相邻的过孔。这些过孔将被放置在尽可能靠近彼此的位置，同时遵守铜和孔到孔间隙的设计规则。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_修改布线">4.9.6. 修改布线</h4>
+<div class="paragraph">
+<p>线段被布线后，可以通过移动或拖动来修改它们，或者删除并重新布线。 当选择一个线段时，快捷键 <kbd>U</kbd> 可以用来将选择范围扩大到所有连接的线段。 第一次按下 <kbd>U</kbd> 将选择与焊盘或过孔最近的连接点之间的线段。 第二次按 <kbd>U</kbd> 将再次扩大选择范围，包括所有层上与所选线段相连的所有线段。 用这种技术选择线段可以用来快速删除整个布线网络。</p>
+</div>
+<div class="paragraph">
+<p>有两种不同的拖动命令可用于修改布线段。拖动 (45 度模式) 命令快捷键 <kbd>D</kbd> 用于通过布线器拖动布线。如果布线器模式设置为推挤，则使用此命令拖动将推挤附近的布线。如果布线器模式设置为绕走，则使用此命令拖动将绕过障碍物或停在障碍物处。拖动自由角度命令 快捷键 <kbd>G</kbd> 用于将布线段一分为二，并将新角点拖动到任何位置。拖动自由角度的行为类似于高亮碰撞布线器模式：不会避开或推挤障碍物，只会高亮。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+目前还不能拖动包含圆弧的布线。在某些情况下，尝试拖动这些布线会导致圆弧被删除。可以通过选中特定圆弧并使用拖动命令 (<kbd>D</kbd>) 来调整其大小。使用此命令调整圆弧大小时，不执行 DRC 检查。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>移动命令（快捷键 <kbd>M</kbd>）也可以在线段上使用。 该命令将拾取选定的线段，而忽略任何未被选中的附加线段或过孔。 使用移动命令移动线段时，不会进行 DRC 检查。</p>
+</div>
+<div class="paragraph">
+<p>在移动封装的同时，可以对附着在封装上的线段进行重新布线。 要做到这一点，在选择了一个封装的情况下使用拖动命令（<kbd>D</kbd>）。 任何以封装的一个焊盘为终点的线段都将与封装一起被拖动。 这个功能有一些限制：它只在高亮冲突模式下运行，所以附着在封装上的线段不会绕过障碍物或将附近的线段推开。 此外，只有以封装的焊盘为终点的线段才会被拖动。 仅仅穿过焊盘或在原点以外的焊盘上结束的线段将不会被拖动。</p>
+</div>
+<div class="paragraph">
+<p>可以使用编辑布线和过孔对话框修改布线的宽度和过孔的大小，而无需重新布线。有关详细信息，请参阅下面关于批量编辑工具的部分。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_长度调整">4.9.7. 长度调整</h4>
+<div class="paragraph">
+<p>The length tuning tools can be used to add serpentine tuning shapes to tracks after routing. To tune the length of a track, first pick the appropriate length tuning tool. The single track tuning tool (icon <span class="image"><img src="images/icons/ps_tune_length_24.png" alt="ps tune length 24"></span> or hotkey <kbd>7</kbd>) will add serpentine shapes to bring the length of a single track up to the target value. The differential pair tuning tool (icon <span class="image"><img src="images/icons/ps_diff_pair_tune_length_24.png" alt="ps diff pair tune length 24"></span> or hotkey <kbd>8</kbd>) will do the same for a differential pair. The differential pair skew tuning tool (icon <span class="image"><img src="images/icons/ps_diff_pair_tune_phase_24.png" alt="ps diff pair tune phase 24"></span> or hotkey <kbd>9</kbd>) will add length to the shorter member of a differential pair in order to eliminate skew (phase difference) between the positive and negative sides of the pair. As with the Routing icons, the Tuning icons are found in both the Route menu dropdown from the top toolbar and the drawing toolbar on the right.</p>
+</div>
+<div class="paragraph">
+<p>要选择长度调整工具的目标长度，请在激活长度调整工具后，从上下文菜单或使用快捷键 <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>L</kbd></span> 打开 "长度调整设置" 对话框：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_length_tuning_settings.png" alt="pcbnew length tuning settings">
+</div>
+</div>
+<div class="paragraph">
+<p>此对话框还可用于配置曲折形状的大小、形状和间距。</p>
+</div>
+<div class="paragraph">
+<p>配置好目标长度后，在你希望开始放置蛇形形状的区域点击一个布线。 沿着线段移动鼠标光标，蛇形形状就会被添加。 光标旁边会出现一个状态窗口，显示布线的当前长度和目标长度。 再次点击，完成放置当前的蛇形布线。 如果需要，可以在同一条布线上放置多条蛇形布线。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+长度调整工具仅支持调整两个焊盘之间的点对点网络的长度。尚不支持调整具有不同拓扑的网络长度。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_交互式布线设置">4.9.8. 交互式布线设置</h4>
+<div class="paragraph">
+<p>交互式布线器设置可通过路径菜单访问，或通过右键单击工具栏中的布线按钮来访问。这些设置控制布线和拖动现有布线时的布线行为。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_interactive_router_settings.png" alt="pcbnew interactive router settings">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">设置</th>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">模式</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置用于创建新布线和拖动现有布线的路由器的操作模式。
+            有关详细信息，请参阅上面的内容。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自由角度模式</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">允许以任何角度布线，而不是仅以 45 度增量布线。
+                    仅当布线模式设置为突出显示高亮冲突时，
+                    此选项才可用。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">绕过障碍物</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在推挤模式下，允许布线尝试在实心障碍物 (如焊盘)
+                        后面移动碰撞布线。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">移除多余的布线</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自动删除在当前布线中创建的回路，
+                            仅保留回路中最近布线的部分。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">优化焊盘连接</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用此设置时，交互式布线器尝试在退出焊盘和过孔时避免锐角
+                             和其他不需要的布线。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">平滑拖动线段</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">拖动布线时，会尝试将布线段组合在一起，
+                            以最大限度地减少方向更改。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">允许违反 DRC 规则</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在高亮碰撞模式下，允许放置违反 DRC 规则的布线和过孔。
+                         在其他模式下不起作用。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">优化正在拖动的布线</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用后，拖动布线段将导致 KiCad 优化屏幕上可见的其余布线。
+      优化过程去除了不必要的拐角，避免了锐角，通常会尝试找到布线的最短路径。
+      禁用时，不会对正在拖动的紧邻部分之外的布线执行任何优化。
+      在拖动布线时尝试优化布线。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">使用鼠标路径设置布线形态</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">尝试根据鼠标路径从布线起点位置拾取布线形态。
+      如果鼠标从开始位置开始主要沿对角线移动，则形态将设置为对角线起点；
+      如果鼠标主要水平或垂直移动，则形态将设置为垂直起点。
+      当鼠标离开布线起始位置很远时，形态估计就会被锁定，
+      并且可以通过移回起始位置来解锁。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">点击时固定所有线段</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用时，在布线时单击将固定已布线的所有布线段的位置，
+      包括在鼠标光标结束的线段。新的线段将从鼠标光标位置开始。
+      禁用时，最后一个线段 (在鼠标光标处结束的线段) 将不会固定在适当位置，
+      可以通过进一步的鼠标移动进行调整。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="forward-and-back-annotation">4.10. 向前和向后批注</h3>
+<div class="sect3">
+<h4 id="_从原理图更新_pcb正向批注">4.10.1. 从原理图更新 PCB（正向批注）</h4>
+<div class="paragraph">
+<p>使用 "从原理图更新 PCB" 工具将设计信息从原理图编辑器同步到电路板编辑器。在原理图编辑器和电路板编辑器中都可以用 <strong>工具</strong> &#8594; <strong>从原理图更新 PCB</strong>（<kbd>F8</kbd>）来访问该工具。你也可以使用电路板编辑器顶部工具栏上的 <span class="image"><img src="images/icons/update_pcb_from_sch_24.png" alt="从原理图更新 PCB 图标"></span> 图标。这个过程通常被称为正向批注。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+从原理图更新 PCB 是将设计信息从原理图转移到 PCB 的首选方法。在旧版本的 KiCad 中，相应的过程是将网表从原理图编辑器中导出并导入到电路板编辑器中。现在已经没有必要使用网表文件了。
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/update_pcb_from_schematic.png" alt="从原理图更新 PCB">
+</div>
+</div>
+<div class="paragraph">
+<p>该工具将每个符号的封装添加到电路板上，并将更新的原理图信息传输到电路板上。特别是，电路板的网络连接被更新以符合原理图。</p>
+</div>
+<div class="paragraph">
+<p>将对 PCB 进行的修改列在 <em>待应用的修改</em> 窗格中。在你点击 <strong>更新 PCB</strong> 按钮之前，PCB 不会被修改。</p>
+</div>
+<div class="paragraph">
+<p>你可以使用窗口底部的复选框来显示或隐藏不同类型的信息。可以使用 <strong>保存&#8230;&#8203;</strong> 按钮将更改的报告保存到文件中。</p>
+</div>
+<div class="sect4">
+<h5 id="_选项">选项</h5>
+<div class="paragraph">
+<p>该工具有几个选项来控制其行为。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">选项</th>
+<th class="tableblock halign-left valign-top">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根据位号将封装重新链接到原理图符号上</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">封装通常是通过符号添加到原理图中时创建的唯一标识符与原理图符号相连。符号的唯一标识符不能被改变。</p>
+<p class="tableblock">如果选中，PCB 中的每个封装将被重新链接到与该封装具有相同位号的符号上。</p>
+<p class="tableblock">如果不勾选，封装和符号将像往常一样通过唯一的标识符来链接，而不是通过位号。每个封装的位号将被更新以匹配其链接符号的位号。</p>
+<p class="tableblock">这个选项一般不应该被选中。它对依赖改变原理图符号和封装之间的链接的特定工作流程很有用，例如重构原理图以方便布局，或者在设计的相同通道之间复制布局。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">删除没有符号的封装</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，PCB 中任何在原理图中没有相应符号的封装都将从 PCB 中删除。带有 "不在原理图中" 属性的封装将不受影响。</p>
+<p class="tableblock">如果不勾选，没有相应符号的封装将不会被删除。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用原理图中指定的封装替换封装</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，PCB 中的封装将被替换为相应原理图符号中指定的封装。</p>
+<p class="tableblock">如果不勾选，即使原理图符号被更新为指定了不同的封装，PCB 中已有的封装也不会被改变。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_从_pcb_上更新原理图反向批注">4.10.2. 从 PCB 上更新原理图（反向批注）。</h4>
+<div class="paragraph">
+<p>KiCad 的典型工作流程是在原理图中进行修改，然后使用 "从原理图更新 PCB" 工具将修改内容同步到电路板上。然而，相反的过程也是可行的：可以在电路板上进行设计修改，然后在原理图或电路板编辑器中使用 <strong>工具</strong> &#8594; <strong>从 PCB 更新原理图</strong> 同步到原理图上。这个过程通常被称为反向批注。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/update_schematic_from_pcb.png" alt="从 PCB 上更新原理图">
+</div>
+</div>
+<div class="paragraph">
+<p>该工具将位号、值、封装分配和网络名称的变化从电路板同步到原理图。每种类型的变化都可以单独启用或禁用。</p>
+</div>
+<div class="paragraph">
+<p>将对原理图进行的修改列在 <em>待应用的修改</em> 窗格中。在您点击 <strong>更新原理图</strong> 按钮之前，原理图不会被修改。</p>
+</div>
+<div class="paragraph">
+<p>你可以使用窗口底部的复选框来显示或隐藏不同类型的信息。可以使用 <strong>保存&#8230;&#8203;</strong> 按钮将更改的报告保存到文件中。</p>
+</div>
+<div class="sect4">
+<h5 id="_选项_2">选项</h5>
+<div class="paragraph">
+<p>该工具有几个选项来控制其行为。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选项</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">说明</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根据位号将封装重新链接到原理图符号上</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，PCB 中的每个封装将被重新链接到与该封装具有相同位号的符号上。这个选项与更新符号位号不兼容。</p>
+<p class="tableblock">如果不勾选，封装和符号将像往常一样通过唯一的标识符连接，而不是通过位号。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">位号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，符号位号将被更新，以匹配链接封装的位号。</p>
+<p class="tableblock">如果不勾选，符号位号将不会被更新。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，符号值将被更新以匹配链接封装的值。</p>
+<p class="tableblock">如果不勾选，符号值不会被更新。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">封装分配</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，符号的封装分配将被更新，这些符号的封装在电路板中被改变或替换。</p>
+<p class="tableblock">如果不勾选，符号的封装分配将不会被更新。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">网络名</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果选中，原理图将根据电路板上的任何网络名变化进行更新。如有必要，网络标签将被更新或添加到原理图中，以便与电路板相匹配。</p>
+<p class="tableblock">如果不勾选，原理图中的网络名将不会被更新。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+《全局重新批注，全局重新批注》功能可以与反向批注位号结合使用，根据设计中的位置重新批注所有元件。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_用_cmp_文件进行反向批注">用 CMP 文件进行反向批注</h5>
+<div class="paragraph">
+<p>通过从 PCB 编辑器导出 CMP 文件（<strong>文件</strong> &#8594; <strong>导出</strong> &#8594; <strong>封装关联（.cmp）文件&#8230;&#8203;</strong>）并在原理图编辑器中导入（<strong>文件</strong> &#8594; <strong>导入</strong> &#8594; <strong>封装分配&#8230;&#8203;</strong>），也可以将选择的变化从 PCB 上同步到原理图。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+这种方法只能同步对封装分配和封装字段的修改。建议使用 "从 PCB 更新原理图" 工具来代替。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="geographical-re-annotation">4.10.3. 位置重新批注</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_锁定">4.11. 锁定</h3>
+<div class="paragraph">
+<p>大多数对象可以通过其属性对话框、右键上下文菜单或使用 "切换锁定" 快捷键（<kbd>L</kbd>）来锁定。 被锁定的对象不能被选择，除非选择过滤器中的 "被锁定的项目" 复选框被启用。 试图移动锁定的项目将导致一个警告对话框：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/zh/pcbnew_locked_items_dialog.png" alt="pcbnew locked items dialog">
+</div>
+</div>
+<div class="paragraph">
+<p>在这个对话框中选择 "覆盖锁定" 将允许移动锁定的项目。 选择 "确定" 将允许你在选择中移动任何未上锁的项目；留下锁定的项目。 选择 "不再显示" 将使你在剩下的会话中记住你的选择。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_批量编辑工具">4.12. 批量编辑工具</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_清理工具">4.13. 清理工具</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_正在导入图形">4.14. 正在导入图形</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_从_dxf_和_svg_文件导入矢量图">4.14.1. 从 DXF 和 SVG 文件导入矢量图</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_正在导入位图图像">4.14.2. 正在导入位图图像</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+TODO：写下这一节
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
