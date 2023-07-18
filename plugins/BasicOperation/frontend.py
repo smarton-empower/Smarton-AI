@@ -9,7 +9,6 @@ import atexit
 from .preinput import plugin_preinput, basicop_helpers
 from .GPTModels import GPTModel
 
-# Add your openai api key here
 openai.api_key = ""
 
 
@@ -63,26 +62,29 @@ class OneCommandLine(wx.Frame):
 
         # gpt属性
         self.language = ""
+        self.state = "choose_language"
+        self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+        self.chat_display.AppendText(f"Smarton AI: Please choose language / 请选择语言: \n")
+        self.chat_display.AppendText(f"Smarton AI: choose from (en/zh) / 从(en/zh)中选择: \n")
+
         self.plugin_names, self.plugin_args, self.plugin_description_msg = plugin_preinput.plugin_preinput()
 
-        self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
-        # self.chat_display.AppendText(f"Smarton AI: Board: {self.board}\n")
-
         self.plugin_display.AppendText("=" * 30 + "\n")
-        self.plugin_display.AppendText(f"<< Plugin function names >>\n")
+        self.plugin_display.AppendText(f"<< Plugin names/插件名 >>\n")
         self.plugin_display.AppendText("="*30+"\n")
         self.plugin_display.AppendText("-" * 30 + "\n")
 
+        # self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+        # self.chat_display.AppendText(f"Smarton AI: Board: {self.board}\n")
         self.plugin_ids = []
         for i in range(len(self.plugin_names)):
             plugin = self.plugin_names[i]
             args = self.plugin_args[i]
             self.plugin_ids.append(i)
-            self.chat_display.AppendText(f"Plugin {i+1}: {plugin}\n\t{args}\n")
+            # self.chat_display.AppendText(f"Plugin {i+1}: {plugin}\n\t{args}\n")
             self.plugin_display.AppendText(f"{plugin}\n")
             self.plugin_display.AppendText("-"*30+"\n")
-        self.chat_display.AppendText(
-            f"\nSmarton AI: We currently have the above plugins, please choose one plugin to use at a time\n")
+        # self.chat_display.AppendText(f"\nSmarton AI: We currently have the above plugins, please choose one plugin to use at a time\n")
 
         # 绑定事件
         self.send_button.Bind(wx.EVT_BUTTON, self.on_submit)
@@ -103,14 +105,47 @@ class OneCommandLine(wx.Frame):
         # 调整布局
         self.panel.Layout()
 
+    def choose_language(self, user_input):
+
+        language = user_input
+        if language == 'zh':
+            self.language = language
+            self.state = "use_plugin"
+            self.welcome()
+        elif language == 'en':
+            self.language = language
+            self.state = "use_plugin"
+            self.welcome()
+        else:
+            self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+            self.chat_display.AppendText(
+                f"Smarton AI: not a valid language, please choose from (en/zh) / 不是有效的语言, 请重新选择(en/zh): \n")
+
+        self.text_ctrl.SetValue("")  # 清空输入框
+        self.text_ctrl.SetMinSize((self.text_ctrl.GetMinSize()[0], -1))  # 恢复文本框的最小尺寸
+        self.Layout()  # 重新布局窗口
+
+    def welcome(self):
+        if self.language == 'zh':
+            self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+            self.chat_display.AppendText(f"请输入您想用的插件名称, 或者输入想要实现的效果，我们将为您推荐合适的插件\n")
+
+        elif self.language == 'en':
+            self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+            self.chat_display.AppendText(f"Please enter the name of the plugin you want to use, or enter the effect you want to achieve, we will recommend the appropriate plugin for you\n")
+
     def on_submit(self, event):
         try:
             user_input = self.text_ctrl.GetValue()
             self.chat_display.AppendText(f"==========  User  ==========\n")
             self.chat_display.AppendText(f"User: {user_input}\n")
 
-            self.text_ctrl.Clear()
-            self.userInputQueue.put(user_input)
+            if self.state == "choose_language":
+                self.choose_language(user_input)
+
+            elif self.state == "use_plugin":
+                self.text_ctrl.Clear()
+                self.userInputQueue.put(user_input)
 
             self.text_ctrl.SetValue("")  # 清空输入框
             self.text_ctrl.SetMinSize((self.text_ctrl.GetMinSize()[0], -1))  # 恢复文本框的最小尺寸
@@ -118,6 +153,37 @@ class OneCommandLine(wx.Frame):
 
         except Exception as e:
             self.chat_display.AppendText(f"An exception occurred: {e}\n")
+
+    def argument_msg(self, args, need_click, example_msg):
+        if need_click:
+            if self.language == 'zh':
+                wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> 请先用鼠标点击选择元件\n')
+                if args != '':
+                    wx.CallAfter(self.chat_display.AppendText, f'=> 请给出相关参数 {args} 并用逗号分开\n')
+                    wx.CallAfter(self.chat_display.AppendText, f'例如：{example_msg}\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> 在发送参数后，请重新点击PCB编辑器对应元件，元件将在再次点击后发生变化\n')
+            if self.language == 'en':
+                wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> Please click the footprints first\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {args} and separated by commas\n')
+                if args != '':
+                    wx.CallAfter(self.chat_display.AppendText, f'eg. {example_msg}\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> After sending the parameters, please click the corresponding footprint in the PCB editor again, the component will change after clicking again\n')
+        else:
+            if self.language == 'zh':
+                wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                if args != '':
+                    wx.CallAfter(self.chat_display.AppendText, f'=> 请给出相关参数 {args} 并用逗号分开\n')
+                    wx.CallAfter(self.chat_display.AppendText, f'例如：{example_msg}\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> 在发送参数后，请重新点击PCB编辑器对应元件，元件将在再次点击后发生变化\n')
+            if self.language == 'en':
+                wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                wx.CallAfter(self.chat_display.AppendText,
+                             f'=> Please provide some arguments {args} and separated by commas\n')
+                if args != '':
+                    wx.CallAfter(self.chat_display.AppendText, f'eg. {example_msg}\n')
+                wx.CallAfter(self.chat_display.AppendText, f'=> After sending the parameters, please click the corresponding footprint in the PCB editor again, the component will change after clicking again\n')
 
     def handle_user_input(self):
         need_recommend = True
@@ -137,17 +203,19 @@ class OneCommandLine(wx.Frame):
                     wx.CallAfter(self.button_Enable, response)
 
                     selected_plugin_names = response['Plugin']
-                    wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                    wx.CallAfter(self.chat_display.AppendText, f'Recommend Plugin: {selected_plugin_names}\n')
+                    if self.language == 'zh':
+                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                        wx.CallAfter(self.chat_display.AppendText, f'建议使用: {selected_plugin_names}\n')
+                    if self.language == 'en':
+                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                        wx.CallAfter(self.chat_display.AppendText, f'Recommend Plugin: {selected_plugin_names}\n')
                     pname = self.userInputQueue.get()
 
                 not_valid_plugin = True
                 while not_valid_plugin:
                     # plugin 1: rotate_fp_by_fp_name
                     if pname == self.plugin_names[0]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {self.plugin_args[0]} and separated by commas\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'eg. P1, 45\n')
+                        self.argument_msg(self.plugin_args[0], False, 'P1, 45')
                         params = self.userInputQueue.get().split(',')
                         footprint_name = params[0].strip()
                         rotate_angle = int(params[1].strip())
@@ -158,16 +226,12 @@ class OneCommandLine(wx.Frame):
                             rotate_angle,
                         )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[0]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 2: rotate_fp_by_mouse
                     elif pname == self.plugin_names[1]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please click the footprints first\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {self.plugin_args[1]} and separated by commas\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'eg. 45\n')
+                        self.argument_msg(self.plugin_args[1], True, '45')
                         params = self.userInputQueue.get().split(',')
                         rotate_angle = int(params[0].strip())
 
@@ -176,15 +240,12 @@ class OneCommandLine(wx.Frame):
                             rotate_angle,
                         )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[1]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 3: move_fp_by_fp_name
                     elif pname == self.plugin_names[2]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {self.plugin_args[2]} and separated by commas\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'eg. P1, 1000000, 1000000\n')
+                        self.argument_msg(self.plugin_args[2], False, 'P1, 1000000, 1000000')
                         params = self.userInputQueue.get().split(',')
                         footprint_name = params[0].strip()
                         X_offset = int(params[1].strip())
@@ -197,16 +258,12 @@ class OneCommandLine(wx.Frame):
                                      Y_offset,
                                      )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[2]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 4: move_fp_by_mouse
                     elif pname == self.plugin_names[3]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please click the footprints first\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {self.plugin_args[3]} and separated by commas\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'eg. 1000000, 1000000\n')
+                        self.argument_msg(self.plugin_args[3], True, '1000000, 1000000')
                         params = self.userInputQueue.get().split(',')
                         X_offset = int(params[0].strip())
                         Y_offset = int(params[1].strip())
@@ -217,15 +274,12 @@ class OneCommandLine(wx.Frame):
                                      Y_offset,
                                      )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[3]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 5: flip_fp_by_fp_name
                     elif pname == self.plugin_names[4]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please provide some arguments {self.plugin_args[4]} and separated by commas\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'eg. P1\n')
+                        self.argument_msg(self.plugin_args[4], False, 'P1')
                         params = self.userInputQueue.get().split(',')
                         footprint_name = params[0].strip()
 
@@ -234,27 +288,29 @@ class OneCommandLine(wx.Frame):
                                      footprint_name,
                                      )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[4]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 6: flip_fp_by_mouse
                     elif pname == self.plugin_names[5]:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'=> Please click the footprints first\n')
+                        self.argument_msg(self.plugin_args[5], True, '')
 
                         wx.CallAfter(basicop_helpers.flip_fp_by_mouse,
                                      self.board,
                                      )
 
-                        wx.CallAfter(self.chat_display.AppendText, f'=> {self.plugin_names[5]} Done\n')
                         not_valid_plugin = False
                         need_recommend = True
 
                     # invalid plugin name
                     else:
-                        wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
-                        wx.CallAfter(self.chat_display.AppendText, f'Not a valid plugin name, please give a valid name from {self.plugin_names}\n')
+                        if self.language == 'zh':
+                            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                            wx.CallAfter(self.chat_display.AppendText, f'不是一个有效的插件名，请从下面的插件中选择\n{self.plugin_names}\n')
+
+                        if self.language == 'en':
+                            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+                            wx.CallAfter(self.chat_display.AppendText, f'Not a valid plugin name, please give a valid name from the following\n{self.plugin_names}\n')
                         pname = self.userInputQueue.get()
 
             except Exception as e:
@@ -264,15 +320,26 @@ class OneCommandLine(wx.Frame):
 
     def button_Enable(self, response):
         text = self.chat_display.GetValue()
-        new_text = text.replace('Matching the appropriate Plugin, please wait for a minute ...', '')
+        new_text = ''
+        if self.language == 'zh':
+            new_text = text.replace('正在匹配相应的插件，请稍候 ...', '')
+        if self.language == 'en':
+            new_text = text.replace('Matching the appropriate Plugin, please wait for a minute ...', '')
         self.chat_display.SetValue(new_text)
 
-        self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
-        self.chat_display.AppendText(f"Based on your request, we recommend you these plugins\n")
+        if self.language == 'zh':
+            self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+            self.chat_display.AppendText(f"根据您的要求，我们向您推荐这些插件\n")
+        if self.language == 'en':
+            self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+            self.chat_display.AppendText(f"Based on your request, we recommend you these plugins\n")
         self.chat_display.AppendText(f"{response}\n")
         self.send_button.Enable()
 
     def button_Disable(self):
-        wx.CallAfter(self.chat_display.AppendText, f'Matching the appropriate Plugin, please wait for a minute ...')
+        if self.language == 'zh':
+            wx.CallAfter(self.chat_display.AppendText, f'正在匹配相应的插件，请稍候 ...')
+        if self.language == 'en':
+            wx.CallAfter(self.chat_display.AppendText, f'Matching the appropriate Plugin, please wait for a minute ...')
         self.send_button.Disable()
 
