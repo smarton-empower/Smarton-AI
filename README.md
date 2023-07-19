@@ -4,7 +4,7 @@
 
 ```
 git init
-git remote add origin https://github.com/BoyuHan666/Kicad-Plugins.git
+git remote add origin https://github.com/smarton-empower/Smarton-AI.git
 ```
 
 ### Develop on a feature branch
