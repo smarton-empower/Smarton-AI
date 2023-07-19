@@ -67,6 +67,9 @@ class ChatWindow(wx.Frame):
         self.path_active_eeschema = ""
         self.path_active_pcbnew = ""
 
+        self.current_file_path = os.path.dirname(os.path.realpath(__file__))
+        self.chat_display.AppendText(f"Default Script Path: {self.current_file_path} \n")
+
         self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
         self.chat_display.AppendText(f"Smarton AI: Please choose language / 请选择语言: \n")
         self.chat_display.AppendText(f"Smarton AI: choose from (en/zh) / 从(en/zh)中选择: \n")
@@ -255,16 +258,16 @@ class ChatWindow(wx.Frame):
 
         language = user_input
         if language == 'zh':
-            self.path_active_pcbnew = '/Users/alain/Documents/KiCad/7.0/3rdparty/plugins/chat/static/html/zh/pcbnew_zh/'
-            self.path_active_eeschema = '/Users/alain/Documents/KiCad/7.0/3rdparty/plugins/chat/static/html/zh/eeschema_zh/'
+            self.path_active_pcbnew = f'{self.current_file_path}/static/html/zh/pcbnew_zh/'
+            self.path_active_eeschema = f'{self.current_file_path}/static/html/zh/eeschema_zh/'
             self.language = language
             # change event
             # self.send_button.Bind(wx.EVT_BUTTON, self.main_sub_gpt)
             self.state = "ask_main_gpt"
             self.main_sub_msg()
         elif language == 'en':
-            self.path_active_pcbnew = '/Users/alain/Documents/KiCad/7.0/3rdparty/plugins/chat/static/html/en/pcbnew/'
-            self.path_active_eeschema = '/Users/alain/Documents/KiCad/7.0/3rdparty/plugins/chat/static/html/en/eeschema/'
+            self.path_active_pcbnew = f'{self.current_file_path}/static/html/en/pcbnew/'
+            self.path_active_eeschema = f'{self.current_file_path}/static/html/en/eeschema/'
             self.language = language
             # change event
             # self.send_button.Bind(wx.EVT_BUTTON, self.main_sub_gpt)
