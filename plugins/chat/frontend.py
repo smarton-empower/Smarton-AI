@@ -12,7 +12,6 @@ import atexit
 from .GPTModels import MainGPT, SubGPT, GPTModel, GPTModel_QA, Data_increment_GPTModel
 from .preinput import main_gpt_preinput, sub_gpt_preinput, data_increment_gpt_preinput
 
-# Add you openai api key here
 openai.api_key = ""
 
 
@@ -403,8 +402,7 @@ class ChatWindow(wx.Frame):
                                 wx.CallAfter(self.chat_display.AppendText, "请输入您想进一步了解的子任务的编号, 每个编号之间以逗号隔开(如:1,2,3): \n")
 
                             # 获取用户选择的子任务
-                            selected_subtasks = self.userInputQueue.get()
-                            chosen_index, chosen_subtasks = self.generate_checkbox(self.main_gpt.subgpts[task_id].subtasks_name, selected_subtasks)
+                            chosen_index, chosen_subtasks = self.generate_checkbox(self.main_gpt.subgpts[task_id].subtasks_name)
                             results = self.main_gpt.subgpts[task_id].id_to_html_result(chosen_index)
 
                             wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
@@ -424,8 +422,7 @@ class ChatWindow(wx.Frame):
                                 wx.CallAfter(self.chat_display.AppendText, "请输入您想进一步了解的子任务的编号, 每个编号之间以逗号隔开(如:1,2,3): \n")
 
                             # 获取用户选择的子任务
-                            selected_subtasks = self.userInputQueue.get()
-                            chosen_index, chosen_subtasks = self.generate_checkbox(self.main_gpt.subgpts[task_id].subtasks_name, selected_subtasks)
+                            chosen_index, chosen_subtasks = self.generate_checkbox(self.main_gpt.subgpts[task_id].subtasks_name)
                             results = self.main_gpt.subgpts[task_id].id_to_html_result(chosen_index)
 
                             wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
@@ -439,98 +436,103 @@ class ChatWindow(wx.Frame):
 
                         # 如果有一个主task, 询问用户是终止并返回结果还是重选主任务
                         if len(task_ids) == 1:
-
-                            if self.language == 'en':
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                wx.CallAfter(self.chat_display.AppendText, "Do you want to go back to rechoose tasks(r) or terminate(t)? Please input r/t:\n")
-                                switch = self.userInputQueue.get()
-                            if self.language == 'zh':
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                wx.CallAfter(self.chat_display.AppendText, "您要返回重新选择任务(r)还是终止(t)? 请输入 r/t:\n")
-                                switch = self.userInputQueue.get()
-
-                            if switch == 'r':
-                                not_terminate = True
+                            while True:
                                 if self.language == 'en':
                                     wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"Please provide a reason for not choosing this task: {chosen_task}:\n")
+                                    wx.CallAfter(self.chat_display.AppendText, "Do you want to go back to rechoose tasks(r) or terminate(t)? Please input r/t:\n")
+                                    switch = self.userInputQueue.get()
                                 if self.language == 'zh':
                                     wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
-                                rechoose_reason = self.userInputQueue.get()
-                                self.main_gpt.gpt_model.messages.append({"role": "system", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
-                                break
+                                    wx.CallAfter(self.chat_display.AppendText, "您要返回重新选择任务(r)还是终止(t)? 请输入 r/t:\n")
+                                    switch = self.userInputQueue.get()
 
-                            if switch == 't':
-                                not_terminate = False
-                                # wx.CallAfter(self.chat_display.AppendText, f"==========  result_dic  ==========\n")
-                                # wx.CallAfter(self.chat_display.AppendText, f"{result_dic}\n")
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                if self.language == 'en':
-                                    wx.CallAfter(self.chat_display.AppendText, f"Thanks for using our service.\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"You can click the <View Result> Button now for detail\n")
-                                if self.language == 'zh':
-                                    wx.CallAfter(self.chat_display.AppendText, f"感谢您使用我们的服务\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
+                                if switch == 'r':
+                                    not_terminate = True
+                                    if self.language == 'en':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"Please provide a reason for not choosing this task: {chosen_task}:\n")
+                                    if self.language == 'zh':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
+                                    rechoose_reason = self.userInputQueue.get()
+                                    self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
+                                    break
 
-                                self.result_dic = result_dic
-                                break
+                                elif switch == 't':
+                                    not_terminate = False
+                                    # wx.CallAfter(self.chat_display.AppendText, f"==========  result_dic  ==========\n")
+                                    # wx.CallAfter(self.chat_display.AppendText, f"{result_dic}\n")
+                                    wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                    if self.language == 'en':
+                                        wx.CallAfter(self.chat_display.AppendText, f"Thanks for using our service.\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"You can click the <View Result> Button now for detail\n")
+                                    if self.language == 'zh':
+                                        wx.CallAfter(self.chat_display.AppendText, f"感谢您使用我们的服务\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
+
+                                    self.result_dic = result_dic
+                                    break
+
+                            break
+
 
                         # 如果有多个主task, 询问用户是终止并返回结果，还是重选主任务，还是继续处理下一个主task
                         else:
-
-                            if self.language == 'en':
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                wx.CallAfter(self.chat_display.AppendText, f"Do you want to go back to rechoose tasks(r), go forwarding(g) or terminate(t)? Please input r/g/t:\n")
-                                switch = self.userInputQueue.get()
-                            if self.language == 'zh':
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                wx.CallAfter(self.chat_display.AppendText, f"您要返回重新选择任务(r)、继续选择(g)还是终止(t)? 请输入 r/g/t:\n")
-                                switch = self.userInputQueue.get()
-
-                            if switch == 'r':
-                                not_terminate = True
+                            while True:
                                 if self.language == 'en':
                                     wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"Please provide a reason for not choosing this task: {chosen_task}:\n")
+                                    wx.CallAfter(self.chat_display.AppendText, f"Do you want to go back to rechoose tasks(r), go forwarding(g) or terminate(t)? Please input r/g/t:\n")
+                                    switch = self.userInputQueue.get()
                                 if self.language == 'zh':
                                     wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
-                                rechoose_reason = self.userInputQueue.get()
-                                self.main_gpt.gpt_model.messages.append({"role": "system", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
-                                break
+                                    wx.CallAfter(self.chat_display.AppendText, f"您要返回重新选择任务(r)、继续选择(g)还是终止(t)? 请输入 r/g/t:\n")
+                                    switch = self.userInputQueue.get()
 
-                            if switch == 'g':
-                                if self.language == 'en':
+                                if switch == 'r':
+                                    not_terminate = True
+                                    if self.language == 'en':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"Please provide a reason for not choosing this task: {chosen_task}:\n")
+                                    if self.language == 'zh':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
+                                    rechoose_reason = self.userInputQueue.get()
+                                    self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
+                                    break
+
+                                elif switch == 'g':
+                                    if self.language == 'en':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"go forward to the next main task\n")
+                                    if self.language == 'zh':
+                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"继续进行下一个主任务\n")
+
+                                elif switch == 't':
+                                    not_terminate = False
+                                    # wx.CallAfter(self.chat_display.AppendText, f"==========  result_dic  ==========\n")
+                                    # wx.CallAfter(self.chat_display.AppendText, f"{result_dic}\n")
                                     wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"go forward to the next main task\n")
-                                if self.language == 'zh':
-                                    wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"继续进行下一个主任务\n")
+                                    if self.language == 'en':
+                                        wx.CallAfter(self.chat_display.AppendText, f"Thanks for using our service.\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"You can click the <View Result> Button now for detail\n")
+                                    if self.language == 'zh':
+                                        wx.CallAfter(self.chat_display.AppendText, f"感谢您使用我们的服务\n")
+                                        wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
 
-                            if switch == 't':
-                                not_terminate = False
-                                # wx.CallAfter(self.chat_display.AppendText, f"==========  result_dic  ==========\n")
-                                # wx.CallAfter(self.chat_display.AppendText, f"{result_dic}\n")
-                                wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                if self.language == 'en':
-                                    wx.CallAfter(self.chat_display.AppendText, f"Thanks for using our service.\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"You can click the <View Result> Button now for detail\n")
-                                if self.language == 'zh':
-                                    wx.CallAfter(self.chat_display.AppendText, f"感谢您使用我们的服务\n")
-                                    wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
+                                    self.result_dic = result_dic
+                                    break
 
-                                self.result_dic = result_dic
-                                break
+                            break
 
                     else:
-                        self.chat_display.AppendText(f"==========  Smarton AI  ==========\n")
+                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
                         if self.language == 'en':
-                            self.chat_display.AppendText(f"Sorry, can you provide some reason:\n")
+                            wx.CallAfter(self.chat_display.AppendText, f"Sorry, can you provide some reason:\n")
                         if self.language == 'zh':
-                            self.chat_display.AppendText(f"抱歉，能提供一些原因吗:\n")
+                            wx.CallAfter(self.chat_display.AppendText, f"抱歉，能提供一些原因吗:\n")
                         user_reason_for_task = self.userInputQueue.get()
-                        self.main_gpt.gpt_model.messages.append({"role": "system", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {user_reason_for_task}"})
+                        self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {user_reason_for_task}"})
 
                         switch = 'r'
 
@@ -655,10 +657,26 @@ class ChatWindow(wx.Frame):
         except Exception as e:
             self.chat_display.AppendText(f"An exception occurred: {e}\n")
 
-    def generate_checkbox(self, subtask_names, user_input):
-        user_input = user_input.replace("，", ",")
-        selected_index = [int(index) for index in user_input.split(',')]
-        selected_subtask_names = [subtask_names[i - 1] for i in selected_index]
+    def generate_checkbox(self, subtask_names):
+        while True:
+            try:
+                selected_subtasks = self.userInputQueue.get()
+                user_input = selected_subtasks.replace("，", ",")
+                selected_index = []
+                for index in user_input.split(','):
+                    if int(index) <= 0:
+                        a = 1 / 0
+                    else:
+                        selected_index.append(int(index))
+                selected_subtask_names = [subtask_names[i - 1] for i in selected_index]
+                break
+            except:
+                if self.language == 'en':
+                    wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                    wx.CallAfter(self.chat_display.AppendText, "Not valid input, Please enter the number of the subtask separated by commas (e.g. 1,2,3): \n")
+                if self.language == 'zh':
+                    wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
+                    wx.CallAfter(self.chat_display.AppendText, "无效输入，请输入子任务的编号, 每个编号之间以逗号隔开(如:1,2,3): \n")
         return selected_index, selected_subtask_names
 
     def button_Enable(self, response, reason=None):
