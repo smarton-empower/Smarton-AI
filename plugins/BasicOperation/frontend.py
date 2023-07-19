@@ -5,6 +5,7 @@ import json
 import threading
 import queue
 import atexit
+import pcbnew
 
 from .preinput import plugin_preinput, basicop_helpers
 from .GPTModels import GPTModel
@@ -185,6 +186,22 @@ class OneCommandLine(wx.Frame):
                     wx.CallAfter(self.chat_display.AppendText, f'eg. {example_msg}\n')
                 wx.CallAfter(self.chat_display.AppendText, f'=> After sending the parameters, please click the corresponding footprint in the PCB editor again, the component will change after clicking again\n')
 
+    def not_valid_argument_msg(self):
+        if self.language == 'zh':
+            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+            wx.CallAfter(self.chat_display.AppendText, f'参数输入有误，请重试\n')
+        if self.language == 'en':
+            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+            wx.CallAfter(self.chat_display.AppendText, f'not valid arguments, please try again\n')
+
+    def done_msg(self):
+        if self.language == 'zh':
+            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+            wx.CallAfter(self.chat_display.AppendText, f'完成，您可以继续选择插件\n')
+        if self.language == 'en':
+            wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
+            wx.CallAfter(self.chat_display.AppendText, f'Done, you can continue to choose a plugin\n')
+
     def handle_user_input(self):
         need_recommend = True
         while True:
@@ -215,90 +232,126 @@ class OneCommandLine(wx.Frame):
                 while not_valid_plugin:
                     # plugin 1: rotate_fp_by_fp_name
                     if pname == self.plugin_names[0]:
-                        self.argument_msg(self.plugin_args[0], False, 'P1, 45')
-                        params = self.userInputQueue.get().split(',')
-                        footprint_name = params[0].strip()
-                        rotate_angle = int(params[1].strip())
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[0], False, 'P1, 45')
+                                params = self.userInputQueue.get().split(',')
+                                footprint_name = params[0].strip()
+                                rotate_angle = int(params[1].strip())
 
-                        wx.CallAfter(basicop_helpers.rotate_fp_by_fp_name,
-                            self.board,
-                            footprint_name,
-                            rotate_angle,
-                        )
+                                wx.CallAfter(basicop_helpers.rotate_fp_by_fp_name,
+                                    self.board,
+                                    footprint_name,
+                                    rotate_angle,
+                                )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 2: rotate_fp_by_mouse
                     elif pname == self.plugin_names[1]:
-                        self.argument_msg(self.plugin_args[1], True, '45')
-                        params = self.userInputQueue.get().split(',')
-                        rotate_angle = int(params[0].strip())
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[1], True, '45')
+                                params = self.userInputQueue.get().split(',')
+                                rotate_angle = int(params[0].strip())
 
-                        wx.CallAfter(basicop_helpers.rotate_fp_by_mouse,
-                            self.board,
-                            rotate_angle,
-                        )
+                                wx.CallAfter(basicop_helpers.rotate_fp_by_mouse,
+                                             self.board,
+                                             rotate_angle,
+                                             )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 3: move_fp_by_fp_name
                     elif pname == self.plugin_names[2]:
-                        self.argument_msg(self.plugin_args[2], False, 'P1, 1000000, 1000000')
-                        params = self.userInputQueue.get().split(',')
-                        footprint_name = params[0].strip()
-                        X_offset = int(params[1].strip())
-                        Y_offset = int(params[2].strip())
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[2], False, 'P1, 1000000, 1000000')
+                                params = self.userInputQueue.get().split(',')
+                                footprint_name = params[0].strip()
+                                X_offset = int(params[1].strip())
+                                Y_offset = int(params[2].strip())
 
-                        wx.CallAfter(basicop_helpers.move_fp_by_fp_name,
-                                     self.board,
-                                     footprint_name,
-                                     X_offset,
-                                     Y_offset,
-                                     )
+                                wx.CallAfter(basicop_helpers.move_fp_by_fp_name,
+                                             self.board,
+                                             footprint_name,
+                                             X_offset,
+                                             Y_offset,
+                                             )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 4: move_fp_by_mouse
                     elif pname == self.plugin_names[3]:
-                        self.argument_msg(self.plugin_args[3], True, '1000000, 1000000')
-                        params = self.userInputQueue.get().split(',')
-                        X_offset = int(params[0].strip())
-                        Y_offset = int(params[1].strip())
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[3], True, '1000000, 1000000')
+                                params = self.userInputQueue.get().split(',')
+                                X_offset = int(params[0].strip())
+                                Y_offset = int(params[1].strip())
 
-                        wx.CallAfter(basicop_helpers.move_fp_by_mouse,
-                                     self.board,
-                                     X_offset,
-                                     Y_offset,
-                                     )
+                                wx.CallAfter(basicop_helpers.move_fp_by_mouse,
+                                             self.board,
+                                             X_offset,
+                                             Y_offset,
+                                             )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 5: flip_fp_by_fp_name
                     elif pname == self.plugin_names[4]:
-                        self.argument_msg(self.plugin_args[4], False, 'P1')
-                        params = self.userInputQueue.get().split(',')
-                        footprint_name = params[0].strip()
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[4], False, 'P1')
+                                params = self.userInputQueue.get().split(',')
+                                footprint_name = params[0].strip()
 
-                        wx.CallAfter(basicop_helpers.flip_fp_by_fp_name,
-                                     self.board,
-                                     footprint_name,
-                                     )
+                                wx.CallAfter(basicop_helpers.flip_fp_by_fp_name,
+                                             self.board,
+                                             footprint_name,
+                                             )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
                     # plugin 6: flip_fp_by_mouse
                     elif pname == self.plugin_names[5]:
-                        self.argument_msg(self.plugin_args[5], True, '')
+                        while True:
+                            try:
+                                self.argument_msg(self.plugin_args[5], True, '')
 
-                        wx.CallAfter(basicop_helpers.flip_fp_by_mouse,
-                                     self.board,
-                                     )
+                                wx.CallAfter(basicop_helpers.flip_fp_by_mouse,
+                                             self.board,
+                                             )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
 
+                        self.done_msg()
                         not_valid_plugin = False
                         need_recommend = True
 
