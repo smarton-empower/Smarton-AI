@@ -19,7 +19,7 @@ import json
 import openai
 from bs4 import BeautifulSoup
 
-openai.api_key = "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"
+openai.api_key = ""
 
 
 class MainGPT:

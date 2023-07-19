@@ -27,7 +27,7 @@ import pcbnew
 from .preinput import plugin_preinput, basicop_helpers
 from .GPTModels import GPTModel
 
-openai.api_key = "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"
+openai.api_key = ""
 
 
 class OneCommandLine(wx.Frame):

@@ -29,7 +29,7 @@ import atexit
 from .GPTModels import MainGPT, SubGPT, GPTModel, GPTModel_QA, Data_increment_GPTModel
 from .preinput import main_gpt_preinput, sub_gpt_preinput, data_increment_gpt_preinput
 
-openai.api_key = "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"
+openai.api_key = ""
 
 
 class WebViewWindow(wx.Frame):
