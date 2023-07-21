@@ -1,6 +1,6 @@
 # New Interaction Paradigm for Complex EDA Software Leveraging GPT
 
-# Abstract
+## Abstract
 
 In the rapidly evolving field of electronic design automation (EDA), intricate software like KiCad provide extensive design functionalities. However, the intricate command structure and high learning curve create a barrier to entry, particularly for novice printed circuit board (PCB) designers. This results in difficulty in selecting appropriate functions or plugins for varying design purposes, compounded by the lack of intuitive learning methods beyond traditional documentation, videos, and online forums.
 
@@ -10,8 +10,6 @@ Our preliminary results demonstrate that SmartonAI can significantly streamline 
 
 In conclusion, SmartonAI not only has the potential to democratize access to EDA software for novices, but also promises to enhance productivity for experienced designers. Its application could extend to other complex software systems, illustrating the immense potential of AI-assisted user interfaces in advancing digital interactions across various domains.
 
-# Introduction
-
 ## 1. Introduction and Overview of SmartonAI
 ### 1.1. Brief description of SmartonAI
 
@@ -19,7 +17,7 @@ In conclusion, SmartonAI not only has the potential to democratize access to EDA
 
 ### 1.3. Overview of the two main components of SmartonAI: Chat Plugin and OneCommandLine Plugin
 
-### 1.4 Support language
+### 1.4 Support languages
 
 ## 2. The Chat Plugin in SmartonAI
 ### 2.1. Detailed explanation of the Chat Plugin
