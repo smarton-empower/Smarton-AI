@@ -11,3 +11,38 @@ Our preliminary results demonstrate that SmartonAI can significantly streamline 
 In conclusion, SmartonAI not only has the potential to democratize access to EDA software for novices, but also promises to enhance productivity for experienced designers. Its application could extend to other complex software systems, illustrating the immense potential of AI-assisted user interfaces in advancing digital interactions across various domains.
 
 ### Introduction
+
+## 1. Introduction and Overview of SmartonAI
+# 1.1. Brief description of SmartonAI
+
+# 1.2. Explanation of the need for such an AI-assisted interface
+
+# 1.3. Overview of the two main components of SmartonAI: Chat Plugin and OneCommandLine Plugin
+
+## 2. The Chat Plugin in SmartonAI
+# 2.1. Detailed explanation of the Chat Plugin
+
+# 2.2. Description of how it divides common queries and requirements into 20 main tasks and hundreds of subtasks based on KiCad's official documentation
+
+# 2.3. Explanation of how it provides user-specific introductory paragraphs and chat support services based on these tasks and subtasks
+
+# 2.4. Description of how it can add additional information based on user feedback
+
+## 3. The OneCommandLine Plugin in SmartonAI
+# 3.1. Detailed explanation of the OneCommandLine Plugin
+
+# 3.2. Description of how it recommends plugins based on user needs
+
+# 3.3. Explanation of how it accepts user input to intelligently call plugins
+
+## 4. The Interaction Between the Chat Plugin and OneCommandLine Plugin
+# 4.1. Discussion of how the two plugins work together
+
+# 4.2. Illustration of how they enhance user interaction with KiCad
+
+## 5. Potential Impact and Future Applications
+# 5.1. Discussion of the potential of SmartonAI to democratize access to EDA software
+
+# 5.2. Description of how SmartonAI can potentially enhance productivity for experienced designers
+
+# 5.3. Discussion of the possible extension of this approach to other complex software systems
