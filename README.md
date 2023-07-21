@@ -19,6 +19,8 @@ In conclusion, SmartonAI not only has the potential to democratize access to EDA
 
 ### 1.3. Overview of the two main components of SmartonAI: Chat Plugin and OneCommandLine Plugin
 
+### 1.4 Support language
+
 ## 2. The Chat Plugin in SmartonAI
 ### 2.1. Detailed explanation of the Chat Plugin
 
