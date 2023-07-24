@@ -12,19 +12,19 @@ In conclusion, SmartonAI not only has the potential to democratize access to EDA
 
 ## 1. Introduction and Overview of SmartonAI
 ### 1.1. Brief description of SmartonAI
-
 SmartonAI, a groundbreaking development by Wisdom Empowerment Technology, revolutionizes electronic circuit design automation. Merging the power of AI with a collaborative multi-model, multi-software simulation environment, it paves the way for an innovative design process for power electronics, particularly important in our energy-conscious era. Composed of a distinguished team from globally renowned institutions, SmartonAI's development is fueled by years of combined experience in power electronics and AI, creating a robust foundation for this transformative initiative.
-### 1.2. Explanation of the need for such an AI-assisted interface
 
+### 1.2. Explanation of the need for such an AI-assisted interface
 In the domain of Printed Circuit Board (PCB) design, traditional learning resources often fall short of providing intuitive and accessible learning pathways, especially for software like KiCad, known for its rich features but steep learning curve. This hurdle can delay efficient onboarding and hinder the swift execution of design tasks, even for those with a foundational understanding of PCB design.
 An AI-assisted interface like SmartonAI offers a solution by transforming the way users interact with EDA software. By interpreting natural language commands and conducting task breakdowns, it allows for a high level of personalization and context-aware guidance. This AI-augmentation effectively bridges the knowledge gap, making the vast array of functions and plugins within KiCad more accessible to users.
 Such an interface not only democratizes access to advanced EDA software but also optimizes the learning process, fostering a more productive and user-friendly environment. It is these market needs and challenges that have inspired and shaped the development of SmartonAI.
-### 1.3. Overview of the two main components of SmartonAI: Chat Plugin and OneCommandLine Plugin
 
+### 1.3. Overview of the two main components of SmartonAI: Chat Plugin and OneCommandLine Plugin
 SmartonAI consists of two main components, each contributing significantly to the overall user experience and effectiveness of the system:
-1.3.1 Chat Plugin
+
+#### 1.3.1 Chat Plugin
 The Chat Plugin serves as an interactive AI tutor, guiding users through the functionalities related to PCB design (pcbnew) and schematics (eeschema) in KiCad. It is designed to understand user queries, analyze, and break down tasks, and offer solutions in a conversational manner akin to ChatGPT. This feature greatly simplifies the learning curve, providing contextually aware and personalized assistance.
-1.3.2 OneCommandLine Plugin
+#### 1.3.2 OneCommandLine Plugin
 The OneCommandLine Plugin, on the other hand, primarily focuses on plugin selection and intelligent execution based on user needs. By understanding user commands, it facilitates rapid plugin selection and activation, thus speeding up the design process and improving productivity.
 Together, these two components empower users with a seamless, intelligent, and highly interactive design environment within KiCad, enhancing both the learning and practical aspects of electronic design automation.
 
@@ -35,11 +35,11 @@ Currently, SmartonAI supports both English and Chinese for user interaction. Add
 ## 2. The Chat Plugin in SmartonAI
 The Chat Plugin of SmartonAI functions through two major components: The Main-Sub GPT and the Question-Answer (QA) GPT.
 ### 2.1. Detailed explanation of the Chat Plugin
-2.1.1 Main-Sub GPT
+#### 2.1.1 Main-Sub GPT
 In this system, the user initiates the process by entering their query or requirement into the plugin's dialog box. These user inputs are then analyzed by the primary GPT, which identifies the 1-3 most relevant tasks from a pre-classified set of 20. Each of these primary tasks corresponds to a dedicated sub-GPT. The sub-GPTs further interact with the user to determine the most suitable sub-task from their respective domains.
 The selected subtasks serve as the foundation to create personalized learning documents that cater to the user's specific needs. Once these documents are generated, they are sent to the QA GPT for further processing.
 If the user finds the recommended primary or sub-task unsatisfactory, they are allowed to provide reasons for their dissatisfaction. This feedback mechanism enables users to revisit their choices, ensuring that the system accurately meets their requirements.
-2.1.2 Question-Answer GPT
+#### 2.1.2 Question-Answer GPT
 The QA GPT initiates the interaction by providing responses to the user's initial questions or concerns. Users can continue to chat and ask questions, and the QA GPT responds based on the built-in document information and knowledge from the GPT model.
 A distinctive feature of the QA GPT is its data augmentation functionality, which comes into play when a user's interaction hits a knowledge bottleneck or when the user wishes to inquire about a different overarching topic. It is capable of reading and learning relevant information from chat logs and integrating this new knowledge into its responses.
 ### 2.2. Description of how it divides common queries and requirements into 20 main tasks and hundreds of subtasks based on KiCad's official documentation
