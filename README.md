@@ -102,7 +102,7 @@ The AI-assisted approach developed by SmartonAI can potentially be extended to o
 
 Such a system could revolutionize the way users interact with complex software, reducing the learning curve, and enabling more efficient and effective use of these tools. The long-term impact could be a significant enhancement in the productivity and creativity of software users across many fields.
 
-## 6.Conclusion
+## 6. Conclusion
 The implementation of AI-driven solutions in PCB design software, like KiCad, marks a significant leap in the Electronic Design Automation (EDA) industry. In this context, SmartonAI's intelligent platforms, namely the ChatPlugin and OneCommandLine, have showcased immense potential to revolutionize the way designers interact with such software.
 
 The ChatPlugin, with its ability to break down complex queries into manageable tasks and provide tailored learning resources, simplifies the learning curve for users. On the other hand, OneCommandLine optimizes the design process by providing intelligent plugin recommendations based on users' specific needs.
@@ -111,3 +111,4 @@ When these two plugins work in tandem, they not only enhance the user experience
 
 In conclusion, SmartonAI sets a new benchmark in the EDA industry. By harnessing the power of AI and placing users' needs at the forefront, it paves the way for a more inclusive, productive, and interactive design landscape.
 
+## 7. Reference
