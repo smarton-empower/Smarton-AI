@@ -3,7 +3,7 @@
 
 ## Abstract
 In the rapidly evolving field of electronic design automation (EDA), intricate software like KiCad [[1]](#1) provide extensive design functionalities. However, the intricate command structure and high learning curve create a barrier to entry, particularly for novice printed circuit board (PCB) designers. This results in difficulty in selecting appropriate functions or plugins for varying design purposes, compounded by the lack of intuitive learning methods beyond traditional documentation, videos, and online forums.
-To address this challenge, we introduce SmartonAI, an artificial intelligence (AI) interaction helper plugin for KiCad. SmartonAI is inspired by the HuggingGPT framework [2] and employs large language models, such as GPT [3-5] and BERT [6], to facilitate task planning and execution. On receiving a designer request, SmartonAI conducts a task breakdown and efficiently executes relevant subtasks, such as analysis of help documentation paragraphs and execution of different plugins, along with leveraging the built-in schematic and PCB manipulation functions in KiCad.
+To address this challenge, we introduce SmartonAI, an artificial intelligence (AI) interaction helper plugin for KiCad. SmartonAI is inspired by the HuggingGPT framework [[2]](#2) and employs large language models, such as GPT [[3-5]](#3) and BERT [[6]](#4), to facilitate task planning and execution. On receiving a designer request, SmartonAI conducts a task breakdown and efficiently executes relevant subtasks, such as analysis of help documentation paragraphs and execution of different plugins, along with leveraging the built-in schematic and PCB manipulation functions in KiCad.
 Our preliminary results demonstrate that SmartonAI can significantly streamline the PCB design process by simplifying complex commands into intuitive language-based interactions. By harnessing the powerful language capabilities of ChatGPT and the rich design functions of KiCad, the plugin effectively bridges the gap between complex EDA software and user-friendly interaction.
 In conclusion, SmartonAI not only has the potential to democratize access to EDA software for novices, but also promises to enhance productivity for experienced designers. Its application could extend to other complex software systems, illustrating the immense potential of AI-assisted user interfaces in advancing digital interactions across various domains.
 ## 1. Introduction and Overview of SmartonAI
@@ -19,7 +19,7 @@ Such an interface not only democratizes access to advanced EDA software but also
 
 SmartonAI consists of two main components, each contributing significantly to the overall user experience and effectiveness of the system:
 1.3.1 Chat Plugin
-The Chat Plugin serves as an interactive AI tutor, guiding users through the functionalities related to PCB design (pcbnew) [7] and schematics (eeschema) [8] in KiCad. It is designed to understand user queries, analyze, and break down tasks, and offer solutions in a conversational manner akin to ChatGPT. This feature greatly simplifies the learning curve, providing contextually aware and personalized assistance.
+The Chat Plugin serves as an interactive AI tutor, guiding users through the functionalities related to PCB design (pcbnew)[[7]](#5) and schematics (eeschema) [[8]](#6) in KiCad. It is designed to understand user queries, analyze, and break down tasks, and offer solutions in a conversational manner akin to ChatGPT. This feature greatly simplifies the learning curve, providing contextually aware and personalized assistance.
 1.3.2 OneCommandLine Plugin
 The OneCommandLine Plugin, on the other hand, primarily focuses on plugin selection and intelligent execution based on user needs. By understanding user commands, it facilitates rapid plugin selection and activation, thus speeding up the design process and improving productivity.
 Together, these two components empower users with a seamless, intelligent, and highly interactive design environment within KiCad, enhancing both the learning and practical aspects of electronic design automation.
@@ -114,17 +114,17 @@ In conclusion, SmartonAI sets a new benchmark in the EDA industry. By harnessing
 ## Reference
 <a id="1">[1]</a>: "KiCad EDA." KiCad, https://www.kicad.org/. Accessed 25 July 2023.
 
-[2]: Shen, Yongliang, et al. "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face." arXiv preprint, 2023, https://doi.org/10.48550/arXiv.2303.17580.
+<a id="2">[2]</a>: Shen, Yongliang, et al. "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face." arXiv preprint, 2023, https://doi.org/10.48550/arXiv.2303.17580.
 
-[3]: Radford, Alec, et al. "Improving Language Understanding by Generative Pre-training." OpenAI, 2018
+<a id="3">[3]</a>: Radford, Alec, et al. "Improving Language Understanding by Generative Pre-training." OpenAI, 2018
 
 [4]: Radford, Alec, et al. "Language Models are Unsupervised Multitask Learners." OpenAI, 2019
 
 [5]: Brown, Tom B., et al. "Language Models are Few-shot Learners." arXiv preprint, 2020, https://arxiv.org/abs/2005.14165.
 
-[6]: Devlin, Jacob, et al. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv preprint, 2018, https://arxiv.org/abs/1810.04805.
+<a id="4">[6]</a>: Devlin, Jacob, et al. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv preprint, 2018, https://arxiv.org/abs/1810.04805.
 
-[7]: "EEschema: Schematic Capture." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/eeschema/eeschema.pdf. Accessed 25 July 2023.
+<a id="5">[7]</a>: "EEschema: Schematic Capture." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/eeschema/eeschema.pdf. Accessed 25 July 2023.
 
-[8]: "Pcbnew: PCB Layout Editor." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/pcbnew/pcbnew.pdf. Accessed 25 July 2023.
+<a id="6">[8]</a>: "Pcbnew: PCB Layout Editor." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/pcbnew/pcbnew.pdf. Accessed 25 July 2023.
 
