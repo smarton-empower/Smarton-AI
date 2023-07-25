@@ -112,12 +112,12 @@ When these two plugins work in tandem, they not only enhance the user experience
 In conclusion, SmartonAI sets a new benchmark in the EDA industry. By harnessing the power of AI and placing users' needs at the forefront, it paves the way for a more inclusive, productive, and interactive design landscape.
 
 ## Reference
-[1] "KiCad EDA." KiCad, https://www.kicad.org/. Accessed 25 July 2023.
-[2] Shen, Yongliang, et al. "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face." arXiv preprint, 2023, https://doi.org/10.48550/arXiv.2303.17580.
-[3] Radford, Alec, et al. "Improving Language Understanding by Generative Pre-training." OpenAI, 2018
-[4] Radford, Alec, et al. "Language Models are Unsupervised Multitask Learners." OpenAI, 2019
-[5] Brown, Tom B., et al. "Language Models are Few-shot Learners." arXiv preprint, 2020, https://arxiv.org/abs/2005.14165.
-[6] Devlin, Jacob, et al. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv preprint, 2018, https://arxiv.org/abs/1810.04805.
-[7] "EEschema: Schematic Capture." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/eeschema/eeschema.pdf. Accessed 25 July 2023.
-[8] "Pcbnew: PCB Layout Editor." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/pcbnew/pcbnew.pdf. Accessed 25 July 2023.
+[1]: "KiCad EDA." KiCad, https://www.kicad.org/. Accessed 25 July 2023.
+[2]: Shen, Yongliang, et al. "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face." arXiv preprint, 2023, https://doi.org/10.48550/arXiv.2303.17580.
+[3]: Radford, Alec, et al. "Improving Language Understanding by Generative Pre-training." OpenAI, 2018
+[4]: Radford, Alec, et al. "Language Models are Unsupervised Multitask Learners." OpenAI, 2019
+[5]: Brown, Tom B., et al. "Language Models are Few-shot Learners." arXiv preprint, 2020, https://arxiv.org/abs/2005.14165.
+[6]: Devlin, Jacob, et al. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv preprint, 2018, https://arxiv.org/abs/1810.04805.
+[7]: "EEschema: Schematic Capture." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/eeschema/eeschema.pdf. Accessed 25 July 2023.
+[8]: "Pcbnew: PCB Layout Editor." KiCad Documentation, 2023, https://docs.kicad.org/7.0/en/pcbnew/pcbnew.pdf. Accessed 25 July 2023.
 
