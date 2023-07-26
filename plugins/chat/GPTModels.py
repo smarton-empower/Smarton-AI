@@ -19,8 +19,6 @@ import json
 import openai
 from bs4 import BeautifulSoup
 
-openai.api_key = ""
-
 
 class MainGPT:
     def __init__(self, gpt_model, subgpts, language):

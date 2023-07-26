@@ -377,10 +377,12 @@ class ChatWindow(wx.Frame):
                 # 激活send按钮，并清除对话框中的等待回复
                 wx.CallAfter(self.button_Enable, maingpt_response)
                 task_ids, chosen_tasks, chosen_reason = maingpt_response['id'], maingpt_response['Task'], maingpt_response['Reason']
-                for i in range(len(task_ids)):
-                    task_id = task_ids[i]
+                tid = 0
+                while tid < len(task_ids):
+                    task_id = task_ids[tid]
                     task_id = int(task_id) - 1
-                    chosen_task = chosen_tasks[i]
+                    chosen_task = chosen_tasks[tid]
+                    tid += 1
                     if self.language == 'en':
                         wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
                         wx.CallAfter(self.chat_display.AppendText, f"Smarton AI suggests doing task: {chosen_task}. \nReason: {chosen_reason} \nDo you agree? (yes/no)\n")
@@ -476,6 +478,7 @@ class ChatWindow(wx.Frame):
                                         wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
                                     rechoose_reason = self.userInputQueue.get()
                                     self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
+                                    tid = 10000000
                                     break
 
                                 elif switch == 't':
@@ -491,6 +494,7 @@ class ChatWindow(wx.Frame):
                                         wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
 
                                     self.result_dic = result_dic
+                                    tid = 10000000
                                     break
 
                             break
@@ -518,15 +522,11 @@ class ChatWindow(wx.Frame):
                                         wx.CallAfter(self.chat_display.AppendText, f"请提供不选择此任务的原因:{chosen_task}:\n")
                                     rechoose_reason = self.userInputQueue.get()
                                     self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {rechoose_reason}"})
+                                    tid = 10000000
                                     break
 
                                 elif switch == 'g':
-                                    if self.language == 'en':
-                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                        wx.CallAfter(self.chat_display.AppendText, f"go forward to the next main task\n")
-                                    if self.language == 'zh':
-                                        wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
-                                        wx.CallAfter(self.chat_display.AppendText, f"继续进行下一个主任务\n")
+                                    break
 
                                 elif switch == 't':
                                     not_terminate = False
@@ -541,9 +541,9 @@ class ChatWindow(wx.Frame):
                                         wx.CallAfter(self.chat_display.AppendText, f"你可以点击<View Result>按钮来查看详情\n")
 
                                     self.result_dic = result_dic
+                                    tid = 10000000
                                     break
 
-                            break
 
                     else:
                         wx.CallAfter(self.chat_display.AppendText, f"==========  Smarton AI  ==========\n")
@@ -555,6 +555,8 @@ class ChatWindow(wx.Frame):
                         self.main_gpt.gpt_model.messages.append({"role": "user", "content": f"user ask {main_task_description}, user do not agree with choosing this task {chosen_task}, and the reason is: {user_reason_for_task}"})
 
                         switch = 'r'
+
+
 
                 if switch == 'r':
                     # 让GPT重新选择主任务
