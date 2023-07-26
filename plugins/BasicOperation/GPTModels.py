@@ -18,8 +18,6 @@
 import json
 import openai
 
-openai.api_key = ""
-
 
 class GPTModel:
     def __init__(self, model, messages, topics=None, id_list=None):
