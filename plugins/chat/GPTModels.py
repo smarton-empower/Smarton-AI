@@ -134,7 +134,7 @@ class GPTModel_QA:
 
     def ask_gpt(self, QA_user_input):
 
-        self.messages.append({"role": "user", "content": f"give your response to the question '{QA_user_input}'"})
+        self.messages.append({"role": "user", "content": f"give your response to the question '{QA_user_input}' and answer as detailed as possible since I'm a beginner "})
         self.messages.append({"role": "user", "content": f"give the source of your response using parentheses only in the last line, never give the url of the source."})
         # self.messages.append({"role": "user", "content": f"give the source (either 'Google Search' or 'Kicad Documentation') of your response using parentheses only in the last line, never give the url of the source."})
         if self.language == "zh":
