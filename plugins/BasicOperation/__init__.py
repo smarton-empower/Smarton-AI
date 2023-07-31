@@ -17,7 +17,17 @@
 
 try:
     from .action import BasicOperations
+    # from .com_gitlab_dennevi_Board2Pdf.board2pdf_action import board2pdf
+    # from .com_github_MitjaNemec_PlaceFootprints.action_place_footprints import PlaceFootprints
+    # from .com_github_MitjaNemec_ReplicateLayout.action_replicate_layout import ReplicateLayout
+    # from .com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout import SaveRestoreLayout
+
     BasicOperations().register()
+    # board2pdf().register()
+    # PlaceFootprints().register()
+    # ReplicateLayout().register()
+    # SaveRestoreLayout().register()
+
 except Exception as e:
     import logging
     root = logging.getLogger()

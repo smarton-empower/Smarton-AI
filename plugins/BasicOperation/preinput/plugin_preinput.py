@@ -18,7 +18,6 @@
 import inspect
 from .basicop_helpers import *
 
-
 def plugin_preinput():
     functions_list = [o for o in globals().items() if inspect.isfunction(o[1])]
     plugin_names = []
