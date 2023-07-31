@@ -16,6 +16,11 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import pcbnew
+from .com_gitlab_dennevi_Board2Pdf.board2pdf_action import board2pdf
+from .com_github_MitjaNemec_PlaceFootprints.action_place_footprints import PlaceFootprints
+from .com_github_MitjaNemec_ReplicateLayout.action_replicate_layout import ReplicateLayout
+from .com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout import SaveRestoreLayout
+from .com_github_ian_ross_SchematicPositionsToLayout.SchematicPositionsToLayout import SchematicPositionsToLayoutPlugin
 
 
 def rotate_fp_by_fp_name(board, footprint_name=None, rotate_angle=45):
@@ -78,3 +83,44 @@ def flip_fp_by_mouse(board):
     fps = [x for x in footprints if x.IsSelected()]
     for fp in fps:
         fp.Flip(fp.GetPosition(), True)
+
+
+def board_to_pdf():
+    """
+    Create good looking pdf files from the board, the outputted pdf is vector based and searchable
+    """
+    interface = board2pdf()
+    interface.Run()
+
+
+def place_footprints():
+    """
+    Arrange sequentially numbered footprints or footprints from multiple hierarchical sheets in linear, circular or matrix arrangement
+    """
+    interface = PlaceFootprints()
+    interface.Run()
+
+
+def replicate_layout():
+    """
+    Replicate layout of one hierarchical sheet to other hierarchical sheets. The replication is based upon hierarchical sheets in eeschema. The basic requirement for replication is that the section to be replicated (source) is completely contained within a single hierarchical sheet, and replicated sections (destination) are just copies of the same sheet. Complex hierarchies are supported therefore replicated sheet can contain subsheets. The plugin replicates footprints, zones, tracks, text and drawings
+    """
+    interface = ReplicateLayout()
+    interface.Run()
+
+
+def save_restore_layout():
+    """
+    Save partial layout corresponding to footprints from one hirearchical sheet so that it can be restored in other projects
+    """
+    interface = SaveRestoreLayout()
+    interface.Run()
+
+
+def schematic_positions_to_layout():
+    """
+    Help with the initial organisation of parts when first creating a PCB layout from a schematic.
+    """
+    interface = SchematicPositionsToLayoutPlugin()
+    interface.Run()
+

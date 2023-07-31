@@ -16,18 +16,27 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import wx
+import wx.html2
 import openai
-import os
-import json
 import threading
 import queue
-import atexit
-import pcbnew
 
 from .preinput import plugin_preinput, basicop_helpers
 from .GPTModels import GPTModel
 
 openai.api_key = ""
+
+
+class MyBrowser(wx.Dialog):
+    def __init__(self, *args, **kwds):
+        super(MyBrowser, self).__init__(*args, **kwds)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        self.browser = wx.html2.WebView.New(self)
+        sizer.Add(self.browser, 1, wx.EXPAND, 10)
+
+        self.SetSizer(sizer)
+        self.SetSize((800, 600))
 
 
 class OneCommandLine(wx.Frame):
@@ -52,6 +61,9 @@ class OneCommandLine(wx.Frame):
         self.clear_button = wx.Button(self.panel, label="Clear")
         # 新增：显示/隐藏插件记录框的按钮
         self.toggle_plugin_display_button = wx.Button(self.panel, label="View all plugins")
+        self.show_external_plugin_button = wx.Button(self.panel, label="Use")
+        self.show_external_plugin_button.Hide()
+
         # 插件名称记录框
         self.plugin_display = wx.TextCtrl(self.panel, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL)
         self.plugin_display.Hide()  # 默认隐藏插件记录框
@@ -61,6 +73,7 @@ class OneCommandLine(wx.Frame):
         button_sizer.Add(self.send_button, proportion=0, flag=wx.EXPAND | wx.ALL, border=5)
         button_sizer.Add(self.clear_button, proportion=0, flag=wx.EXPAND | wx.ALL, border=5)
         button_sizer.Add(self.toggle_plugin_display_button, proportion=0, flag=wx.EXPAND | wx.ALL, border=5)
+        button_sizer.Add(self.show_external_plugin_button, proportion=0, flag=wx.EXPAND | wx.ALL, border=5)
 
         # 垂直布局
         chat_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -99,8 +112,8 @@ class OneCommandLine(wx.Frame):
             plugin = self.plugin_names[i]
             args = self.plugin_args[i]
             self.plugin_ids.append(i)
-            # self.chat_display.AppendText(f"Plugin {i+1}: {plugin}\n\t{args}\n")
-            self.plugin_display.AppendText(f"{plugin}\n")
+            # self.chat_display.AppendText(f"Plugin {i+1}: {plugin}\n")
+            self.plugin_display.AppendText(f"Plugin {i+1}: {plugin}\n")
             self.plugin_display.AppendText("-"*30+"\n")
         # self.chat_display.AppendText(f"\nSmarton AI: We currently have the above plugins, please choose one plugin to use at a time\n")
 
@@ -108,11 +121,14 @@ class OneCommandLine(wx.Frame):
         self.send_button.Bind(wx.EVT_BUTTON, self.on_submit)
         self.clear_button.Bind(wx.EVT_BUTTON, self.on_clear_button_clicked)
         self.toggle_plugin_display_button.Bind(wx.EVT_BUTTON, self.view_all_plugins)
+        self.show_external_plugin_button.Bind(wx.EVT_BUTTON, self.use_external_plugins)
 
         self.model = 'gpt-3.5-turbo-0613'
 
         self.userInputQueue = queue.Queue()
         self.exitEvent = threading.Event()
+
+        self.browser_dialog = None
 
     def on_clear_button_clicked(self, event):
         self.chat_display.SetValue("")  # 清空聊天信息
@@ -122,6 +138,10 @@ class OneCommandLine(wx.Frame):
         self.plugin_display.Show(not self.plugin_display.IsShown())
         # 调整布局
         self.panel.Layout()
+
+    def use_external_plugins(self, event):
+        # run_with_dialog()
+        return
 
     def choose_language(self, user_input):
 
@@ -218,6 +238,14 @@ class OneCommandLine(wx.Frame):
         if self.language == 'en':
             wx.CallAfter(self.chat_display.AppendText, f'==========  Smarton AI  ==========\n')
             wx.CallAfter(self.chat_display.AppendText, f'Done, you can continue to choose a plugin\n')
+
+    def display_url(self, url):
+        if self.browser_dialog is not None and self.browser_dialog.IsShown():
+            self.browser_dialog.browser.LoadURL(url)
+        else:
+            self.browser_dialog = MyBrowser(None, -1, "Official Document")
+            self.browser_dialog.browser.LoadURL(url)
+            self.browser_dialog.Show()
 
     def handle_user_input(self):
         need_recommend = True
@@ -364,6 +392,72 @@ class OneCommandLine(wx.Frame):
                                 wx.CallAfter(basicop_helpers.flip_fp_by_mouse,
                                              self.board,
                                              )
+                                break
+                            except:
+                                self.not_valid_argument_msg()
+
+                        self.done_msg()
+                        not_valid_plugin = False
+                        need_recommend = True
+
+                    # plugin 7: board_to_pdf
+                    elif pname == self.plugin_names[6]:
+                        while True:
+                            try:
+                                wx.CallAfter(basicop_helpers.board_to_pdf)
+                                # wx.CallAfter(self.display_url, "https://gitlab.com/dennevi/Board2Pdf/-/blob/main/README.md")
+                                break
+                            except:
+                                self.not_valid_argument_msg()
+
+                        self.done_msg()
+                        not_valid_plugin = False
+                        need_recommend = True
+
+                    # plugin 8: place_footprints
+                    elif pname == self.plugin_names[7]:
+                        while True:
+                            try:
+                                wx.CallAfter(basicop_helpers.place_footprints)
+                                break
+                            except:
+                                self.not_valid_argument_msg()
+
+                        self.done_msg()
+                        not_valid_plugin = False
+                        need_recommend = True
+
+                    # plugin 9: replicate_layout
+                    elif pname == self.plugin_names[8]:
+                        while True:
+                            try:
+                                wx.CallAfter(basicop_helpers.replicate_layout)
+                                break
+                            except:
+                                self.not_valid_argument_msg()
+
+                        self.done_msg()
+                        not_valid_plugin = False
+                        need_recommend = True
+
+                    # plugin 10: save_restore_layout
+                    elif pname == self.plugin_names[9]:
+                        while True:
+                            try:
+                                wx.CallAfter(basicop_helpers.save_restore_layout)
+                                break
+                            except:
+                                self.not_valid_argument_msg()
+
+                        self.done_msg()
+                        not_valid_plugin = False
+                        need_recommend = True
+
+                    # plugin 11: schematic_positions_to_layout
+                    elif pname == self.plugin_names[10]:
+                        while True:
+                            try:
+                                wx.CallAfter(basicop_helpers.schematic_positions_to_layout)
                                 break
                             except:
                                 self.not_valid_argument_msg()
